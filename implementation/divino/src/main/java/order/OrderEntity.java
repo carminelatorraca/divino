@@ -1,12 +1,23 @@
 package order;
 
+import account.CustomerUserEntity;
+import payment.PaymentEntity;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 public class OrderEntity {
 
     private String orderNumber;
     private String orderStatus;
     private double orderTotalAmount;
     private String orderShippingAddress;
-    private String createdAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime isDeleted;
+
+    private CustomerUserEntity orderCustomer;
+    private PaymentEntity orderPayment;
+    private ArrayList<OrderDetail> products;
 
     public String getOrderNumber() {
         return orderNumber;
