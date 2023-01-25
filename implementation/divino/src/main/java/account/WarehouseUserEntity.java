@@ -5,7 +5,7 @@ public class WarehouseUserEntity extends AccountEntity {
     private String firstName;
     private String lastName;
 
-    public WarehouseUserEntity(String email, String password, Role rol, String firstName, String lastName) {
+    public WarehouseUserEntity(String email, String password, String firstName, String lastName) {
         super(email, password, Role.WAREHOUSEUSER);
         this.firstName = firstName;
         this.lastName = lastName;

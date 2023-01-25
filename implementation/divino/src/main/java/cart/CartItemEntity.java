@@ -2,12 +2,12 @@ package cart;
 
 import catalog.ProductEntity;
 
-public class CartItem {
+public class CartItemEntity {
 
     private ProductEntity product;
     private int productQuantity;
 
-    public CartItem(ProductEntity product, int productQuantity) {
+    public CartItemEntity(ProductEntity product, int productQuantity) {
         this.product = product;
         this.productQuantity = productQuantity;
     }

@@ -2,7 +2,6 @@ package account;
 
 import payment.PaymentEntity;
 
-import java.util.HashSet;
 import java.util.List;
 
 public class CustomerUserEntity extends AccountEntity {
@@ -13,7 +12,7 @@ public class CustomerUserEntity extends AccountEntity {
     private String shippingAddress;
     private List<PaymentEntity> customerPayments;
 
-    public CustomerUserEntity(String email, String password, Role role, String firstName, String lastName) {
+    public CustomerUserEntity(String email, String password, String firstName, String lastName) {
         super(email, password, Role.CUSTOMERUSER);
         this.firstName = firstName;
         this.lastName = lastName;

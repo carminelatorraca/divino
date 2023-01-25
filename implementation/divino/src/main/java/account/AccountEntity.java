@@ -1,6 +1,7 @@
 package account;
 
 public class AccountEntity {
+
     public enum Role{CUSTOMERUSER, WAREHOUSEUSER, MANAGERUSER};
 
     private String email;
