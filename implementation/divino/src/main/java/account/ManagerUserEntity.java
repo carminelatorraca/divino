@@ -5,7 +5,7 @@ public class ManagerUserEntity extends AccountEntity{
     private String lastName;
 
     public ManagerUserEntity(String email, String password, Role rol, String firstName, String lastName) {
-        super(email, password, Role.WAREHOUSEUSER);
+        super(email, password, Role.MANAGERUSER);
         this.firstName = firstName;
         this.lastName = lastName;
     }
