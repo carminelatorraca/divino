@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql/mysql-server:8.0
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: divino
+      MYSQL_PASSWORD: Divino18
+    volumes:
+      - mysql-data:/var/lib/mysql
+volumes:
+  mysql-data:
