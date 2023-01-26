@@ -7,6 +7,10 @@ public class CartEntity {
     private HashMap<String, CartItemEntity> shoppingCart;
     private double totalAmount;
 
+    public CartEntity() {
+        totalAmount = 0;
+    }
+
     public void addItem(String productId, CartItemEntity cartItem) {
         if (!shoppingCart.containsKey(productId)) {
             cartItem.setProductQuantity(1);
@@ -16,7 +20,12 @@ public class CartEntity {
         }
     }
 
+    public void removeItem(String productId) {
+        shoppingCart.remove(productId);
+    }
+
     public double getTotalAmount() {
+        totalAmount = 0;
         for (CartItemEntity item : shoppingCart.values()) {
             totalAmount += item.getProduct().getProductPrice() * item.getProductQuantity();
         }

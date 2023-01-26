@@ -10,9 +10,17 @@ public class ProductEntity {
     private String productFormat;
     private double productPrice;
     private int productAvailability;
+    private boolean isSales;
+    private double salesPrice;
+    private int productVat;
+    private boolean isVisible;
 
     private LocalDateTime createdAt;
     private LocalDateTime isDeleted;
+
+    public ProductEntity() {
+
+    }
 
     public String getProductId() {
         return productId;
@@ -76,5 +84,37 @@ public class ProductEntity {
 
     public void setIsDeleted(LocalDateTime isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public boolean isSales() {
+        return isSales;
+    }
+
+    public void setSales(boolean sales) {
+        isSales = sales;
+    }
+
+    public double getSalesPrice() {
+        return salesPrice;
+    }
+
+    public void setSalesPrice(double salesPrice) {
+        this.salesPrice = salesPrice;
+    }
+
+    public int getProductVat() {
+        return productVat;
+    }
+
+    public void setProductVat(int productVat) {
+        this.productVat = productVat;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
     }
 }

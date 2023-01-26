@@ -20,6 +20,10 @@ public class CustomerUserEntity extends AccountEntity {
         this.shippingAddress = null;
     }
 
+    public CustomerUserEntity() {
+        super();
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -17,8 +17,23 @@ public class OrderEntity {
 
     private CustomerUserEntity orderCustomer;
     private PaymentEntity orderPayment;
-    private ArrayList<OrderDetail> products;
+    private ArrayList<OrderItem> products;
 
+    public OrderEntity(String orderNumber, String orderStatus, double orderTotalAmount, String orderShippingAddress, LocalDateTime createdAt, LocalDateTime isDeleted, CustomerUserEntity orderCustomer, PaymentEntity orderPayment, ArrayList<OrderItem> products) {
+        this.orderNumber = orderNumber;
+        this.orderStatus = orderStatus;
+        this.orderTotalAmount = orderTotalAmount;
+        this.orderShippingAddress = orderShippingAddress;
+        this.createdAt = createdAt;
+        this.isDeleted = isDeleted;
+        this.orderCustomer = orderCustomer;
+        this.orderPayment = orderPayment;
+        this.products = products;
+    }
+
+    public OrderEntity() {
+
+    }
 
     public String getOrderNumber() {
         return orderNumber;
@@ -37,11 +52,9 @@ public class OrderEntity {
     }
 
     public double getOrderTotalAmount() {
+        for (OrderItem item : products)
+            orderTotalAmount += item.getProductPrice() * item.getProductQuantity();
         return orderTotalAmount;
-    }
-
-    public void setOrderTotalAmount(double orderTotalAmount) {
-        this.orderTotalAmount = orderTotalAmount;
     }
 
     public String getOrderShippingAddress() {
@@ -84,11 +97,7 @@ public class OrderEntity {
         this.orderPayment = orderPayment;
     }
 
-    public ArrayList<OrderDetail> getProducts() {
+    public ArrayList<OrderItem> getProducts() {
         return products;
-    }
-
-    public void setProducts(ArrayList<OrderDetail> products) {
-        this.products = products;
     }
 }
