@@ -43,9 +43,11 @@ public class AccountDAO {
         pst.setString(2, password);
         ResultSet rs = pst.executeQuery();
 
+
         while (rs.next()){
-            account.setEmail(rs.getString("email"));
             account.setAccountID(rs.getInt("accountID"));
+            account.setEmail(rs.getString("email"));
+            account.setPassword(rs.getString("password"));
             account.setRole((AccountEntity.Role.valueOf(rs.getString("role"))));
         }
         return account;
