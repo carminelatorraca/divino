@@ -51,5 +51,12 @@ public class AccountDAO {
         return account;
     }
 
+    public void updateData(AccountEntity account) throws SQLException{
+        PreparedStatement pst = connection.prepareStatement("UPDATE " + TABLE_NAME + " SET WHERE accountID = ? AND email = ?");
 
+        pst.setInt(, account.getAccountID());
+        pst.setString(, account.getEmail());
+
+        pst.executeUpdate();
+    }
 }
