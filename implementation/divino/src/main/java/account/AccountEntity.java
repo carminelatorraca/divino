@@ -1,5 +1,4 @@
 package account;
-
 public class AccountEntity {
 
     public enum Role{CUSTOMERUSER, WAREHOUSEUSER, MANAGERUSER};
@@ -13,6 +12,13 @@ public class AccountEntity {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public AccountEntity() {
+        accountID = -1;
+        email = null;
+        password = null;
+        role = null;
     }
 
     public String getEmail() {

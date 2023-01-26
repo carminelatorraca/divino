@@ -35,8 +35,8 @@ public class AccountDAO {
         return rs.wasNull();
     }
 
-    public AccountEntity login(String email, String password) throws SQLException{
-        AccountEntity account = null;
+    public AccountEntity retrieveAccount(String email, String password) throws SQLException{
+        AccountEntity account = new AccountEntity();
 
         PreparedStatement pst = connection.prepareStatement("SELECT accountID, email, password, role FROM " + TABLE_NAME + "WHERE email = ? AND password = ?");
         pst.setString(1, email);
@@ -50,4 +50,6 @@ public class AccountDAO {
         }
         return account;
     }
+
+
 }
