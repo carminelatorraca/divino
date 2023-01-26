@@ -19,6 +19,7 @@ public class OrderEntity {
     private PaymentEntity orderPayment;
     private ArrayList<OrderDetail> products;
 
+
     public String getOrderNumber() {
         return orderNumber;
     }
@@ -51,11 +52,43 @@ public class OrderEntity {
         this.orderShippingAddress = orderShippingAddress;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(LocalDateTime isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public CustomerUserEntity getOrderCustomer() {
+        return orderCustomer;
+    }
+
+    public void setOrderCustomer(CustomerUserEntity orderCustomer) {
+        this.orderCustomer = orderCustomer;
+    }
+
+    public PaymentEntity getOrderPayment() {
+        return orderPayment;
+    }
+
+    public void setOrderPayment(PaymentEntity orderPayment) {
+        this.orderPayment = orderPayment;
+    }
+
+    public ArrayList<OrderDetail> getProducts() {
+        return products;
+    }
+
+    public void setProducts(ArrayList<OrderDetail> products) {
+        this.products = products;
     }
 }

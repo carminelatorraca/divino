@@ -17,7 +17,6 @@ public class CartEntity {
     }
 
     public double getTotalAmount() {
-        totalAmount = 0;
         for (CartItemEntity item : shoppingCart.values()) {
             totalAmount += item.getProduct().getProductPrice() * item.getProductQuantity();
         }
