@@ -4,6 +4,7 @@ public class AccountEntity {
 
     public enum Role{CUSTOMERUSER, WAREHOUSEUSER, MANAGERUSER};
 
+    private int accountID;
     private String email;
     private String password;
     private Role role;
@@ -36,5 +37,13 @@ public class AccountEntity {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 }
