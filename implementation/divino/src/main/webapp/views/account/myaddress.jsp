@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.dewine.model.Users" %>
-<%@ page import="com.dewine.model.UsersDAO" %>
+
 <%@ page import="java.util.ArrayList" %>
 
 <% DataSource addressDS = (DataSource) pageContext.getServletContext().getAttribute("DataSource"); %>
@@ -18,12 +17,12 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <%@include file="/fragments/meta.jsp" %>
+    <%@include file="/views/meta/meta.jsp" %>
 
     <title>I miei indirizzi</title>
 </head>
 <body>
-<%@include file="/fragments/header.jsp" %>
+<%@include file="/views/meta/header.jsp" %>
 
 <div class="container">
     <%
@@ -101,7 +100,7 @@
     </div>
 </div>
 
-<%@include file="/fragments/footer.jsp" %>
+<%@include file="/views/meta/footer.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
         integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
