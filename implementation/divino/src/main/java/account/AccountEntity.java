@@ -1,21 +1,20 @@
 package account;
+
 public class AccountEntity {
 
-    public enum Role{CUSTOMERUSER, WAREHOUSEUSER, MANAGERUSER};
+    public enum Role {CUSTOMERUSER, WAREHOUSEUSER, MANAGERUSER}
+
+    ;
 
     private int accountID;
     private String email;
     private String password;
     private Role role;
-    private String firstName;
-    private String lastName;
 
     public AccountEntity(String email, String password, Role role, String firstName, String lastName) {
         this.email = email;
         this.password = password;
         this.role = role;
-        this.lastName = lastName;
-        this.firstName = firstName;
     }
 
     public AccountEntity() {
@@ -23,6 +22,14 @@ public class AccountEntity {
         email = null;
         password = null;
         role = null;
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 
     public String getEmail() {
@@ -47,29 +54,5 @@ public class AccountEntity {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public int getAccountID() {
-        return accountID;
-    }
-
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 }
