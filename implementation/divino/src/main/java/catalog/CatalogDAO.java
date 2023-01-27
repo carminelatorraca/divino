@@ -62,7 +62,7 @@ public class CatalogDAO {
     public void updateProduct(ProductEntity product) throws SQLException{
         PreparedStatement pst = connection.prepareStatement(
                 "UPDATE " + TABLE_NAME +
-                "SET productID=?, productPrice=?, productBrand=?, productAvailability=?, ProductDescription=?, productVAT=?, productFormat=?, isSales=?, salesPrice=?, isVisible=? " +
+                "SET productID=?, productPrice = ?, productBrand = ?, productAvailability = ?, ProductDescription = ?, productVAT = ?, productFormat = ?, isSales = ?, salesPrice = ?, isVisible = ? " +
                 "WHERE productID = ?;");
         pst.setString(1, product.getProductId());
         pst.setDouble(2, product.getProductPrice());
@@ -75,6 +75,17 @@ public class CatalogDAO {
         pst.setDouble(9, product.getSalesPrice());
         pst.setBoolean(10, product.isVisible());
         pst.setString(11, product.getProductId());
+        pst.executeUpdate();
+    }
+
+    //Aggiorna la quantità disponibile di un prodotto in seguito ad un ordine andato a buon fine
+    public void updateStock(Integer newQuantity, String productID) throws SQLException{
+        PreparedStatement pst = connection.prepareStatement(
+                "UPDATE " + TABLE_NAME +
+                        "SET productAvailability = ?" +
+                        "WHERE productID = ?;");
+        pst.setDouble(1, newQuantity);
+        pst.setString(2, productID);
         pst.executeUpdate();
     }
 
