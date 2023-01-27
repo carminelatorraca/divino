@@ -40,7 +40,7 @@ public class OrderDAO {
         PreparedStatement pst = connection.prepareStatement(query);
 
         //inserimento dei prodotti contenuti nell'ordine
-        for (OrderItemEntity item : order.getProducts()) {
+        for (OrderItemEntity item : order.getOrderProducts()) {
             pst.setString(1, order.getOrderNumber());
             pst.setString(2, item.getProductDescription());
             pst.setInt(3, item.getProductQuantity());

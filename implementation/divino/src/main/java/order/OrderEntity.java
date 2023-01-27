@@ -17,9 +17,9 @@ public class OrderEntity {
 
     private CustomerUserEntity orderCustomer;
     private PaymentEntity orderPayment;
-    private ArrayList<OrderItemEntity> products;
+    private ArrayList<OrderItemEntity> orderProducts;
 
-    public OrderEntity(String orderNumber, String orderStatus, double orderTotalAmount, String orderShippingAddress, LocalDateTime createdAt, LocalDateTime isDeleted, CustomerUserEntity orderCustomer, PaymentEntity orderPayment, ArrayList<OrderItemEntity> products) {
+    public OrderEntity(String orderNumber, String orderStatus, double orderTotalAmount, String orderShippingAddress, LocalDateTime createdAt, LocalDateTime isDeleted, CustomerUserEntity orderCustomer, PaymentEntity orderPayment, ArrayList<OrderItemEntity> orderProducts) {
         this.orderNumber = orderNumber;
         this.orderStatus = orderStatus;
         this.orderTotalAmount = orderTotalAmount;
@@ -28,7 +28,7 @@ public class OrderEntity {
         this.isDeleted = isDeleted;
         this.orderCustomer = orderCustomer;
         this.orderPayment = orderPayment;
-        this.products = products;
+        this.orderProducts = orderProducts;
     }
 
     public OrderEntity() {
@@ -52,7 +52,7 @@ public class OrderEntity {
     }
 
     public double getOrderTotalAmount() {
-        for (OrderItemEntity item : products)
+        for (OrderItemEntity item : orderProducts)
             orderTotalAmount += item.getProductPrice() * item.getProductQuantity();
         return orderTotalAmount;
     }
@@ -97,11 +97,11 @@ public class OrderEntity {
         this.orderPayment = orderPayment;
     }
 
-    public ArrayList<OrderItemEntity> getProducts() {
-        return products;
+    public ArrayList<OrderItemEntity> getOrderProducts() {
+        return orderProducts;
     }
 
-    public void setProducts(ArrayList<OrderItemEntity> products) {
-        this.products = products;
+    public void setOrderProducts(ArrayList<OrderItemEntity> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 }
