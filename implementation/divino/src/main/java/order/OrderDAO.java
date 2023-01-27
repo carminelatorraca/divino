@@ -1,8 +1,6 @@
 package order;
 
 import account.CustomerUserEntity;
-import cart.CartEntity;
-import catalog.CatalogDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,13 +39,13 @@ public class OrderDAO {
         String query = "INSERT INTO " + PIVOT_ORDER_TABLE + " (order_id, product_description, product_quantity, product_price, product_vat) VALUES(?,?,?,?,?)";
         PreparedStatement pst = connection.prepareStatement(query);
 
-        for (OrderItem item : order.getProducts()) {
+        //inserimento dei prodotti contenuti nell'ordine
+        for (OrderItemEntity item : order.getProducts()) {
             pst.setString(1, order.getOrderNumber());
             pst.setString(2, item.getProductDescription());
             pst.setInt(3, item.getProductQuantity());
             pst.setDouble(4, item.getProductPrice());
             pst.setInt(5, item.getProductVat());
-
             pst.executeUpdate();
         }
     }

@@ -1,6 +1,6 @@
 package order;
 
-public class OrderItem {
+public class OrderItemEntity {
 
     private OrderEntity order;
     private int productVat;
@@ -8,7 +8,7 @@ public class OrderItem {
     private int productQuantity;
     private String productDescription;
 
-    public OrderItem() {
+    public OrderItemEntity() {
     }
 
     public OrderEntity getOrder() {

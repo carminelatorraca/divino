@@ -88,5 +88,4 @@ public class CatalogDAO {
         pst.setString(2, productID);
         pst.executeUpdate();
     }
-
 }
