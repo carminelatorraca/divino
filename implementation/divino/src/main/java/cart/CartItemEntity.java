@@ -2,8 +2,6 @@ package cart;
 
 import catalog.ProductEntity;
 
-import java.util.ArrayList;
-
 public class CartItemEntity {
 
     private ProductEntity product;

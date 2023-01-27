@@ -100,4 +100,8 @@ public class OrderEntity {
     public ArrayList<OrderItem> getProducts() {
         return products;
     }
+
+    public void setProducts(ArrayList<OrderItem> products) {
+        this.products = products;
+    }
 }

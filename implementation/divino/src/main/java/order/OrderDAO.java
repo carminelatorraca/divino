@@ -1,15 +1,18 @@
 package order;
 
-import cart.CartItemEntity;
+import account.CustomerUserEntity;
+import cart.CartEntity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrderDAO {
 
-    private static final String TABLE_NAME = "order";
-    private static final String PIVOT_TABLE_NAME = "order_item";
+    private static final String ORDER_TABLE = "order";
+    private static final String PIVOT_ORDER_TABLE = "order_item";
+    private static final String PAYMENT_TABLE = "payment";
 
     private Connection connection;
 
@@ -17,10 +20,34 @@ public class OrderDAO {
         this.connection = connection;
     }
 
-    public void createOrder(OrderEntity order, CartItemEntity cart) throws SQLException {
-        String createQuery = "INSERT INTO " + TABLE_NAME + " (order_id, customer_id, order_status, order_total_amount, created_at) VALUES (?,?,?,?,?)";
-        PreparedStatement statement = connection.prepareStatement(createQuery);
+    public OrderEntity createOrder(CustomerUserEntity customer) throws SQLException {
+        OrderEntity order = new OrderEntity();
 
+        //associo cliente a nuovo ordine
+        String createQuery = "INSERT INTO " + ORDER_TABLE + " (customer_id) VALUES (?)";
+        PreparedStatement pst = connection.prepareStatement(createQuery);
+        pst.setInt(1, customer.getAccountID());
+        pst.executeUpdate();
 
+        //return id nuovo ordine creato
+        ResultSet rs = pst.getGeneratedKeys();
+        if (!rs.wasNull()) order.setOrderNumber(rs.getString(1));
+
+        return order;
+    }
+
+    public void saveOrder(OrderEntity order) throws SQLException {
+        String query = "INSERT INTO " + PIVOT_ORDER_TABLE + " (order_id, product_description, product_quantity, product_price, product_vat) VALUES(?,?,?,?,?)";
+        PreparedStatement pst = connection.prepareStatement(query);
+
+        for (OrderItem item : order.getProducts()) {
+            pst.setString(1, order.getOrderNumber());
+            pst.setString(2, item.getProductDescription());
+            pst.setInt(3, item.getProductQuantity());
+            pst.setDouble(4, item.getProductPrice());
+            pst.setInt(5, item.getProductVat());
+
+            pst.executeUpdate();
+        }
     }
 }
