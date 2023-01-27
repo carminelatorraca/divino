@@ -12,9 +12,7 @@ public class AccountDAO {
     }
 
     public void createAccount(CustomerUserEntity customer) throws SQLException {
-
         String query = "INSERT INTO " + TABLE_NAME + " (email, password, firstName, lastName, role) VALUES (?,?,?,?,?);";
-
         PreparedStatement statement = connection.prepareStatement(query);
 
         if (check(customer.getEmail())) {

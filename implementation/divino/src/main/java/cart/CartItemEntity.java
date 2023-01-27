@@ -2,10 +2,13 @@ package cart;
 
 import catalog.ProductEntity;
 
+import java.util.ArrayList;
+
 public class CartItemEntity {
 
     private ProductEntity product;
     private int productQuantity;
+
 
     public CartItemEntity(ProductEntity product, int productQuantity) {
         this.product = product;
