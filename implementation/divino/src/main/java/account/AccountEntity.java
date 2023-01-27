@@ -2,9 +2,7 @@ package account;
 
 public class AccountEntity {
 
-    public enum Role {CUSTOMERUSER, WAREHOUSEUSER, MANAGERUSER}
-
-    ;
+    public enum Role {CUSTOMERUSER, WAREHOUSEUSER, MANAGERUSER};
 
     private int accountID;
     private String email;
