@@ -7,7 +7,6 @@ public class CartItemEntity {
     private ProductEntity product;
     private int productQuantity;
 
-
     public CartItemEntity(ProductEntity product, int productQuantity) {
         this.product = product;
         this.productQuantity = productQuantity;

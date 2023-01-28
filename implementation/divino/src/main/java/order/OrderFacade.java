@@ -1,26 +1,40 @@
 package order;
 
 import account.CustomerUserEntity;
-import payment.PaymentEntity;
+import cart.CartEntity;
+import cart.CartItemEntity;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 
 public class OrderFacade {
 
-    private OrderEntity order;
-    private ArrayList<OrderItemEntity> products;
-    private PaymentEntity payment;
-    private CustomerUserEntity customer;
+    private OrderDAO orderDAO;
 
-    public OrderFacade() {
-        order = new OrderEntity();
-        payment = new PaymentEntity();
-        products = new ArrayList<OrderItemEntity>();
-        customer = new CustomerUserEntity();
+    public OrderEntity placeOrder(CustomerUserEntity customer) throws SQLException {
+        return orderDAO.createOrder(customer);
     }
 
-    public void createOrder() {
+    //associo i prodotti del carrello all'ordine
+    public boolean joinProducts(CartEntity cart, OrderEntity order) {
+        if (cart != null && order != null) {
+            for (CartItemEntity cartItem : cart.getShoppingCart().values()) {
+                OrderItemEntity orderItem = new OrderItemEntity();
 
+                orderItem.setOrderNumber(order.getOrderNumber());
+                orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
+                orderItem.setProductDescription(cartItem.getProduct().getProductBrand());
+                orderItem.setProductQuantity(cartItem.getProductQuantity());
+                orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
+                orderItem.setProductVat(cartItem.getProduct().getProductVat());
+            }
+        } else return false;
+        return true;
     }
 
+    public boolean placeOrderItems(OrderEntity order) throws SQLException {
+        for (OrderItemEntity item : order.getOrderProducts()) {
+            orderDAO.saveOrderItem(item);
+        }
+        return true;
+    }
 }

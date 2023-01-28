@@ -20,6 +20,14 @@ public class CartEntity {
         }
     }
 
+    public HashMap<String, CartItemEntity> getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(HashMap<String, CartItemEntity> shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
     public void removeItem(String productId) {
         shoppingCart.remove(productId);
     }
@@ -35,6 +43,5 @@ public class CartEntity {
     public void clearCart() {
         shoppingCart.clear();
     }
-
 
 }
