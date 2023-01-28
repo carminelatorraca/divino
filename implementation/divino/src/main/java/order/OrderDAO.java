@@ -35,18 +35,16 @@ public class OrderDAO {
         return order;
     }
 
-    public void saveOrder(OrderEntity order) throws SQLException {
+    public void saveOrderItem(OrderItemEntity item) throws SQLException {
         String query = "INSERT INTO " + PIVOT_ORDER_TABLE + " (order_id, product_description, product_quantity, product_price, product_vat) VALUES(?,?,?,?,?)";
         PreparedStatement pst = connection.prepareStatement(query);
 
         //inserimento dei prodotti contenuti nell'ordine
-        for (OrderItemEntity item : order.getOrderProducts()) {
-            pst.setString(1, order.getOrderNumber());
-            pst.setString(2, item.getProductDescription());
-            pst.setInt(3, item.getProductQuantity());
-            pst.setDouble(4, item.getProductPrice());
-            pst.setInt(5, item.getProductVat());
-            pst.executeUpdate();
-        }
+        pst.setString(1, item.getOrderNumber());
+        pst.setString(2, item.getProductDescription());
+        pst.setInt(3, item.getProductQuantity());
+        pst.setDouble(4, item.getProductPrice());
+        pst.setInt(5, item.getProductVat());
+        pst.executeUpdate();
     }
 }
