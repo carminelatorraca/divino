@@ -4,26 +4,36 @@ import java.sql.*;
 
 public class AccountDAO {
 
-    private static final String TABLE_NAME = "user";
+    private static final String TABLE_NAME = "account";
     private Connection connection;
 
     public AccountDAO(Connection connection) {
         this.connection = connection;
     }
 
-    public void createAccount(CustomerUserEntity customer) throws SQLException {
-        String query = "INSERT INTO " + TABLE_NAME + " (email, password, firstName, lastName, role) VALUES (?,?,?,?,?);";
+    public AccountDAO() {
+        //this.connection = connection;
+    }
+
+    public void createAccount(AccountEntity account) throws SQLException {
+        String query = "INSERT INTO " + TABLE_NAME + " (email, password, role) VALUES (?,?,?,?,?);";
         PreparedStatement statement = connection.prepareStatement(query);
-
-        if (check(customer.getEmail())) {
-            statement.setString(1, customer.getEmail());
-            statement.setString(2, customer.getPassword());
-            statement.setString(3, customer.getFirstName());
-            statement.setString(4, customer.getLastName());
-            statement.setString(5, customer.getRole().toString());
-
+        if (check(account.getEmail())) {
+            statement.setString(1, account.getEmail());
+            statement.setString(2, account.getPassword());
+            statement.setString(3, account.getRole().toString());
             statement.executeUpdate();
         }
+    }
+
+    public void createUser(UserEntity user) throws SQLException {
+        String query = "INSERT INTO user (AccountID, firstName, lastName, fiscalCode) VALUES (?,?,?,?);";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, user.getAccountID());
+        statement.setString(2, user.getFirstName());
+        statement.setString(3, user.getLastName());
+        statement.setString(4, user.getFiscalCode());
+        statement.executeUpdate();
     }
 
     private boolean check(String email) throws SQLException {
@@ -43,7 +53,7 @@ public class AccountDAO {
 
 
         while (rs.next()) {
-            account.setAccountID(rs.getInt("accountID"));
+            account.setAccountID(rs.getString("accountID"));
             account.setEmail(rs.getString("email"));
             account.setPassword(rs.getString("password"));
             account.setRole((AccountEntity.Role.valueOf(rs.getString("role"))));
@@ -51,15 +61,28 @@ public class AccountDAO {
         return account;
     }
 
-    public void updateCustomerAccount(CustomerUserEntity account) throws SQLException {
-        PreparedStatement pst = connection.prepareStatement("UPDATE firstName, lastName, email, password, fiscalCode" + TABLE_NAME + " SET WHERE accountID = ?");
-        pst.setString(1, account.getFirstName());
-        pst.setString(2, account.getLastName());
-        pst.setString(3, account.getEmail());
-        pst.setString(4, account.getPassword());
-        pst.setString(4, account.getFiscalCode());
-        pst.setInt(5, account.getAccountID());
+    public UserEntity retrieveUser(AccountEntity account) throws SQLException {
+        UserEntity user = new UserEntity(account);
 
+        PreparedStatement pst = connection.prepareStatement("SELECT * FROM user WHERE accountID = ?");
+        pst.setString(1, account.getAccountID());
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            user.setFirstName(rs.getString("firstName"));
+            user.setLastName(rs.getString("lastName"));
+            user.setFiscalCode(rs.getString("fiscalCode"));
+        }
+        return user;
+    }
+
+    public void updateCustomerAccount(UserEntity user) throws SQLException {
+        PreparedStatement pst = connection.prepareStatement("UPDATE firstName, lastName, email, password, fiscalCode" + TABLE_NAME + " SET WHERE accountID = ?");
+        pst.setString(1, user.getFirstName());
+        pst.setString(2, user.getLastName());
+        pst.setString(3, user.getEmail());
+        pst.setString(4, user.getPassword());
+        pst.setString(5, user.getFiscalCode());
         pst.executeUpdate();
     }
 }
