@@ -24,18 +24,18 @@ public class OrderFacade {
      * @return true if all cart item are in order item
      */
     public boolean joinProducts(CartEntity cart, OrderEntity order) {
-        if (cart != null && order != null) {
-            for (CartItemEntity cartItem : cart.getShoppingCart().values()) {
-                OrderItemEntity orderItem = new OrderItemEntity();
+        if (cart == null || order == null) return false;
 
-                orderItem.setOrderNumber(order.getOrderNumber());
-                orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
-                orderItem.setProductDescription(cartItem.getProduct().getProductBrand());
-                orderItem.setProductQuantity(cartItem.getProductQuantity());
-                orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
-                orderItem.setProductVat(cartItem.getProduct().getProductVat());
-            }
-        } else return false;
+        for (CartItemEntity cartItem : cart.getShoppingCart().values()) {
+            OrderItemEntity orderItem = new OrderItemEntity();
+
+            orderItem.setOrderNumber(order.getOrderNumber());
+            orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
+            orderItem.setProductDescription(cartItem.getProduct().getProductBrand());
+            orderItem.setProductQuantity(cartItem.getProductQuantity());
+            orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
+            orderItem.setProductVat(cartItem.getProduct().getProductVat());
+        }
         return true;
     }
 
