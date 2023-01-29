@@ -1,87 +1,37 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.ArrayList" %>
-
-<% DataSource checkoutDS = (DataSource) pageContext.getServletContext().getAttribute("DataSource"); %>
-<% ProductsDAO productsDAO = new ProductsDAO(checkoutDS); %>
-<% UsersDAO usersDAO = new UsersDAO(checkoutDS); %>
-<%
-    Users user = (Users) request.getSession().getAttribute("user");
-    ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart");
-
-    try {
-        user = usersDAO.doRetrieveByKey(user.getUserId());
-        if (user == null || !user.getUserRole().equals("User") || cart == null) {
-            request.setAttribute("notAuthorized", Boolean.TRUE);
-            response.sendRedirect("/cart.jsp");
-        }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        response.sendRedirect("/cart.jsp");
-    }
-
-    List<Cart> productsCart = null;
-    if (cart != null) {
-        try {
-            productsCart = productsDAO.getProductsCart(cart);
-            double total = productsDAO.getCartTotal(cart);
-            request.setAttribute("cart", cart);
-            request.setAttribute("total", total);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-%>
-<% ArrayList<String> errors = (ArrayList<String>) session.getAttribute("order-errors"); %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="/fragments/meta.jsp" %>
-    <script src="javascript/my-scripts.js" type="text/javascript"></script>
+    <%@include file="meta/meta.jsp" %>
+    <script src="${pageContext.request.contextPath}/js/custom-script.js" type="text/javascript"></script>
 
     <title>Checkout</title>
 </head>
 <body>
-<%@include file="/fragments/header.jsp" %>
+<%@include file="meta/header.jsp" %>
 <div class="container">
-    <%
-        if (errors != null) {
-            for (String error : errors) {
-    %>
-    <div class="row justify-content-center">
-        <div class="col-lg-12">
-            <div class="alert alert-warning wine-errors" role="alert">
-                <%=error%>
-            </div>
-        </div>
-    </div>
-    <%
-            }
-        }
-    %>
+
     <form action="${pageContext.request.contextPath}/order" method="post" onsubmit="return validatePayment()">
         <div class="row">
             <div class="col-md-6">
                 <h3>Dati Fatturazione</h3>
                 <div class="form-check">
-                    <%
-                        if (user != null) {
-                    %>
+
                     <input class="form-check-input" type="radio" name="c-choose" id="choose-old-address" checked
                            value="oldaddress">
-                    <label class="form-check-label" for="choose-old-address">L'indirizzo di fatturazione coincide con
-                        quello di spedizione</label>
-                    <br>
+                    <label class="form-check-label" for="choose-old-address">L'indirizzo di fatturazione coincide con quello di spedizione</label>
+
                     <div class="card" style="width: 18rem; border-radius: 0">
                         <div class="card-body">
-                            <h5 class="card-title"><%=user.getFirstName() + " " + user.getLastName()%>
+                            <h5 class="card-title">
                             </h5>
                             <h6 class="card-subtitle mb-2 text-muted">Indirizzo</h6>
-                            <p class="card-text" style="margin-bottom: 0"><%=user.getAddress()%>
+                            <p class="card-text" style="margin-bottom: 0">
                             </p>
-                            <p class="card-text" style="margin-bottom: 0"><%=user.getCapCode()%>
+                            <p class="card-text" style="margin-bottom: 0">
                             </p>
-                            <p class="card-text" style="margin-bottom: 0"><%=user.getCity()%>
+                            <p class="card-text" style="margin-bottom: 0">
                             </p>
                         </div>
                     </div>
@@ -100,49 +50,42 @@
                 <div id="choose-hidden" style="display: none">
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-firstname" class="form-label wine-label">Nome</label>
+                            <label for="input-firstname" class="form-label wine-label">nome</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-firstname"
                                    placeholder="" name="c-firstname">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-lastname" class="form-label wine-label">Cognome</label>
+                            <label for="input-lastname" class="form-label wine-label">cognome</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-lastname"
                                    placeholder="" name="c-lastname">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-company" class="form-label wine-label">Nome società</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-company"
-                                   placeholder="" name="c-company">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-state" class="form-label wine-label">Stato/regione</label>
+                            <label for="input-state" class="form-label wine-label">stato/regione</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-state"
                                    placeholder="" name="c-state">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-address" class="form-label wine-label">Via e numero</label>
+                            <label for="input-address" class="form-label wine-label">via e numero</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-address"
                                    placeholder="Via/Piazza e Numero Civico" name="c-address">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-address-sec" class="form-label wine-label">Indirizzo secondario</label>
+                            <label for="input-address-sec" class="form-label wine-label">indirizzo secondario</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-address-sec"
                                    placeholder="Appartamento, Scala, ecc." name="c-address-sec">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-address-cap" class="form-label wine-label">c.a.p.</label>
+                            <label for="input-address-cap" class="form-label wine-label">cap</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-address-cap"
                                    placeholder="" name="c-address-cap">
                         </div>
@@ -156,7 +99,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-address-prov" class="form-label wine-label">Provincia</label>
+                            <label for="input-address-prov" class="form-label wine-label">provincia</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-address-prov"
                                    placeholder="" name="c-address-prov">
                         </div>
@@ -189,14 +132,39 @@
                         </thead>
                         <tbody>
                         <%
-                            for (Cart product : productsCart) {
+                            for
+                            (
+                            Cart
+                            product
+                            :
+                            productsCart
+                            )
+                            {
                         %>
                         <tr>
                             <th>
-                                <%=product.getTitle()%> x<%=product.getQuantity()%>
+                                <%=product
+                                    .
+                                    getTitle
+                                    (
+                                    )%> x<%=product
+                                .
+                                getQuantity
+                                (
+                                )%>
                             </th>
                             <td>
-                                <%=product.getPrice() * product.getQuantity()%>
+                                <%=product
+                                    .
+                                    getPrice
+                                    (
+                                    )
+                                    *
+                                    product
+                                    .
+                                    getQuantity
+                                    (
+                                    )%>
                             </td>
                         </tr>
                         <% } %>
@@ -239,7 +207,15 @@
                 <br>
                 <div class="row justify-content-center">
                     <div class="col-lg-12 align-items-center">
-                        <% request.setAttribute("cart", cart);%>
+                        <% request
+                            .
+                            setAttribute
+                            (
+                            "cart"
+                            ,
+                            cart
+                            )
+                            ;%>
                         <button type="submit" class="btn btn-success wine-button">CONFERMA ORDINE</button>
                     </div>
                 </div>
@@ -247,7 +223,7 @@
         </div>
     </form>
 </div>
-<%@include file="/fragments/footer.jsp" %>
+<%@include file="meta/footer.jsp" %>
 
 <script>
     $(document).ready(
@@ -265,12 +241,15 @@
     )
 </script>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
         integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
         integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
+
 </body>
 </html>
