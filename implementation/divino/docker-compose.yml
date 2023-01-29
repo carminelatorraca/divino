@@ -1,9 +1,11 @@
 version: '3.8'
 services:
-  web:
+  webserver:
     image: 'tomcat:9.0'
     ports:
       - '8888:8080'
+    volumes:
+      - ./target/divino-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/divino-webapp.war
   mysql:
     image: 'mysql/mysql-server:8.0'
     ports:
