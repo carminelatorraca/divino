@@ -10,6 +10,11 @@ public class OrderFacade {
 
     private OrderDAO orderDAO;
 
+    /**
+     *
+     * @param customer
+     * @return order object with orderID
+     */
     public OrderEntity placeOrder(CustomerUserEntity customer) throws SQLException {
         return orderDAO.createOrder(customer);
     }
