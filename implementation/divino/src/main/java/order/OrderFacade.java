@@ -11,15 +11,18 @@ public class OrderFacade {
     private OrderDAO orderDAO;
 
     /**
-     *
-     * @param customer
+     * @param customer that place order
      * @return order object with orderID
      */
     public OrderEntity placeOrder(CustomerUserEntity customer) throws SQLException {
         return orderDAO.createOrder(customer);
     }
 
-    //associo i prodotti del carrello all'ordine
+    /**
+     * @param cart  contains a list of cart item
+     * @param order order just create
+     * @return true if all cart item are in order item
+     */
     public boolean joinProducts(CartEntity cart, OrderEntity order) {
         if (cart != null && order != null) {
             for (CartItemEntity cartItem : cart.getShoppingCart().values()) {
@@ -36,10 +39,13 @@ public class OrderFacade {
         return true;
     }
 
-    public boolean placeOrderItems(OrderEntity order) throws SQLException {
+    /**
+     * @param order order contains list of order items to save into db
+     * @throws SQLException error in db insert
+     */
+    public void placeOrderItems(OrderEntity order) throws SQLException {
         for (OrderItemEntity item : order.getOrderProducts()) {
             orderDAO.saveOrderItem(item);
         }
-        return true;
     }
 }
