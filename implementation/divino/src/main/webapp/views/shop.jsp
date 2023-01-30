@@ -16,8 +16,8 @@
 <%@include file="meta/header.jsp" %>
 
 <div class="container">
-    <% HashSet<ProductEntity> catalog = (HashSet<ProductEntity>) session.getAttribute("catalog");
-    <% ArrayList<String> errors = (ArrayList<String>) session.getAttribute("errors");
+    <% HashSet<ProductEntity> catalog = (HashSet<ProductEntity>) session.getAttribute("catalog"); %>
+    <% ArrayList<String> errors = (ArrayList<String>) session.getAttribute("errors"); %>
     <%
         if (errors != null) {
             for (String error : errors) {
