@@ -5,6 +5,8 @@ import cart.CartEntity;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import payment.PaymentController;
+import payment.PaymentEntity;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,15 +29,23 @@ public class OrderController extends HttpServlet {
         //gestire eccezione se cliente o carrello sono null
         //if (customer == null || shoppingCart == null) {}
 
-        //gestire eccezione
+        //logica ordine
         try {
             OrderEntity order = orderPlacement.placeOrder(customer);
-            if (orderPlacement.joinProducts(shoppingCart, order))
+            orderPlacement.joinProducts(shoppingCart, order);
+
+            request.setAttribute("order", order);
+            RequestDispatcher paymentRequest = request.getRequestDispatcher("/payment");
+            paymentRequest.include(request, response);
+
+            //verifica se il pagamento è andato a buon fine
+            PaymentEntity payment = (PaymentEntity) request.getAttribute("payment");
+            if (payment != null && payment.getPaymentStatus().equals("paid")) {
+                orderPlacement.placePayment(payment);
                 orderPlacement.placeOrderItems(order);
+            }
         } catch (SQLException exception) {
-            exception.getErrorCode();
+            exception.printStackTrace();
         }
-
-
     }
 }

@@ -1,6 +1,5 @@
 package catalog;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,8 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;
 
-@WebServlet("/catalog")
-
+@WebServlet(name = "CatalogController", value = "/shop")
 public class CatalogController extends HttpServlet {
 
     public CatalogController() {
@@ -20,8 +18,8 @@ public class CatalogController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            CatalogDAO dbCatalog = new CatalogDAO();
-            HashSet<ProductEntity> catalog = new HashSet<>();
+        CatalogDAO dbCatalog = new CatalogDAO();
+        HashSet<ProductEntity> catalog = new HashSet<>();
         try {
             catalog = dbCatalog.createCatalog();
             request.getSession().setAttribute("catalog", catalog);

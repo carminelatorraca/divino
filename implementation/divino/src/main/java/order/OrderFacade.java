@@ -3,6 +3,7 @@ package order;
 import account.CustomerUserEntity;
 import cart.CartEntity;
 import cart.CartItemEntity;
+import payment.PaymentEntity;
 
 import java.sql.SQLException;
 
@@ -21,10 +22,9 @@ public class OrderFacade {
     /**
      * @param cart  contains a list of cart item
      * @param order order just create
-     * @return true if all cart item are in order item
      */
-    public boolean joinProducts(CartEntity cart, OrderEntity order) {
-        if (cart == null || order == null) return false;
+    public void joinProducts(CartEntity cart, OrderEntity order) {
+        if (cart == null || order == null) return;
 
         for (CartItemEntity cartItem : cart.getShoppingCart().values()) {
             OrderItemEntity orderItem = new OrderItemEntity();
@@ -36,7 +36,11 @@ public class OrderFacade {
             orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
             orderItem.setProductVat(cartItem.getProduct().getProductVat());
         }
-        return true;
+    }
+
+
+    public void placePayment(PaymentEntity payment) {
+
     }
 
     /**
