@@ -37,8 +37,8 @@
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="loginUsername" class="form-label wine-label">Email</label>
-                        <input class="form-control form-control-lg wine-input" type="text" id="loginUsername" required
-                               placeholder="inserisci l'username" name="l-username">
+                        <input class="form-control form-control-lg wine-input" type="email" id="loginUsername" required
+                               placeholder="indirizzo email" name="l-username">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -58,7 +58,7 @@
         <!-- SIGNUP FORM -->
         <div class="col-lg-4 my-auto">
             <h3>Registrati qui!</h3>
-            <form action="${pageContext.request.contextPath}/register" method="post" novalidate>
+            <form action="${pageContext.request.contextPath}/signup" method="post" novalidate>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="inputFirstname" class="form-label wine-label">Nome</label>
