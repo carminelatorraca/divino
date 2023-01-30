@@ -5,9 +5,6 @@ import cart.CartEntity;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import javax.servlet.ServletException;
 
 import java.io.IOException;
 import java.sql.SQLException;
