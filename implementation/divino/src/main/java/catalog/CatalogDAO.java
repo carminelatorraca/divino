@@ -8,7 +8,7 @@ import java.util.HashSet;
 
 public class CatalogDAO {
 
-    private static final String TABLE_NAME = "prodotto";
+    private static final String TABLE_NAME = "products";
     private Connection connection;
 
     public CatalogDAO(Connection connection) {
@@ -18,35 +18,37 @@ public class CatalogDAO {
     public CatalogDAO() {
     }
 
-    public  HashSet<ProductEntity> createCatalog() throws SQLException {
-        PreparedStatement pst = connection.prepareStatement("SELECT * FROM " + TABLE_NAME + ";");
-        ResultSet rs = pst.executeQuery();
+    public HashSet<ProductEntity> createCatalog() throws SQLException {
         HashSet<ProductEntity> catalog = new HashSet<>();
         ProductEntity product = new ProductEntity();
-        while(rs.next()){
-            product.setProductId(rs.getString("productID"));
-            product.setProductBrand(rs.getString("productBrand"));
-            product.setProductAvailability(rs.getInt("productAvailability"));
-            product.setProductDescription(rs.getString("productDescription"));
-            product.setProductFormat(rs.getString("productFormat"));
-            product.setProductPrice(rs.getDouble("productPrice"));
-            product.setProductVat(rs.getInt("productVAT"));
-            product.setSales(rs.getBoolean("isSales"));
-            product.setSalesPrice(rs.getDouble("salesPrice"));
-            product.setVisible(rs.getBoolean("isVisible"));
+
+        PreparedStatement pst = connection.prepareStatement("SELECT * FROM " + TABLE_NAME + ";");
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            product.setProductId(rs.getString(1));
+            product.setProductBrand(rs.getString(2));
+            product.setProductAvailability(rs.getInt(6));
+            product.setProductDescription(rs.getString(3));
+            product.setProductFormat(rs.getString(4));
+            product.setProductPrice(rs.getDouble(5));
+            product.setProductVat(rs.getInt(9));
+            product.setSales(rs.getBoolean(7));
+            product.setSalesPrice(rs.getDouble(8));
+            product.setVisible(rs.getBoolean(10));
             catalog.add(product);
         }
         return catalog;
     }
 
-    public void removeProduct(ProductEntity product) throws SQLException{
+    public void removeProduct(ProductEntity product) throws SQLException {
         PreparedStatement pst = connection.prepareStatement("DELETE * FROM " + TABLE_NAME + "WHERE productID = ?;");
         pst.setString(1, product.getProductId());
         pst.executeUpdate();
     }
 
 
-    public void addProduct(ProductEntity product) throws SQLException{
+    public void addProduct(ProductEntity product) throws SQLException {
         PreparedStatement pst = connection.prepareStatement("INSERT INTO " + TABLE_NAME +
                 "(productID, productPrice, productBrand, productAvailability, ProductDescription, productVAT, productFormat, isSales, salesPrice, isVisible) VALUES (?,?,?,?,?,?,?,?,?,?);");
         pst.setString(1, product.getProductId());
@@ -62,11 +64,11 @@ public class CatalogDAO {
         pst.executeUpdate();
     }
 
-    public void updateProduct(ProductEntity product) throws SQLException{
+    public void updateProduct(ProductEntity product) throws SQLException {
         PreparedStatement pst = connection.prepareStatement(
                 "UPDATE " + TABLE_NAME +
-                "SET productID=?, productPrice = ?, productBrand = ?, productAvailability = ?, ProductDescription = ?, productVAT = ?, productFormat = ?, isSales = ?, salesPrice = ?, isVisible = ? " +
-                "WHERE productID = ?;");
+                        "SET productID=?, productPrice = ?, productBrand = ?, productAvailability = ?, ProductDescription = ?, productVAT = ?, productFormat = ?, isSales = ?, salesPrice = ?, isVisible = ? " +
+                        "WHERE productID = ?;");
         pst.setString(1, product.getProductId());
         pst.setDouble(2, product.getProductPrice());
         pst.setString(3, product.getProductBrand());
@@ -82,7 +84,7 @@ public class CatalogDAO {
     }
 
     //Aggiorna la quantità disponibile di un prodotto in seguito ad un ordine andato a buon fine
-    public void updateStock(Integer purchasedQuantity, String productID) throws SQLException{
+    public void updateStock(Integer purchasedQuantity, String productID) throws SQLException {
 
         int updatedQuantity = getAvailableQuantity(productID) - purchasedQuantity;
         PreparedStatement pst = connection.prepareStatement(
@@ -94,12 +96,12 @@ public class CatalogDAO {
         pst.executeUpdate();
     }
 
-    private Integer getAvailableQuantity (String productID) throws SQLException {
+    private Integer getAvailableQuantity(String productID) throws SQLException {
         PreparedStatement pst = connection.prepareStatement(
                 "SELECT productAvailability FROM" + TABLE_NAME + "WHERE productID = ?;");
-                pst.setString(1, productID);
-                ResultSet rs = pst.executeQuery();
-                return rs.getInt("productAvailability") ;
+        pst.setString(1, productID);
+        ResultSet rs = pst.executeQuery();
+        return rs.getInt("productAvailability");
     }
 
 }
