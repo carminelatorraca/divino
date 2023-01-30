@@ -37,21 +37,18 @@
         <!--<h4>Nessun prodotto disponibile</h4>-->
         <% for (ProductEntity product : catalog) {
         %>
+
+        <!-- CARD PRODUCT -->
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 w-100 wine-card bg-white">
-                <%
-                    //image
-                %>
+
+                <!-- IMAGE PRODUCT -->
                 <div class="overflow-hidden">
                     <img src="${pageContext.request.contextPath}/images/"
                          class="card-img-top img-fluid zoom" alt="#" width="200px" height="200px">
                 </div>
-                <% //} else { %>
-                <img src="${pageContext.request.contextPath}/images/default/no_image_available.jpg"
-                     class="card-img-top img-fluid"
-                     alt="" width="200px" height="200px">
-                <%// } %>
 
+                <!-- CARD BODY -->
                 <div class="card-body bg-black" style="color: white; padding: 40px">
                     <h5 class="card-title"><%=product.getProductBrand()%>
                     </h5>
