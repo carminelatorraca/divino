@@ -82,20 +82,6 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
-                        <label for="inputUsername" class="form-label wine-label">Username</label>
-                        <div class="input-group">
-                            <span class="input-group-text wine-no-border-radius" id="span">@</span>
-                            <input class="form-control form-control-lg wine-input" type="text" id="inputUsername"
-                                   required
-                                   placeholder="scegli l'username" name="r-username">
-                            <!--<button class="btn btn-outline-secondary wine-no-border-radius" type="button"
-                                    id="check-username">Check
-                            </button>-->
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-12">
                         <label for="inputPassword" class="form-label wine-label">Password</label>
                         <div class="col-auto">
                             <input type="password" id="inputPassword" class="form-control form-control-lg wine-input"
