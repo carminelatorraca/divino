@@ -15,6 +15,9 @@ public class CatalogDAO {
         this.connection = connection;
     }
 
+    public CatalogDAO() {
+    }
+
     public  HashSet<ProductEntity> createCatalog() throws SQLException {
         PreparedStatement pst = connection.prepareStatement("SELECT * FROM " + TABLE_NAME + ";");
         ResultSet rs = pst.executeQuery();

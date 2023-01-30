@@ -6,33 +6,39 @@ import java.util.List;
 
 public class CustomerUserEntity extends UserEntity {
 
-    private String shippingAddress;
+    private List<AddressEntity> shippingAddresses;
     private List<PaymentEntity> customerPayments;
 
     public CustomerUserEntity (){
         super("", "", Role.CUSTOMERUSER , "", "", "");
-        this.shippingAddress = null;
+        this.shippingAddresses = null;
         this.customerPayments = null;
     }
 
-    public CustomerUserEntity(String email, String password, String firstName, String lastName, String fiscalCode, String shippingAddress, List<PaymentEntity> customerPayments) {
-        super(email, password, Role.CUSTOMERUSER, firstName, lastName, fiscalCode);
-        this.shippingAddress = shippingAddress;
+    public CustomerUserEntity(String email, String password, Role role, String firstName, String lastName, String fiscalCode, List<AddressEntity> shippingAddresses, List<PaymentEntity> customerPayments) {
+        super(email, password, role, firstName, lastName, fiscalCode);
+        this.shippingAddresses = shippingAddresses;
+        this.customerPayments = customerPayments;
+    }
+
+    public CustomerUserEntity(AccountEntity account, List<AddressEntity> shippingAddresses, List<PaymentEntity> customerPayments) {
+        super(account);
+        this.shippingAddresses = shippingAddresses;
         this.customerPayments = customerPayments;
     }
 
     public CustomerUserEntity(UserEntity user) {
         super(user.getEmail(), user.getPassword(), Role.CUSTOMERUSER, user.getFirstName(), user.getLastName(), user.getFiscalCode());
-        this.shippingAddress = null;
+        this.shippingAddresses = null;
         this.customerPayments = null;
     }
 
-    public String getShippingAddress() {
-        return shippingAddress;
+    public List<AddressEntity> getShippingAddresses() {
+        return shippingAddresses;
     }
 
-    public void setShippingAddress(String shippingAddress) {
-        this.shippingAddress = shippingAddress;
+    public void setShippingAddresses(List<AddressEntity> shippingAddresses) {
+        this.shippingAddresses = shippingAddresses;
     }
 
     public List<PaymentEntity> getCustomerPayments() {

@@ -11,10 +11,10 @@ public class CartEntity {
         totalAmount = 0;
     }
 
-    public void addItem(String productId, CartItemEntity cartItem) {
-        if (!shoppingCart.containsKey(productId)) {
+    public void addItem(CartItemEntity cartItem) {
+        if (!shoppingCart.containsKey(cartItem.getProduct().getProductId())) {
             cartItem.setProductQuantity(1);
-            shoppingCart.put(productId, cartItem);
+            shoppingCart.put(cartItem.getProduct().getProductId(), cartItem);
         } else {
             cartItem.setProductQuantity(cartItem.getProductQuantity() + 1);
         }

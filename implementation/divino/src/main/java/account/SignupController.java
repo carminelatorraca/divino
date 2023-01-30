@@ -6,7 +6,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class SignupServlet {
+public class SignupController {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         AccountDAO dbAccount = new AccountDAO();

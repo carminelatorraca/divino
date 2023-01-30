@@ -8,9 +8,9 @@ import java.io.IOException;
 
 @WebServlet("/logout")
 
-public class LogoutServlet {
+public class LogoutController {
 
-    public LogoutServlet() {
+    public LogoutController() {
         super();
     }
 

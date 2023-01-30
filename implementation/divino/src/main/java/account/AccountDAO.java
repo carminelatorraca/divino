@@ -85,4 +85,7 @@ public class AccountDAO {
         pst.setString(5, user.getFiscalCode());
         pst.executeUpdate();
     }
+
+
+    //AGGIUNGERE METODO PER RECUPERARE GLI INDIRIZZI DI UN DETERMINATO CUSTOMER
 }
