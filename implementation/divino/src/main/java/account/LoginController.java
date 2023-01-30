@@ -7,19 +7,14 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/login")
-
+@WebServlet(name = "LoginController", value = "/LoginController")
 public class LoginController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
-    public LoginController() {
-        super();
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
+    @Override
     //Check delle credenziali inserite per il login e aggiunta oggetto utente alla sessione in caso di credeziali corrette
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AccountDAO dbAccount = new AccountDAO();
@@ -50,6 +45,4 @@ public class LoginController extends HttpServlet {
             }
         }
     }
-
-
 }

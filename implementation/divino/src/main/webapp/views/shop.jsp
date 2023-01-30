@@ -1,6 +1,3 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="catalog.ProductEntity" %>
-<%@ page import="java.util.HashMap" %>
 <!DOCTYPE html>
 <html>
 <head>
