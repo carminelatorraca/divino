@@ -12,6 +12,7 @@ public class CartItemEntity {
         this.productQuantity = productQuantity;
     }
 
+
     public ProductEntity getProduct() {
         return product;
     }

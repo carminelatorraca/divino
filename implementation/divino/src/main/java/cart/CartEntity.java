@@ -24,6 +24,10 @@ public class CartEntity {
         return shoppingCart;
     }
 
+    public CartItemEntity getCartItem(String productID){
+        return shoppingCart.get(productID);
+    }
+
     public void setShoppingCart(HashMap<String, CartItemEntity> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }

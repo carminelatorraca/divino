@@ -1,61 +1,61 @@
 package account;
 
 public class AddressEntity {
-    private String via;
-    private String cap;
-    private String civico;
-    private String città;
-    private String nazione;
+    private String street;
+    private String postalCode;
+    private String number;
+    private String city;
+    private String country;
 
     public AddressEntity() {
 
     }
 
-    public AddressEntity(String via, String cap, String civico, String città, String nazione) {
-        this.via = via;
-        this.cap = cap;
-        this.civico = civico;
-        this.città = città;
-        this.nazione = nazione;
+    public AddressEntity(String street, String postalCode, String number, String city, String country) {
+        this.street = street;
+        this.postalCode = postalCode;
+        this.number = number;
+        this.city = city;
+        this.country = country;
     }
 
-    public String getVia() {
-        return via;
+    public String getStreet() {
+        return street;
     }
 
-    public void setVia(String via) {
-        this.via = via;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String getCap() {
-        return cap;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setCap(String cap) {
-        this.cap = cap;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
-    public String getCivico() {
-        return civico;
+    public String getNumber() {
+        return number;
     }
 
-    public void setCivico(String civico) {
-        this.civico = civico;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getCittà() {
-        return città;
+    public String getCity() {
+        return city;
     }
 
-    public void setCittà(String città) {
-        this.città = città;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getNazione() {
-        return nazione;
+    public String getCountry() {
+        return country;
     }
 
-    public void setNazione(String nazione) {
-        this.nazione = nazione;
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
