@@ -24,58 +24,57 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getSession().getAttribute("shoppingCart")==null) {
+        if (request.getSession().getAttribute("shoppingCart") == null) {
             request.getSession().setAttribute("shoppingCart", cart);
             System.out.println("FATTO");
         }
         cart = (CartEntity) request.getSession().getAttribute("shoppingCart");
         HashMap<String, CartItemEntity> list = new HashMap<>();
-            //aggiunta al carrello
-            if (request.getParameter("mode").equalsIgnoreCase("add")) {
-                String productID = request.getParameter("productid");
-                System.out.println(productID);
-                CartItemEntity cartItem = new CartItemEntity();
-                for (ProductEntity product : catalog) {
-                    if (product.getProductId().equals(productID))
-                        cartItem = new CartItemEntity(product, 1);
-                    System.out.println("Cart Entity creata");
-                }
-                if (cart.getShoppingCart()==null) {
-                    list.put(cartItem.getProduct().getProductId(), cartItem);
-                    cart.setShoppingCart(list);
-                }else
+
+
+        //aggiunta al carrello
+        if (request.getParameter("mode").equalsIgnoreCase("add")) {
+            String productID = request.getParameter("productid");
+            System.out.println(productID);
+            CartItemEntity cartItem = new CartItemEntity();
+            for (ProductEntity product : catalog) {
+                if (product.getProductId().equals(productID))
+                    cartItem = new CartItemEntity(product, 1);
+            }
+            if (cart.getShoppingCart() == null) {
+                list.put(cartItem.getProduct().getProductId(), cartItem);
+                cart.setShoppingCart(list);
+            } else
                 cart.getShoppingCart().put(cartItem.getProduct().getProductId(), cartItem);
-
-            }
-
-            //rimozione prodotto
-            else if (request.getParameter("mode").equalsIgnoreCase("remove")) {
-                String productID = request.getParameter("productid");
-                cart.getShoppingCart().remove(productID);
-
-            }
-
-            //incremento quantità
-            else if (request.getParameter("mode").equalsIgnoreCase("plus")) {
-                String productID = request.getParameter("productid");
-                int quantity = cart.getShoppingCart().get(productID).getProductQuantity();
-                cart.getShoppingCart().get(productID).setProductQuantity(quantity + 1);
-
-            }
-
-            //decremento quantità
-            else if (request.getParameter("mode").equalsIgnoreCase("min")) {
-                String productID = request.getParameter("productid");
-                int quantity = cart.getShoppingCart().get(productID).getProductQuantity();
-                if (quantity - 1 == 0)
-                    cart.getShoppingCart().remove(productID);
-                else
-                    cart.getShoppingCart().get(productID).setProductQuantity(quantity - 1);
-            }
-
-            request.getSession().setAttribute("shoppingCart", cart);
-            response.sendRedirect("./shop.jsp");
         }
+
+        //rimozione prodotto
+        if (request.getParameter("mode").equalsIgnoreCase("remove")) {
+            String productid = request.getParameter("productid");
+            cart.removeItem(productid);
+        }
+
+        //incremento quantità
+        else if (request.getParameter("mode").equalsIgnoreCase("plus")) {
+            String productID = request.getParameter("productid");
+            int quantity = cart.getShoppingCart().get(productID).getProductQuantity();
+            cart.getShoppingCart().get(productID).setProductQuantity(quantity + 1);
+
+        }
+
+        //decremento quantità
+        else if (request.getParameter("mode").equalsIgnoreCase("min")) {
+            String productID = request.getParameter("productid");
+            int quantity = cart.getShoppingCart().get(productID).getProductQuantity();
+            if (quantity - 1 == 0)
+                cart.getShoppingCart().remove(productID);
+            else
+                cart.getShoppingCart().get(productID).setProductQuantity(quantity - 1);
+        }
+
+        request.getSession().setAttribute("shoppingCart", cart);
+        response.sendRedirect("./shop.jsp");
+    }
 
 
     @Override

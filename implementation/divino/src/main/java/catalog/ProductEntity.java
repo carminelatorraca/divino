@@ -71,22 +71,6 @@ public class ProductEntity {
         this.productAvailability = productAvailability;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(LocalDateTime isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
     public boolean isSales() {
         return isSales;
     }
@@ -125,5 +109,21 @@ public class ProductEntity {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(LocalDateTime isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

@@ -8,9 +8,9 @@
 <% ServletContext context = request.getServletContext(); %>
 <% CartEntity shoppingCart = new CartEntity(); %>
 <% if (session.getAttribute("shoppingCart") == null)
-        session.setAttribute("shoppingCart", shoppingCart);
-    else
-        shoppingCart = (CartEntity) session.getAttribute("shoppingCart"); %>
+    session.setAttribute("shoppingCart", shoppingCart);
+else
+    shoppingCart = (CartEntity) session.getAttribute("shoppingCart"); %>
 <% session.setAttribute("total", ""); %>
 
 <!DOCTYPE html>
@@ -57,7 +57,7 @@
                 <div class="row g-0 align-items-center">
 
                     <div class="col-md-2" style="text-align: center">
-                        <a href="${pageContext.request.contextPath}/cart?remove=<%=product.getProduct().getProductId()%>"
+                        <a href="${pageContext.request.contextPath}/cart?mode=remove&productid=<%=product.getProduct().getProductId()%>"
                            class="material-symbols-outlined" id="wine-cart-remove" style="color: #dcbe84">close</a>
                     </div>
 
@@ -88,14 +88,7 @@
 
                             <!-- DECREMANTA QUANTITA PRODOTTO -->
                             <a class="btn btn-light"
-                               href="${pageContext.request.contextPath}/cart?mode=min&productID=<%=product.getProduct().getProductId()%>">-</a>
-                            <br>
-
-                            <!-- RIMUOVI PRODOTTO -->
-                            <a href="${pageContext.request.contextPath}/cart?mode=remove&productID=<%=product.getProduct().getProductId()%>"
-                               class="btn">
-                                Rimuovi
-                            </a>
+                               href="${pageContext.request.contextPath}/cart?mode=min&productid=<%=product.getProduct().getProductId()%>">-</a>
                         </div>
                     </div>
                 </div>
