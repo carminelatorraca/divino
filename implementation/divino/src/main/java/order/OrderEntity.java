@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class OrderEntity {
 
-    private String orderNumber;
+    private int orderNumber;
     private String orderStatus;
     private double orderTotalAmount;
     private String orderShippingAddress;
@@ -19,7 +19,7 @@ public class OrderEntity {
     private PaymentEntity orderPayment;
     private ArrayList<OrderItemEntity> orderProducts;
 
-    public OrderEntity(String orderNumber, String orderStatus, double orderTotalAmount, String orderShippingAddress, LocalDateTime createdAt, LocalDateTime isDeleted, CustomerUserEntity orderCustomer, PaymentEntity orderPayment, ArrayList<OrderItemEntity> orderProducts) {
+    public OrderEntity(int orderNumber, String orderStatus, double orderTotalAmount, String orderShippingAddress, LocalDateTime createdAt, LocalDateTime isDeleted, CustomerUserEntity orderCustomer, PaymentEntity orderPayment, ArrayList<OrderItemEntity> orderProducts) {
         this.orderNumber = orderNumber;
         this.orderStatus = orderStatus;
         this.orderTotalAmount = orderTotalAmount;
@@ -35,12 +35,16 @@ public class OrderEntity {
 
     }
 
-    public String getOrderNumber() {
+    public int getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(String orderNumber) {
+    public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public void setOrderTotalAmount(double orderTotalAmount) {
+        this.orderTotalAmount = orderTotalAmount;
     }
 
     public String getOrderStatus() {

@@ -11,6 +11,10 @@ public class OrderFacade {
 
     private OrderDAO orderDAO;
 
+    public OrderFacade(OrderDAO orderDAO) {
+        this.orderDAO = orderDAO;
+    }
+
     /**
      * @param customer that place order
      * @return order object with orderID
@@ -29,7 +33,7 @@ public class OrderFacade {
         for (CartItemEntity cartItem : cart.getShoppingCart().values()) {
             OrderItemEntity orderItem = new OrderItemEntity();
 
-            orderItem.setOrderNumber(order.getOrderNumber());
+            orderItem.setOrder(order.getOrderNumber());
             orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
             orderItem.setProductDescription(cartItem.getProduct().getProductBrand());
             orderItem.setProductQuantity(cartItem.getProductQuantity());

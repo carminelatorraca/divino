@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class OrderDAO {
 
-    private static final String ORDER_TABLE = "order";
+    private static final String ORDER_TABLE = "orders";
     private static final String PIVOT_ORDER_TABLE = "order_items";
     private static final String PAYMENT_TABLE = "payments";
 
@@ -23,24 +23,25 @@ public class OrderDAO {
         OrderEntity order = new OrderEntity();
 
         //associo cliente a nuovo ordine
-        String createQuery = "INSERT INTO " + ORDER_TABLE + " (customer_id) VALUES (?)";
+        String createQuery = "INSERT INTO " + ORDER_TABLE + " (order_account) VALUES (?)";
         PreparedStatement pst = connection.prepareStatement(createQuery);
+        System.out.println(customer.getAccountID());
         pst.setInt(1, customer.getAccountID());
         pst.executeUpdate();
 
         //return id nuovo ordine creato
         ResultSet rs = pst.getGeneratedKeys();
-        if (!rs.wasNull()) order.setOrderNumber(rs.getString(1));
+        if (!rs.wasNull()) order.setOrderNumber(rs.getInt(1));
 
         return order;
     }
 
     public void saveOrderItem(OrderItemEntity item) throws SQLException {
-        String query = "INSERT INTO " + PIVOT_ORDER_TABLE + " (order_item_id, order_id, item_description, item_quantity, item_price, item_vat) VALUES(?,?,?,?,?)";
+        String query = "INSERT INTO " + PIVOT_ORDER_TABLE + " (order_id, item_description, item_quantity, item_price, item_vat) VALUES(?,?,?,?,?)";
         PreparedStatement pst = connection.prepareStatement(query);
 
         //inserimento dei prodotti contenuti nell'ordine
-        pst.setString(1, item.getOrderNumber());
+        pst.setInt(1, item.getOrder());
         //aggiungi riferimento order id
         pst.setString(2, item.getProductDescription());
         pst.setInt(3, item.getProductQuantity());

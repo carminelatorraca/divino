@@ -38,5 +38,8 @@ public class CheckoutController extends HttpServlet {
             addressEntity.setNumber(phone);
             addressEntity.setFavourite(1);
         }
+
+        RequestDispatcher orderRequest = request.getRequestDispatcher("/buy");
+        orderRequest.forward(request, response);
     }
 }

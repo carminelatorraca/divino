@@ -1,7 +1,9 @@
 package order;
 
+import account.AccountDAO;
 import account.CustomerUserEntity;
 import cart.CartEntity;
+import catalog.ProductEntity;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -9,9 +11,17 @@ import payment.PaymentEntity;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collection;
 
 @WebServlet(name = "OrderController", value = "/buy")
 public class OrderController extends HttpServlet {
+    private OrderDAO orderDAO;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        this.orderDAO = (OrderDAO) super.getServletContext().getAttribute("orderDAO");
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,7 +30,7 @@ public class OrderController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        OrderFacade orderPlacement = new OrderFacade();
+        OrderFacade orderPlacement = new OrderFacade(orderDAO);
 
         CustomerUserEntity customer = (CustomerUserEntity) request.getSession().getAttribute("user");
         CartEntity shoppingCart = (CartEntity) request.getAttribute("shoppingCart");
@@ -42,6 +52,7 @@ public class OrderController extends HttpServlet {
             if (payment != null && payment.getPaymentStatus().equals("paid")) {
                 orderPlacement.placePayment(payment);
                 orderPlacement.placeOrderItems(order);
+                response.sendRedirect("/order-confirm.jsp");
             }
         } catch (SQLException exception) {
             exception.printStackTrace();

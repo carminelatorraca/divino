@@ -2,25 +2,25 @@ package order;
 
 public class OrderItemEntity {
 
-    private String order;
+    private int order;
     private int productVat;
     private double productPrice;
     private int productQuantity;
     private String productDescription;
 
     public OrderItemEntity() {
-        this.order = null;
+        this.order = -1;
         this.productVat = -1;
         this.productPrice = -1;
         this.productQuantity = -1;
         this.productDescription = null;
     }
 
-    public String getOrderNumber() {
+    public int getOrder() {
         return order;
     }
 
-    public void setOrderNumber(String order) {
+    public void setOrder(int order) {
         this.order = order;
     }
 

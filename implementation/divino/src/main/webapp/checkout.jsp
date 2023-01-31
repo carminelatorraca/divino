@@ -4,7 +4,6 @@
 <%@ page import="cart.CartEntity" %>
 
 <%@ page import="cart.CartItemEntity" %>
-<%@ page import="account.AddressEntity" %>
 <%@ page import="account.AccountEntity" %>
 <%@ page import="account.CustomerUserEntity" %>
 
@@ -17,7 +16,6 @@
     }
 
 %>
-
 <%
     CartEntity shoppingCart = (CartEntity) request.getSession().getAttribute("shoppingCart");
     double total = shoppingCart.getTotalAmount();
@@ -30,13 +28,13 @@
 <html>
 <head>
     <%@include file="/fragments/meta.jsp" %>
-
     <script src="js/my-scripts.js" type="text/javascript"></script>
-
     <title>Checkout</title>
 </head>
 <body>
+
 <%@include file="/fragments/header.jsp" %>
+
 <div class="container">
     <%
         if (errors != null) {
@@ -56,20 +54,12 @@
 
     <!-- FORM INDIRIZZO -->
     <form action="${pageContext.request.contextPath}/checkout" method="post" onsubmit="return validatePayment()">
-
         <div class="row">
 
             <!-- DETTAGLIO INDIRIZZI -->
             <div class="col-md-6">
                 <h3>Dati Fatturazione</h3>
                 <div class="form-check">
-                    <%
-                        if (user != null) {
-                            AddressEntity favAddress = null;
-                            for (AddressEntity addressEntity : user.getShippingAddresses())
-                                if (addressEntity.getFavourite() == 1)
-                                    favAddress = addressEntity;
-                    %>
                     <input class="form-check-input" type="radio" name="c-choose" id="choose-old-address" checked
                            value="oldaddress">
                     <label class="form-check-label" for="choose-old-address">L'indirizzo di fatturazione coincide con
@@ -77,19 +67,15 @@
                     <br>
                     <div class="card" style="width: 18rem; border-radius: 0">
                         <div class="card-body">
-                            <h5 class="card-title"><%=user.getFirstName() + " " + user.getLastName()%>
+                            <h5 class="card-title"><%=user.getFirstName().concat("" + user.getLastName())%>
                             </h5>
                             <h6 class="card-subtitle mb-2 text-muted">Indirizzo</h6>
-                            <p class="card-text" style="margin-bottom: 0"><%=favAddress.getStreet()%>
-                            </p>
-                            <p class="card-text" style="margin-bottom: 0"><%=favAddress.getPostalCode()%>
-                            </p>
-                            <p class="card-text" style="margin-bottom: 0"><%=favAddress.getCity()%>
+                            <p class="card-text" style="margin-bottom: 0">Indirizzo
                             </p>
                         </div>
                     </div>
-                    <% } %>
                 </div>
+
                 <br>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="c-choose" id="choose-new-address"
@@ -100,65 +86,66 @@
                 </div>
 
                 <br>
-                <div id="choose-hidden" style="display: none">
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-firstname" class="form-label wine-label">Nome</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-firstname"
-                                   placeholder="" name="c-firstname">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-lastname" class="form-label wine-label">Cognome</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-lastname"
-                                   placeholder="" name="c-lastname">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-state" class="form-label wine-label">Stato/regione</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-state"
-                                   placeholder="" name="c-state">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-address" class="form-label wine-label">Via e Numero</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-address"
-                                   placeholder="Via/Piazza e Numero Civico" name="c-address">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-address-cap" class="form-label wine-label">CAP</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-address-cap"
-                                   placeholder="" name="c-address-cap">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-address-city" class="form-label wine-label">Città</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-address-city"
-                                   placeholder="" name="c-address-city">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-address-prov" class="form-label wine-label">Provincia</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-address-prov"
-                                   placeholder="" name="c-address-prov">
-                        </div>
-                    </div>
-                    <
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-phone" class="form-label wine-label">Cellulare</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-phone" required
-                                   placeholder="" name="c-phone">
-                        </div>
+
+                <!-- NUOVO INDIRIZZO -->
+
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label for="input-firstname" class="form-label wine-label">Nome</label>
+                        <input class="form-control form-control-lg wine-input" type="text" id="input-firstname"
+                               placeholder="" name="c-firstname">
                     </div>
                 </div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label for="input-lastname" class="form-label wine-label">Cognome</label>
+                        <input class="form-control form-control-lg wine-input" type="text" id="input-lastname"
+                               placeholder="" name="c-lastname">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label for="input-state" class="form-label wine-label">Stato/regione</label>
+                        <input class="form-control form-control-lg wine-input" type="text" id="input-state"
+                               placeholder="" name="c-state">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label for="input-address" class="form-label wine-label">Via e Numero</label>
+                        <input class="form-control form-control-lg wine-input" type="text" id="input-address"
+                               placeholder="Via/Piazza e Numero Civico" name="c-address">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label for="input-address-cap" class="form-label wine-label">CAP</label>
+                        <input class="form-control form-control-lg wine-input" type="text" id="input-address-cap"
+                               placeholder="" name="c-address-cap">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label for="input-address-city" class="form-label wine-label">Città</label>
+                        <input class="form-control form-control-lg wine-input" type="text" id="input-address-city"
+                               placeholder="" name="c-address-city">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label for="input-address-prov" class="form-label wine-label">Provincia</label>
+                        <input class="form-control form-control-lg wine-input" type="text" id="input-address-prov"
+                               placeholder="" name="c-address-prov">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label for="input-phone" class="form-label wine-label">Cellulare</label>
+                        <input class="form-control form-control-lg wine-input" type="text" id="input-phone" required
+                               placeholder="" name="c-phone">
+                    </div>
+                </div>
+
             </div>
 
             <!-- DETTAGLIO ORDINE IN CORSO  -->
@@ -224,7 +211,7 @@
                 <br>
                 <div class="row justify-content-center">
                     <div class="col-lg-12 align-items-center">
-                        <%// request.setAttribute("cart", shoppingCart);%>
+                        <% request.setAttribute("cart", shoppingCart);%>
                         <button type="submit" class="btn btn-success wine-button">CONFERMA ORDINE</button>
                     </div>
                 </div>
@@ -233,22 +220,6 @@
     </form>
 </div>
 <%@include file="/fragments/footer.jsp" %>
-
-<script>
-    $(document).ready(
-        $("#choose-new-address").on("click", function () {
-                $("#choose-hidden").css("display", "")
-            }
-        )
-    )
-
-    $(document).ready(
-        $("#choose-old-address").on("click", function () {
-                $("#choose-hidden").css("display", "none")
-            }
-        )
-    )
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
         integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"

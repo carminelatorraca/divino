@@ -16,7 +16,7 @@ public class PaymentController extends HttpServlet {
 
         PaymentEntity payment = new PaymentEntity();
         payment.setPaidAmount(orderToPay.getOrderTotalAmount());
-        payment.setPaymentDescription(orderToPay.getOrderNumber());
+        payment.setPaymentDescription(orderToPay.getOrderStatus());
         payment.setPaymentMethod("generic");
         payment.setPaymentStatus("paid");
 
