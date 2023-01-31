@@ -62,8 +62,14 @@ public class CartController extends HttpServlet {
         else if (request.getParameter("mode").equalsIgnoreCase("min")) {
             String productID = request.getParameter("productid");
             int quantity = cart.getShoppingCart().get(productID).getProductQuantity();
-            if (quantity - 1 == 0)
-                cart.getShoppingCart().remove(productID);
+            if ((quantity - 1) == 0) {
+                System.out.println("Ci sono");
+                cart.removeItem(productID);
+                if (cart.getShoppingCart().isEmpty()) {
+                    cart = null;
+                    System.out.println("Messo a null");
+                }
+            }
             else
                 cart.getShoppingCart().get(productID).setProductQuantity(quantity - 1);
         }

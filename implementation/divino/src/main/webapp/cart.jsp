@@ -49,7 +49,7 @@
 
             <!-- ERRORI -->
             <%
-                if (shoppingCart.getShoppingCart() == null) { %>
+                if (shoppingCart.getShoppingCart().isEmpty()) { %>
             <br>
             <h4>Hey, riempi il calice!</h4>
             <% } else {
