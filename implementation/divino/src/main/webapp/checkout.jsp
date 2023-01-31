@@ -1,43 +1,37 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList" %>
 
-<%@ page import="account.UserEntity" %>
 <%@ page import="cart.CartEntity" %>
 
 <%@ page import="cart.CartItemEntity" %>
 <%@ page import="account.AddressEntity" %>
-
+<%@ page import="account.AccountEntity" %>
+<%@ page import="account.CustomerUserEntity" %>
 
 <%
-    UserEntity user = (UserEntity) request.getSession().getAttribute("user");
-    CartEntity shoppingCart = (CartEntity) request.getSession().getAttribute("shoppingCart");
+    CustomerUserEntity user = (CustomerUserEntity) session.getAttribute("user");
+    if (user == null || !user.getRole().equals(AccountEntity.Role.CUSTOMERUSER)) {
+        String errors = "non sei autorizzato";
+        session.setAttribute("ow-errors", errors);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
+    }
 
-    //user = usersDAO.doRetrieveByKey(user.getUserId());
-    if (user == null || !user.getRole().equals("CUSTOMERUSER") || shoppingCart == null) {
-        request.setAttribute("notAuthorized", Boolean.TRUE);
-        response.sendRedirect("/cart.jsp");
-    }
-/*
-    List<Cart> productsCart = null;
-    if (cart != null) {
-        try {
-            productsCart = productsDAO.getProductsCart(cart);
-            double total = productsDAO.getCartTotal(cart);
-            request.setAttribute("cart", cart);
-            request.setAttribute("total", total);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
- */
 %>
+
+<%
+    CartEntity shoppingCart = (CartEntity) request.getSession().getAttribute("shoppingCart");
+    double total = shoppingCart.getTotalAmount();
+    request.setAttribute("total", total);
+%>
+
 <% ArrayList<String> errors = (ArrayList<String>) session.getAttribute("order-errors"); %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <%@include file="/fragments/meta.jsp" %>
-    <script src="fragments/my-scripts.js" type="text/javascript"></script>
+
+    <script src="js/my-scripts.js" type="text/javascript"></script>
 
     <title>Checkout</title>
 </head>
@@ -59,8 +53,13 @@
             }
         }
     %>
-    <form action="${pageContext.request.contextPath}/order" method="post" onsubmit="return validatePayment()">
+
+    <!-- FORM INDIRIZZO -->
+    <form action="${pageContext.request.contextPath}/checkout" method="post" onsubmit="return validatePayment()">
+
         <div class="row">
+
+            <!-- DETTAGLIO INDIRIZZI -->
             <div class="col-md-6">
                 <h3>Dati Fatturazione</h3>
                 <div class="form-check">
@@ -68,7 +67,7 @@
                         if (user != null) {
                             AddressEntity favAddress = null;
                             for (AddressEntity addressEntity : user.getShippingAddresses())
-                                if(addressEntity.getFavourite()==1)
+                                if (addressEntity.getFavourite() == 1)
                                     favAddress = addressEntity;
                     %>
                     <input class="form-check-input" type="radio" name="c-choose" id="choose-old-address" checked
@@ -118,13 +117,6 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-company" class="form-label wine-label">Nome società</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-company"
-                                   placeholder="" name="c-company">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12">
                             <label for="input-state" class="form-label wine-label">Stato/regione</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-state"
                                    placeholder="" name="c-state">
@@ -132,28 +124,21 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-address" class="form-label wine-label">Via e numero</label>
+                            <label for="input-address" class="form-label wine-label">Via e Numero</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-address"
                                    placeholder="Via/Piazza e Numero Civico" name="c-address">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-address-sec" class="form-label wine-label">Indirizzo secondario</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-address-sec"
-                                   placeholder="Appartamento, Scala, ecc." name="c-address-sec">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-address-cap" class="form-label wine-label">c.a.p.</label>
+                            <label for="input-address-cap" class="form-label wine-label">CAP</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-address-cap"
                                    placeholder="" name="c-address-cap">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-address-city" class="form-label wine-label">città</label>
+                            <label for="input-address-city" class="form-label wine-label">Città</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-address-city"
                                    placeholder="" name="c-address-city">
                         </div>
@@ -165,22 +150,18 @@
                                    placeholder="" name="c-address-prov">
                         </div>
                     </div>
-                    <!--<div class="form-group row">
+                    <
+                    <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="input-phone" class="form-label wine-label">Telefono</label>
+                            <label for="input-phone" class="form-label wine-label">Cellulare</label>
                             <input class="form-control form-control-lg wine-input" type="text" id="input-phone" required
                                    placeholder="" name="c-phone">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-lg-12">
-                            <label for="input-email" class="form-label wine-label">Email</label>
-                            <input class="form-control form-control-lg wine-input" type="text" id="input-email" required
-                                   placeholder="" name="c-email">
-                        </div>
-                    </div>-->
                 </div>
             </div>
+
+            <!-- DETTAGLIO ORDINE IN CORSO  -->
             <div class="col-md-6">
                 <h3>Il tuo ordine</h3>
                 <div class="row">
@@ -243,7 +224,7 @@
                 <br>
                 <div class="row justify-content-center">
                     <div class="col-lg-12 align-items-center">
-                        <% request.setAttribute("cart", shoppingCart);%>
+                        <%// request.setAttribute("cart", shoppingCart);%>
                         <button type="submit" class="btn btn-success wine-button">CONFERMA ORDINE</button>
                     </div>
                 </div>
@@ -268,7 +249,6 @@
         )
     )
 </script>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
         integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"

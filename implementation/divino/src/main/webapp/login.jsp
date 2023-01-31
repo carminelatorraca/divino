@@ -39,7 +39,7 @@
                     <div class="col-lg-12">
                         <label for="loginUsername" class="form-label wine-label">Email</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="loginUsername" required
-                               placeholder="inserisci l'username" name="l-username">
+                               placeholder="inserisci l'username" name="l-email">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -57,7 +57,7 @@
         <br>
         <div class="col-lg-4 my-auto">
             <h3>Registrati qui!</h3>
-            <form action="${pageContext.request.contextPath}/register" method="post" novalidate>
+            <form action="${pageContext.request.contextPath}/signup" method="post" novalidate>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="inputFirstname" class="form-label wine-label">Nome</label>
@@ -77,20 +77,6 @@
                         <label for="inputEmail" class="form-label wine-label">Email</label>
                         <input class="form-control form-control-lg wine-input" type="email" id="inputEmail" required
                                placeholder="inserisci l'email" name="r-email">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-12">
-                        <label for="inputUsername" class="form-label wine-label">Username</label>
-                        <div class="input-group">
-                            <span class="input-group-text wine-no-border-radius" id="span">@</span>
-                            <input class="form-control form-control-lg wine-input" type="text" id="inputUsername"
-                                   required
-                                   placeholder="scegli l'username" name="r-username">
-                            <!--<button class="btn btn-outline-secondary wine-no-border-radius" type="button"
-                                    id="check-username">Check
-                            </button>-->
-                        </div>
                     </div>
                 </div>
                 <div class="form-group row">

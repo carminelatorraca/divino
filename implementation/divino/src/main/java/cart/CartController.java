@@ -67,8 +67,9 @@ public class CartController extends HttpServlet {
                 cart.getShoppingCart().get(productID).setProductQuantity(quantity - 1);
         }
 
-       // request.getSession().setAttribute("shoppingCart", cart);
-        response.sendRedirect("./shop.jsp");
+        else if(request.getParameter("mode").equalsIgnoreCase("checkout") && cart!=null)
+            response.sendRedirect(getServletContext().getContextPath() + "/checkout.jsp");
+
     }
 
 

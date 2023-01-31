@@ -127,7 +127,7 @@
                 </tbody>
             </table>
 
-            <a type="button" class="btn btn-success wine-button" href="${pageContext.request.contextPath}/checkout">PROCEDI CON L'ORDINE</a>
+            <a type="button" class="btn btn-success wine-button" href="${pageContext.request.contextPath}/cart?mode=checkout">PROCEDI CON L'ORDINE</a>
         </div>
     </div>
 </div>

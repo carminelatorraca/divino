@@ -106,7 +106,9 @@ public class AccountDAO {
     public HashSet<AddressEntity> retrieveAddresses (CustomerUserEntity user) throws SQLException {
         PreparedStatement pst = connection.prepareStatement("SELECT * FROM addresses WHERE account_id = ?;");
         pst.setInt(1, user.getAccountID());
+
         ResultSet rs = pst.executeQuery();
+
         AddressEntity address = new AddressEntity();
         HashSet<AddressEntity> shippingAddresses = null;
         while (rs.next()) {
