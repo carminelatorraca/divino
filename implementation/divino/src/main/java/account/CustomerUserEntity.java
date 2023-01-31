@@ -12,13 +12,13 @@ public class CustomerUserEntity extends UserEntity {
     private HashSet<AddressEntity> shippingAddresses;
 
     public CustomerUserEntity (){
-        super("", "", Role.CUSTOMERUSER , "", "", "");
+        super(-1,"", "", Role.CUSTOMERUSER , "", "", "");
         this.shippingAddresses = null;
         this.customerPayments = null;
     }
 
-    public CustomerUserEntity(String email, String password, Role role, String firstName, String lastName, String fiscalCode, HashSet<AddressEntity> shippingAddresses, List<PaymentEntity> customerPayments) {
-        super(email, password, role, firstName, lastName, fiscalCode);
+    public CustomerUserEntity(int accountID, String email, String password, Role role, String firstName, String lastName, String fiscalCode, HashSet<AddressEntity> shippingAddresses, List<PaymentEntity> customerPayments) {
+        super(accountID,email, password, role, firstName, lastName, fiscalCode);
         this.shippingAddresses = shippingAddresses;
         this.customerPayments = customerPayments;
     }
@@ -30,7 +30,7 @@ public class CustomerUserEntity extends UserEntity {
     }
 
     public CustomerUserEntity(UserEntity user) {
-        super(user.getEmail(), user.getPassword(), Role.CUSTOMERUSER, user.getFirstName(), user.getLastName(), user.getFiscalCode());
+        super(user.getAccountID(),user.getEmail(), user.getPassword(), Role.CUSTOMERUSER, user.getFirstName(), user.getLastName(), user.getFiscalCode());
         this.shippingAddresses = null;
         this.customerPayments = null;
     }

@@ -9,8 +9,8 @@ public class UserEntity extends AccountEntity {
     private String fiscalCode;
 
 
-    public UserEntity(String email, String password, Role role, String firstName, String lastName, String fiscalCode) {
-        super(email, password, role);
+    public UserEntity(int accountID, String email, String password, Role role, String firstName, String lastName, String fiscalCode) {
+        super(accountID,email, password, role);
         this.firstName = firstName;
         this.lastName = lastName;
         this.fiscalCode = fiscalCode;

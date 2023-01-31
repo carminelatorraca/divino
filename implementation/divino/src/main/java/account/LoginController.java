@@ -34,11 +34,14 @@ public class LoginController extends HttpServlet {
         try {
             account = accountDao.retrieveAccount(email, password);
             UserEntity user = accountDao.retrieveUser(account);
-
+            System.out.println(account.getAccountID());
+            System.out.println("USERID: " + account.getAccountID());
+            System.out.println(user.getLastName());
             if (account.getAccountID() != -1) {
                 if (user.getRole() == AccountEntity.Role.CUSTOMERUSER) {
                     CustomerUserEntity customer = new CustomerUserEntity(user);
                     customer.setShippingAddresses(accountDao.retrieveAddresses(customer));
+                    System.out.println(customer.getAccountID());
                     request.getSession().setAttribute("user", customer);
                 } else
                     request.getSession().setAttribute("user", user);
