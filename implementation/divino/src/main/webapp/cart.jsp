@@ -1,4 +1,3 @@
-<%@ page import="java.util.Collection" %>
 <%@ page import="cart.CartEntity" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="cart.CartItemEntity" %>
@@ -7,10 +6,12 @@
 
 <% ServletContext context = request.getServletContext(); %>
 <% CartEntity shoppingCart = new CartEntity(); %>
-<% if (session.getAttribute("shoppingCart") == null)
-    session.setAttribute("shoppingCart", shoppingCart);
-else
-    shoppingCart = (CartEntity) session.getAttribute("shoppingCart"); %>
+<%
+    if (session.getAttribute("shoppingCart") == null)
+        session.setAttribute("shoppingCart", shoppingCart);
+    else
+        shoppingCart = (CartEntity) session.getAttribute("shoppingCart");
+%>
 <% session.setAttribute("total", ""); %>
 
 <!DOCTYPE html>
@@ -46,6 +47,7 @@ else
         <div class="col-lg-8 wine-margin">
             <h3>Carrello</h3>
 
+            <!-- ERRORI -->
             <%
                 if (shoppingCart.getShoppingCart() == null) { %>
             <br>
@@ -56,11 +58,13 @@ else
             <div class="card mb-3 wine-card-cart bg-white">
                 <div class="row g-0 align-items-center">
 
+                    <!-- RIMOZIONE PRODOTTO -->
                     <div class="col-md-2" style="text-align: center">
                         <a href="${pageContext.request.contextPath}/cart?mode=remove&productid=<%=product.getProduct().getProductId()%>"
                            class="material-symbols-outlined" id="wine-cart-remove" style="color: #dcbe84">close</a>
                     </div>
 
+                    <!-- IMG -->
                     <div class="col-md-2">
                         <img src="${pageContext.request.contextPath}/images/<%=product.getProduct().getImagePath()%>"
                              class="card-img-top img-fluid"
