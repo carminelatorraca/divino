@@ -88,7 +88,7 @@
 
                             <!-- INCREMENTA QUANTITA PRODOTTO -->
                             <a class="btn btn-light"
-                               href="${pageContext.request.contextPath}/cart?mode=add&productid=<%=product.getProduct().getProductId()%>">+</a>
+                               href="${pageContext.request.contextPath}/cart?mode=plus&productid=<%=product.getProduct().getProductId()%>">+</a>
 
                             <input type="hidden" name="productid" value="<%=product.getProduct().getProductId()%>">
                             <input type="text" name="quantity" value="<%=product.getProductQuantity()%>" readonly>

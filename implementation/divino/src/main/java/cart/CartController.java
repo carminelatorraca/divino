@@ -39,8 +39,35 @@ public class CartController extends HttpServlet {
 
             for (ProductEntity product : catalog) {
                 if (product.getProductId().equals(productID)) {
-                    cart.addItem(new CartItemEntity(product, 1));
+                    if (!cart.checkItem(productID)) {
+                        cart.addItem(new CartItemEntity(product, 1));
+                    }
+                    else {
+                        CartItemEntity item = cart.getCartItem(productID);
+                        item.setProductQuantity(item.getProductQuantity()+1);
+                    }
                     System.out.println("ok");
+                }
+            }
+
+        }
+
+        //plus al carrello
+        if (request.getParameter("mode").equalsIgnoreCase("plus")) {
+            String productID = request.getParameter("productid");
+            System.out.println(productID);
+
+            for (ProductEntity product : catalog) {
+                if (product.getProductId().equals(productID)) {
+                    if (!cart.checkItem(productID)) {
+                        cart.addItem(new CartItemEntity(product, 1));
+                    }
+                    else {
+                        CartItemEntity item = cart.getCartItem(productID);
+                        item.setProductQuantity(item.getProductQuantity()+1);
+                    }
+                    System.out.println("ok");
+                    request.getSession().setAttribute("shippingCart", cart);
                 }
             }
         }
@@ -67,9 +94,16 @@ public class CartController extends HttpServlet {
                 cart.getShoppingCart().get(productID).setProductQuantity(quantity - 1);
         }
 
-        else if(request.getParameter("mode").equalsIgnoreCase("checkout") && cart!=null)
-            response.sendRedirect(getServletContext().getContextPath() + "/checkout.jsp");
 
+        if (request.getParameter("mode").equalsIgnoreCase("add")) {
+            request.getSession().setAttribute("shippingCart", cart);
+            response.sendRedirect(getServletContext().getContextPath() + "/shop.jsp");
+        } else if (request.getParameter("mode").equalsIgnoreCase("checkout") && cart!=null) {
+            response.sendRedirect(getServletContext().getContextPath() + "/checkout.jsp");
+        } else{
+            request.getSession().setAttribute("shippingCart", cart);
+            response.sendRedirect(getServletContext().getContextPath() + "/cart.jsp");
+        }
     }
 
 
