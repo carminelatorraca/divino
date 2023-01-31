@@ -1,20 +1,21 @@
 package catalog;
 
+import java.util.Collection;
 import java.util.HashSet;
 
 public class CatalogEntity {
 
-    private HashSet<ProductEntity> catalogProducts;
+    private Collection<ProductEntity> catalogProducts;
 
     public CatalogEntity() {
         catalogProducts = new HashSet<>();
     }
 
-    public HashSet<ProductEntity> getCatalogProducts() {
+    public Collection<ProductEntity> getCatalogProducts() {
         return catalogProducts;
     }
 
-    public void setCatalogProducts(HashSet<ProductEntity> catalogProducts) {
+    public void setCatalogProducts(Collection<ProductEntity> catalogProducts) {
         this.catalogProducts = catalogProducts;
     }
 
