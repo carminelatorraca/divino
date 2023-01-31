@@ -12,7 +12,10 @@
     else
         shoppingCart = (CartEntity) session.getAttribute("shoppingCart");
 %>
-<% session.setAttribute("total", ""); %>
+<%
+    double total = shoppingCart.getTotalAmount();
+    session.setAttribute("total", total);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -85,9 +88,9 @@
 
                             <!-- INCREMENTA QUANTITA PRODOTTO -->
                             <a class="btn btn-light"
-                               href="${pageContext.request.contextPath}/cart?mode=plus&productID=<%=product.getProduct().getProductId()%>">+</a>
+                               href="${pageContext.request.contextPath}/cart?mode=add&productid=<%=product.getProduct().getProductId()%>">+</a>
 
-                            <input type="hidden" name="productId" value="<%=product.getProduct().getProductId()%>">
+                            <input type="hidden" name="productid" value="<%=product.getProduct().getProductId()%>">
                             <input type="text" name="quantity" value="<%=product.getProductQuantity()%>" readonly>
 
                             <!-- DECREMANTA QUANTITA PRODOTTO -->
@@ -124,8 +127,7 @@
                 </tbody>
             </table>
 
-            <a type="button" class="btn btn-success wine-button" href="${pageContext.request.contextPath}/checkout">PROCEDI
-                CON L'ORDINE</a>
+            <a type="button" class="btn btn-success wine-button" href="${pageContext.request.contextPath}/checkout">PROCEDI CON L'ORDINE</a>
         </div>
     </div>
 </div>

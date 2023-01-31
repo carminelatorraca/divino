@@ -8,6 +8,7 @@ import java.io.IOException;
 
 @WebServlet(name = "CheckoutController", value = "/checkout")
 public class CheckoutController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

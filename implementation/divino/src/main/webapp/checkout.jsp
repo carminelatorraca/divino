@@ -1,12 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
+
 <%@ page import="account.UserEntity" %>
 <%@ page import="cart.CartEntity" %>
-<%@ page import="java.sql.SQLException" %>
-<%@ page import="catalog.ProductEntity" %>
+
 <%@ page import="cart.CartItemEntity" %>
-<%@ page import="java.util.HashSet" %>
 <%@ page import="account.AddressEntity" %>
 
 
@@ -39,7 +37,7 @@
 <html>
 <head>
     <%@include file="/fragments/meta.jsp" %>
-    <script src="javascript/my-scripts.js" type="text/javascript"></script>
+    <script src="fragments/my-scripts.js" type="text/javascript"></script>
 
     <title>Checkout</title>
 </head>

@@ -18,6 +18,7 @@ public class CartEntity {
                 shoppingCart.put(cartItem.getProduct().getProductId(), cartItem);
             } else {
                 cartItem.setProductQuantity(cartItem.getProductQuantity() + 1);
+                System.out.println("ue be");
             }
         }
     }

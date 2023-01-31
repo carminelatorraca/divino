@@ -36,26 +36,19 @@ public class CartController extends HttpServlet {
         if (request.getParameter("mode").equalsIgnoreCase("add")) {
             String productID = request.getParameter("productid");
             System.out.println(productID);
-            CartItemEntity cartItem = new CartItemEntity();
+
             for (ProductEntity product : catalog) {
-                if (product.getProductId().equals(productID))
-                    cartItem = new CartItemEntity(product, 1);
+                if (product.getProductId().equals(productID)) {
+                    cart.addItem(new CartItemEntity(product, 1));
+                    System.out.println("ok");
+                }
             }
-            cart.addItem(cartItem);
         }
 
         //rimozione prodotto
         if (request.getParameter("mode").equalsIgnoreCase("remove")) {
             String productid = request.getParameter("productid");
             cart.removeItem(productid);
-        }
-
-        //incremento quantità
-        else if (request.getParameter("mode").equalsIgnoreCase("plus")) {
-            String productID = request.getParameter("productid");
-            int quantity = cart.getShoppingCart().get(productID).getProductQuantity();
-            cart.getShoppingCart().get(productID).setProductQuantity(quantity + 1);
-
         }
 
         //decremento quantità
@@ -74,7 +67,7 @@ public class CartController extends HttpServlet {
                 cart.getShoppingCart().get(productID).setProductQuantity(quantity - 1);
         }
 
-        request.getSession().setAttribute("shoppingCart", cart);
+       // request.getSession().setAttribute("shoppingCart", cart);
         response.sendRedirect("./shop.jsp");
     }
 
