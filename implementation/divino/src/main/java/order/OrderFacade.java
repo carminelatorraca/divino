@@ -6,6 +6,7 @@ import cart.CartItemEntity;
 import payment.PaymentEntity;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class OrderFacade {
 
@@ -30,6 +31,8 @@ public class OrderFacade {
     public void joinProducts(CartEntity cart, OrderEntity order) {
         if (cart == null || order == null) return;
 
+        ArrayList<OrderItemEntity> orderItems = new ArrayList<>();
+
         for (CartItemEntity cartItem : cart.getShoppingCart().values()) {
             OrderItemEntity orderItem = new OrderItemEntity();
 
@@ -39,7 +42,10 @@ public class OrderFacade {
             orderItem.setProductQuantity(cartItem.getProductQuantity());
             orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
             orderItem.setProductVat(cartItem.getProduct().getProductVat());
+
+            orderItems.add(orderItem);
         }
+        order.setOrderProducts(orderItems);
     }
 
 

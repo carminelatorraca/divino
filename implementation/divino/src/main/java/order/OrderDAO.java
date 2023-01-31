@@ -2,10 +2,7 @@ package order;
 
 import account.CustomerUserEntity;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class OrderDAO {
 
@@ -24,16 +21,25 @@ public class OrderDAO {
 
         //associo cliente a nuovo ordine
         String createQuery = "INSERT INTO " + ORDER_TABLE + " (order_account) VALUES (?)";
-        PreparedStatement pst = connection.prepareStatement(createQuery);
-        System.out.println(customer.getAccountID());
+        PreparedStatement pst = connection.prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS);
         pst.setInt(1, customer.getAccountID());
         pst.executeUpdate();
 
         //return id nuovo ordine creato
-        ResultSet rs = pst.getGeneratedKeys();
-        if (!rs.wasNull()) order.setOrderNumber(rs.getInt(1));
-
+        order.setOrderNumber(getOrderId(customer.getAccountID()));
         return order;
+    }
+
+    public int getOrderId(int customer) throws SQLException {
+        int id = 0;
+        String createQuery = "SELECT order_id FROM " + ORDER_TABLE + " WHERE order_customer = ?";
+        PreparedStatement pst = connection.prepareStatement(createQuery);
+
+        pst.setInt(1, customer);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next())
+            id = rs.getInt(1);
+        return id;
     }
 
     public void saveOrderItem(OrderItemEntity item) throws SQLException {
