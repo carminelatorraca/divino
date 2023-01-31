@@ -44,7 +44,7 @@ public class OrderDAO {
     }
 
     public void saveOrderItem(OrderItemEntity item) throws SQLException {
-        String query = "INSERT INTO " + PIVOT_ORDER_TABLE + " (order_id, item_description, item_quantity, item_price, item_vat, product_id) VALUES(?,?,?,?,?,?)";
+        String query = "INSERT INTO " + PIVOT_ORDER_TABLE + " (order_id, item_description, item_quantity, item_price, item_vat) VALUES(?,?,?,?,?)";
         PreparedStatement pst = connection.prepareStatement(query);
 
         //inserimento dei prodotti contenuti nell'ordine
