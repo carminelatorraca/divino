@@ -10,8 +10,10 @@ import java.util.HashSet;
 
 @WebServlet(name = "CartController", value = "/cart")
 public class CartController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         if (request.getSession().getAttribute("shoppingCart") != null) {
             CartEntity cart = null;
             cart = (CartEntity) request.getSession().getAttribute("shoppingCart");
