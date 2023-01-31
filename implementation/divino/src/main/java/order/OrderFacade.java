@@ -29,7 +29,7 @@ public class OrderFacade {
      * @param order order just create
      */
     public void joinProducts(CartEntity cart, OrderEntity order) {
-        if (cart == null || order == null) return;
+        //if (cart == null || order == null) return;
 
         ArrayList<OrderItemEntity> orderItems = new ArrayList<>();
 

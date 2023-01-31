@@ -96,12 +96,12 @@ public class CartController extends HttpServlet {
 
 
         if (request.getParameter("mode").equalsIgnoreCase("add")) {
-            request.getSession().setAttribute("shippingCart", cart);
+            request.getSession().setAttribute("shoppingCart", cart);
             response.sendRedirect(getServletContext().getContextPath() + "/shop.jsp");
         } else if (request.getParameter("mode").equalsIgnoreCase("checkout") && cart!=null) {
             response.sendRedirect(getServletContext().getContextPath() + "/checkout.jsp");
         } else{
-            request.getSession().setAttribute("shippingCart", cart);
+            request.getSession().setAttribute("shoppingCart", cart);
             response.sendRedirect(getServletContext().getContextPath() + "/cart.jsp");
         }
     }

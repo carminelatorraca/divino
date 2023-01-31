@@ -39,6 +39,7 @@ public class OrderDAO {
         ResultSet rs = pst.executeQuery();
         if (rs.next())
             id = rs.getInt(1);
+        System.out.println("id"+id);
         return id;
     }
 

@@ -33,7 +33,7 @@ public class OrderController extends HttpServlet {
         OrderFacade orderPlacement = new OrderFacade(orderDAO);
 
         CustomerUserEntity customer = (CustomerUserEntity) request.getSession().getAttribute("user");
-        CartEntity shoppingCart = (CartEntity) request.getAttribute("shoppingCart");
+        CartEntity shoppingCart = (CartEntity) request.getSession().getAttribute("shoppingCart");
 
         //gestire eccezione se cliente o carrello sono null
         //if (customer == null || shoppingCart == null) {}
