@@ -25,7 +25,7 @@ public class OrderDAO {
         //associo cliente a nuovo ordine
         String createQuery = "INSERT INTO " + ORDER_TABLE + " (customer_id) VALUES (?)";
         PreparedStatement pst = connection.prepareStatement(createQuery);
-        pst.setString(1, customer.getAccountID());
+        pst.setInt(1, customer.getAccountID());
         pst.executeUpdate();
 
         //return id nuovo ordine creato

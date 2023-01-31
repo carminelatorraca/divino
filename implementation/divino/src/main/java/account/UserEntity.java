@@ -14,7 +14,7 @@ public class UserEntity extends AccountEntity {
     }
 
     public UserEntity(AccountEntity account) {
-        super(account.getEmail(), account.getPassword(), account.getRole());
+        super(account.getAccountID(), account.getEmail(), account.getPassword(), account.getRole());
         this.firstName = null;
         this.lastName = null;
         this.fiscalCode = null;

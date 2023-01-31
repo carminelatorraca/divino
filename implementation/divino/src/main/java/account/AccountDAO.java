@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class AccountDAO {
 
-    private static final String TABLE_NAME = "account";
+    private static final String TABLE_NAME = "accounts";
     private Connection connection;
 
     public AccountDAO(Connection connection) {
@@ -16,20 +16,21 @@ public class AccountDAO {
     }
 
     public void createAccount(AccountEntity account) throws SQLException {
-        String query = "INSERT INTO " + TABLE_NAME + " (email, password, role) VALUES (?,?,?,?,?);";
+        String query = "INSERT INTO " + TABLE_NAME + " (email, password, role) VALUES (?,?,?);";
         PreparedStatement statement = connection.prepareStatement(query);
-        if (check(account.getEmail())) {
+        //if (check(account.getEmail())) {
             statement.setString(1, account.getEmail());
             statement.setString(2, account.getPassword());
             statement.setString(3, account.getRole().toString());
             statement.executeUpdate();
-        }
+        //}
     }
 
+
     public void createUser(UserEntity user) throws SQLException {
-        String query = "INSERT INTO user (AccountID, firstName, lastName, fiscalCode) VALUES (?,?,?,?);";
+        String query = "INSERT INTO users (account_id, firstName, lastName, fiscalCode) VALUES (?,?,?,?);";
         PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, user.getAccountID());
+        statement.setInt(1, user.getAccountID());
         statement.setString(2, user.getFirstName());
         statement.setString(3, user.getLastName());
         statement.setString(4, user.getFiscalCode());
@@ -37,7 +38,7 @@ public class AccountDAO {
     }
 
     private boolean check(String email) throws SQLException {
-        PreparedStatement pst = connection.prepareStatement("SELECT email FROM " + TABLE_NAME + "WHERE email = ?");
+        PreparedStatement pst = connection.prepareStatement("SELECT email FROM " + TABLE_NAME + "WHERE email = ?;");
         pst.setString(1, email);
         ResultSet rs = pst.executeQuery();
         return rs.wasNull();
@@ -46,14 +47,14 @@ public class AccountDAO {
     public AccountEntity retrieveAccount(String email, String password) throws SQLException {
         AccountEntity account = new AccountEntity();
 
-        PreparedStatement pst = connection.prepareStatement("SELECT accountID, email, password, role FROM " + TABLE_NAME + "WHERE email = ? AND password = ?");
+        PreparedStatement pst = connection.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE email = ? AND password = ?;");
         pst.setString(1, email);
         pst.setString(2, password);
         ResultSet rs = pst.executeQuery();
 
 
         while (rs.next()) {
-            account.setAccountID(rs.getString("accountID"));
+            account.setAccountID(rs.getInt("account_id"));
             account.setEmail(rs.getString("email"));
             account.setPassword(rs.getString("password"));
             account.setRole((AccountEntity.Role.valueOf(rs.getString("role"))));
@@ -64,8 +65,8 @@ public class AccountDAO {
     public UserEntity retrieveUser(AccountEntity account) throws SQLException {
         UserEntity user = new UserEntity(account);
 
-        PreparedStatement pst = connection.prepareStatement("SELECT * FROM user WHERE accountID = ?");
-        pst.setString(1, account.getAccountID());
+        PreparedStatement pst = connection.prepareStatement("SELECT * FROM users WHERE account_id = ?;");
+        pst.setInt(1, account.getAccountID());
         ResultSet rs = pst.executeQuery();
 
         while (rs.next()) {
@@ -77,7 +78,7 @@ public class AccountDAO {
     }
 
     public void updateCustomerAccount(UserEntity user) throws SQLException {
-        PreparedStatement pst = connection.prepareStatement("UPDATE firstName, lastName, email, password, fiscalCode" + TABLE_NAME + " SET WHERE accountID = ?");
+        PreparedStatement pst = connection.prepareStatement("UPDATE firstName, lastName, email, password, fiscalCode" + TABLE_NAME + " SET WHERE accountID = ?;");
         pst.setString(1, user.getFirstName());
         pst.setString(2, user.getLastName());
         pst.setString(3, user.getEmail());

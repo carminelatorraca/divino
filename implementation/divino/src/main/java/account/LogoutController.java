@@ -13,7 +13,7 @@ public class LogoutController extends HttpServlet {
         request.getSession().removeAttribute("user");
         request.getSession().removeAttribute("logged");
         request.getSession().removeAttribute("cart");
-        response.sendRedirect("./home.jsp");
+        response.sendRedirect("./shop.jsp");
     }
 
     @Override

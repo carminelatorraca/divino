@@ -1,5 +1,5 @@
 package account;
-
+import catalog.CatalogDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -9,6 +9,14 @@ import java.sql.SQLException;
 
 @WebServlet(name = "SignupController", value = "/signup")
 public class SignupController extends HttpServlet {
+    private AccountDAO dbAccount;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        this.dbAccount = (AccountDAO) super.getServletContext().getAttribute("accountDAO");
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -16,35 +24,32 @@ public class SignupController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AccountDAO dbAccount = new AccountDAO();
 
-        if (request.getParameter("mode").equalsIgnoreCase("signup")) {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            String passwordCheck = request.getParameter("passwordCheck");
-            String firstName = request.getParameter("firstName");
-            String lastName = request.getParameter("lastName");
+        String email = request.getParameter("r-email");
+        String password = request.getParameter("r-password");
+        String firstName = request.getParameter("r-firstname");
+        String lastName = request.getParameter("r-lastname");
 
-            AccountEntity account = new AccountEntity(email, password, AccountEntity.Role.CUSTOMERUSER);
-            try {
-                dbAccount.createAccount(account);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            UserEntity user = new UserEntity(account);
-            user.setFirstName(firstName);
-            user.setFirstName(lastName);
-            user.setFiscalCode(null);
-            try {
-                dbAccount.createUser(user);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
-            view.forward(request, response);
-
+        AccountEntity account = new AccountEntity(email, password, AccountEntity.Role.CUSTOMERUSER);
+        try {
+            dbAccount.createAccount(account);
+            account = dbAccount.retrieveAccount(email,password);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
+        UserEntity user = new UserEntity(account);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setFiscalCode("null");
+        try {
+            dbAccount.createUser(user);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
+        view.forward(request, response);
+
     }
 }
