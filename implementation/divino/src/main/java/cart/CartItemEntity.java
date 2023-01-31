@@ -7,6 +7,11 @@ public class CartItemEntity {
     private ProductEntity product;
     private int productQuantity;
 
+    public CartItemEntity() {
+        this.product = null;
+        this.productQuantity = -1;
+    }
+
     public CartItemEntity(ProductEntity product, int productQuantity) {
         this.product = product;
         this.productQuantity = productQuantity;

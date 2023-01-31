@@ -7,7 +7,7 @@
 
 <% ServletContext context = request.getServletContext(); %>
 <% CartEntity shoppingCart = new CartEntity(); %>
-<% session.setAttribute("shoppingCart", shoppingCart); %>
+<% if (session.getAttribute("shoppingCart") == null) session.setAttribute("shoppingCart", shoppingCart); %>
 <% session.setAttribute("total", ""); %>
 
 <!DOCTYPE html>
@@ -68,12 +68,13 @@
                     <div class="col-md-8">
                         <div class="card-body">
 
+                            <!-- price -->
                             <h5 class="card-title"><%=product.getProduct().getProductBrand()%>
                             </h5>
+                            <!-- quantity -->
                             <p class="card-text" style="font-size: 17px">
                                 &euro; <%=product.getProduct().getProductPrice() * product.getProductQuantity()%>
                             </p>
-                            <br>
 
                             <!-- INCREMENTA QUANTITA PRODOTTO -->
                             <a class="btn btn-light"
@@ -123,7 +124,6 @@
                 </tbody>
             </table>
 
-            <% request.setAttribute("shoppingCart", shoppingCart);%>
             <a type="button" class="btn btn-success wine-button" href="${pageContext.request.contextPath}/checkout">PROCEDI
                 CON L'ORDINE</a>
         </div>

@@ -56,7 +56,7 @@
                     <h6 class="card-price" style="font-size: 20px">&euro; <%=product.getProductPrice()%>
                     </h6>
                     <div class="mt-4 d-flex justify-content-md-start">
-                        <a href="${pageContext.request.contextPath}/cart?toCart=<%=product.getProductId()%>"
+                        <a href="${pageContext.request.contextPath}/cart?mode=add&productid=<%=product.getProductId()%>"
                            class="btn btn-primary wine-button">
                             AGGIUNGI AL CARRELLO
                         </a>
