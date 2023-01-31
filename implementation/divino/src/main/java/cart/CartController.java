@@ -41,11 +41,7 @@ public class CartController extends HttpServlet {
                 if (product.getProductId().equals(productID))
                     cartItem = new CartItemEntity(product, 1);
             }
-            if (cart.getShoppingCart() == null) {
-                list.put(cartItem.getProduct().getProductId(), cartItem);
-                cart.setShoppingCart(list);
-            } else
-                cart.getShoppingCart().put(cartItem.getProduct().getProductId(), cartItem);
+            cart.addItem(cartItem);
         }
 
         //rimozione prodotto

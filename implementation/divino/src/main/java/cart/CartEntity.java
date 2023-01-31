@@ -4,12 +4,11 @@ import java.util.HashMap;
 
 public class CartEntity {
 
-    private HashMap<String, CartItemEntity> shoppingCart;
+    private HashMap<String, CartItemEntity> shoppingCart = new HashMap<>();
     private double totalAmount;
 
     public CartEntity() {
         totalAmount = 0;
-        shoppingCart = null;
     }
 
     public void addItem(CartItemEntity cartItem) {
