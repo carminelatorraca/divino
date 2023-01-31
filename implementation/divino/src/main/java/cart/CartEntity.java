@@ -18,9 +18,15 @@ public class CartEntity {
                 shoppingCart.put(cartItem.getProduct().getProductId(), cartItem);
             } else {
                 cartItem.setProductQuantity(cartItem.getProductQuantity() + 1);
-                System.out.println("ue be");
+                System.out.println("Fatto +1 :" + cartItem.getProductQuantity());
             }
         }
+    }
+
+    public boolean checkItem(String productID){
+        if (shoppingCart.containsKey(productID))
+            return true;
+        return false;
     }
 
     public HashMap<String, CartItemEntity> getShoppingCart() {
