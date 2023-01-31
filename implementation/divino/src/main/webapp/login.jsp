@@ -1,13 +1,13 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% ArrayList<String> errors = (ArrayList<String>) session.getAttribute("reglog-errors"); %>
+<% ServletContext context = request.getServletContext(); %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <%@include file="/fragments/meta.jsp" %>
-    <script src="javascript/my-scripts.js" type="text/javascript"></script>
+    <script src="js/my-scripts.js" type="text/javascript"></script>
 
     <title>Login</title>
 </head>
@@ -15,13 +15,15 @@
 <%@include file="fragments/header.jsp" %>
 <div class="container">
     <%
-        if (errors != null && errors.size() > 0) {
-            for (String error : errors) {
+        ArrayList<String> exceptions = (ArrayList<String>) context.getAttribute("exceptions");
+
+        if (exceptions != null) {
+            for (String exception : exceptions) {
     %>
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="alert alert-warning wine-errors" role="alert">
-                <%=error%>
+                <%=exception%>
             </div>
         </div>
     </div>

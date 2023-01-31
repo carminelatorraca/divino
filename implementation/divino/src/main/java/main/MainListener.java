@@ -2,6 +2,7 @@ package main;
 
 import account.AccountDAO;
 import catalog.CatalogDAO;
+import catalog.ProductEntity;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -12,6 +13,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @WebListener
 public class MainListener implements ServletContextListener, HttpSessionListener, HttpSessionAttributeListener {
@@ -43,6 +46,14 @@ public class MainListener implements ServletContextListener, HttpSessionListener
 
             OrderDAO orderDAO = new OrderDAO(connection);
             servletContext.setAttribute("orderDAO", orderDAO);
+
+            //set catalog
+            Collection<ProductEntity> catalog = catalogDAO.createCatalog();
+            servletContext.setAttribute("catalog", catalog);
+
+            //set errors
+            Collection<DivinoExceptions> exceptions = new ArrayList<>();
+            servletContext.setAttribute("exceptions", exceptions);
 
         } catch (NamingException | SQLException e) {
             throw new RuntimeException(e);

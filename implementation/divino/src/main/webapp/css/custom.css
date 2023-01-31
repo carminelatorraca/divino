@@ -1,0 +1,129 @@
+body {
+    font-family: 'Rufina', serif;
+}
+
+.form-control.success input{
+    border-color: red;
+}
+
+.zoom{
+    transition: transform 0.2s ease-in-out;
+}
+
+.container{
+    padding: 60px;
+}
+
+.wine-errors{
+    background-color: red;
+    color: white;
+    border-radius: 0;
+    text-align: center;
+}
+
+.wine-margin{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 40px;
+}
+
+.wine-cart-total{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24;
+    text-align: left;
+    padding: 50px;
+    color: white;
+}
+
+.wine-checkout-total{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 12px;
+}
+
+.wine-footer{
+    position: inherit;
+    justify-content: center;
+    margin-top: 45px;
+}
+
+.wine-header{
+    margin-bottom: 45px;
+}
+
+.wine-font-style{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+    padding: 50px;
+    color: #999999;
+}
+
+.wine-label {
+    text-transform: uppercase;
+    font-size: 0.625rem;
+    letter-spacing: 3px;
+    margin-bottom: 2px;
+    font-family: 'Muli', sans-serif;
+    line-height: 15px;
+    font-weight: bold;
+}
+
+.wine-input {
+    border-radius: 0;
+}
+
+.wine-button {
+    border-color: transparent;
+    border-radius: 0;
+    background-color: #dcbe84;
+}
+
+.wine-button:hover{
+    background-color: black;
+    border-color: #dcbe84;
+}
+
+#wine-cart-remove{
+    color: #dcbe84;
+    text-decoration: blink;
+    text-align: center;
+}
+
+.wine-card {
+    width: 18rem;
+    border: 0;
+}
+
+.wine-card-cart {
+    max-width: 540px;
+    border-color: transparent;
+    border-radius: 0;
+}
+
+.wine-cart-amount {
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.625rem;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    font-family: 'Muli', sans-serif;
+    line-height: 15px;
+    font-weight: bold;
+}
+
+.wine-no-border-radius {
+    border-radius: 0;
+}
+
+#input-credit-card {
+    background: no-repeat url("/winesa/media/credit-card.svg");
+    background-position-x: right;
+    background-size: 40px;
+    background-position-y: center;
+    display: block;;
+
+
+}

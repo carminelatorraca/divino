@@ -14,6 +14,7 @@ public class ProductEntity {
     private double salesPrice;
     private int productVat;
     private boolean isVisible;
+    private String imagePath;
 
     private LocalDateTime createdAt;
     private LocalDateTime isDeleted;
@@ -116,5 +117,13 @@ public class ProductEntity {
 
     public void setVisible(boolean visible) {
         isVisible = visible;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
