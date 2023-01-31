@@ -32,7 +32,7 @@ public class OrderDAO {
 
     public int getOrderId(int customer) throws SQLException {
         int id = 0;
-        String createQuery = "SELECT order_id FROM " + ORDER_TABLE + " WHERE order_customer = ?";
+        String createQuery = "SELECT order_id FROM " + ORDER_TABLE + " WHERE order_account = ?";
         PreparedStatement pst = connection.prepareStatement(createQuery);
 
         pst.setInt(1, customer);
