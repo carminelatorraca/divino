@@ -1,6 +1,7 @@
 package account;
 
 import java.sql.*;
+import java.util.HashSet;
 
 public class AccountDAO {
 
@@ -89,4 +90,34 @@ public class AccountDAO {
 
 
     //AGGIUNGERE METODO PER RECUPERARE GLI INDIRIZZI DI UN DETERMINATO CUSTOMER
+    public void addAddress(CustomerUserEntity user, AddressEntity address) throws SQLException {
+        String query = "INSERT INTO addresses (account_id, street, number, city, postalCode, country, favourite) VALUES (?,?,?,?,?,?,?);";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, user.getAccountID());
+        statement.setString(2, address.getStreet());
+        statement.setString(3, address.getNumber());
+        statement.setString(4, address.getCity());
+        statement.setString(5, address.getPostalCode());
+        statement.setString(6, address.getCountry());
+        statement.setInt(7, address.getFavourite());
+        statement.executeUpdate();
+    }
+
+    public HashSet<AddressEntity> retrieveAddresses (CustomerUserEntity user) throws SQLException {
+        PreparedStatement pst = connection.prepareStatement("SELECT * FROM addresses WHERE account_id = ?;");
+        pst.setInt(1, user.getAccountID());
+        ResultSet rs = pst.executeQuery();
+        AddressEntity address = new AddressEntity();
+        HashSet<AddressEntity> shippingAddresses = null;
+        while (rs.next()) {
+            address.setStreet(rs.getString("street"));
+            address.setNumber(rs.getString("number"));
+            address.setCity(rs.getString("city"));
+            address.setPostalCode(rs.getString("postalCode"));
+            address.setCountry(rs.getString("country"));
+            address.setFavourite(rs.getInt("favourite"));
+            shippingAddresses.add(address);
+        }
+        return shippingAddresses;
+    }
 }

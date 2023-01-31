@@ -1,26 +1,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.dewine.model.*" %>
+<%@ page import="account.UserEntity" %>
+<%@ page import="cart.CartEntity" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="catalog.ProductEntity" %>
+<%@ page import="cart.CartItemEntity" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="account.AddressEntity" %>
 
-<% DataSource checkoutDS = (DataSource) pageContext.getServletContext().getAttribute("DataSource"); %>
-<% ProductsDAO productsDAO = new ProductsDAO(checkoutDS); %>
-<% UsersDAO usersDAO = new UsersDAO(checkoutDS); %>
+
 <%
-    Users user = (Users) request.getSession().getAttribute("user");
-    ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart");
+    UserEntity user = (UserEntity) request.getSession().getAttribute("user");
+    CartEntity shoppingCart = (CartEntity) request.getSession().getAttribute("shoppingCart");
 
-    try {
-        user = usersDAO.doRetrieveByKey(user.getUserId());
-        if (user == null || !user.getUserRole().equals("User") || cart == null) {
-            request.setAttribute("notAuthorized", Boolean.TRUE);
-            response.sendRedirect("/cart.jsp");
-        }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+    //user = usersDAO.doRetrieveByKey(user.getUserId());
+    if (user == null || !user.getRole().equals("CUSTOMERUSER") || shoppingCart == null) {
+        request.setAttribute("notAuthorized", Boolean.TRUE);
         response.sendRedirect("/cart.jsp");
     }
-
+/*
     List<Cart> productsCart = null;
     if (cart != null) {
         try {
@@ -32,6 +31,7 @@
             ex.printStackTrace();
         }
     }
+ */
 %>
 <% ArrayList<String> errors = (ArrayList<String>) session.getAttribute("order-errors"); %>
 
@@ -68,6 +68,10 @@
                 <div class="form-check">
                     <%
                         if (user != null) {
+                            AddressEntity favAddress = null;
+                            for (AddressEntity addressEntity : user.getShippingAddresses())
+                                if(addressEntity.getFavourite()==1)
+                                    favAddress = addressEntity;
                     %>
                     <input class="form-check-input" type="radio" name="c-choose" id="choose-old-address" checked
                            value="oldaddress">
@@ -79,11 +83,11 @@
                             <h5 class="card-title"><%=user.getFirstName() + " " + user.getLastName()%>
                             </h5>
                             <h6 class="card-subtitle mb-2 text-muted">Indirizzo</h6>
-                            <p class="card-text" style="margin-bottom: 0"><%=user.getAddress()%>
+                            <p class="card-text" style="margin-bottom: 0"><%=favAddress.getStreet()%>
                             </p>
-                            <p class="card-text" style="margin-bottom: 0"><%=user.getCapCode()%>
+                            <p class="card-text" style="margin-bottom: 0"><%=favAddress.getPostalCode()%>
                             </p>
-                            <p class="card-text" style="margin-bottom: 0"><%=user.getCity()%>
+                            <p class="card-text" style="margin-bottom: 0"><%=favAddress.getCity()%>
                             </p>
                         </div>
                     </div>
@@ -191,14 +195,14 @@
                         </thead>
                         <tbody>
                         <%
-                            for (Cart product : productsCart) {
+                            for (CartItemEntity cartItem : shoppingCart.getShoppingCart().values()) {
                         %>
                         <tr>
                             <th>
-                                <%=product.getTitle()%> x<%=product.getQuantity()%>
+                                <%=cartItem.getProduct().getProductDescription()%> x<%=cartItem.getProductQuantity()%>
                             </th>
                             <td>
-                                <%=product.getPrice() * product.getQuantity()%>
+                                <%=cartItem.getProduct().getProductPrice() * cartItem.getProductQuantity()%>
                             </td>
                         </tr>
                         <% } %>
@@ -241,7 +245,7 @@
                 <br>
                 <div class="row justify-content-center">
                     <div class="col-lg-12 align-items-center">
-                        <% request.setAttribute("cart", cart);%>
+                        <% request.setAttribute("cart", shoppingCart);%>
                         <button type="submit" class="btn btn-success wine-button">CONFERMA ORDINE</button>
                     </div>
                 </div>

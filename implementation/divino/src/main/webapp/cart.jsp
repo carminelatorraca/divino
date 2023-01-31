@@ -7,7 +7,10 @@
 
 <% ServletContext context = request.getServletContext(); %>
 <% CartEntity shoppingCart = new CartEntity(); %>
-<% if (session.getAttribute("shoppingCart") == null) session.setAttribute("shoppingCart", shoppingCart); %>
+<% if (session.getAttribute("shoppingCart") == null)
+        session.setAttribute("shoppingCart", shoppingCart);
+    else
+        shoppingCart = (CartEntity) session.getAttribute("shoppingCart"); %>
 <% session.setAttribute("total", ""); %>
 
 <!DOCTYPE html>

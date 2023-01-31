@@ -9,14 +9,17 @@ public class CartEntity {
 
     public CartEntity() {
         totalAmount = 0;
+        shoppingCart = null;
     }
 
     public void addItem(CartItemEntity cartItem) {
-        if (!shoppingCart.containsKey(cartItem.getProduct().getProductId())) {
-            cartItem.setProductQuantity(1);
-            shoppingCart.put(cartItem.getProduct().getProductId(), cartItem);
-        } else {
-            cartItem.setProductQuantity(cartItem.getProductQuantity() + 1);
+        if(shoppingCart!=null) {
+            if (!shoppingCart.containsKey(cartItem.getProduct().getProductId())) {
+                cartItem.setProductQuantity(1);
+                shoppingCart.put(cartItem.getProduct().getProductId(), cartItem);
+            } else {
+                cartItem.setProductQuantity(cartItem.getProductQuantity() + 1);
+            }
         }
     }
 

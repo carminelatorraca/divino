@@ -1,10 +1,13 @@
 package account;
 
+import java.util.HashSet;
+
 public class UserEntity extends AccountEntity {
 
     private String firstName;
     private String lastName;
     private String fiscalCode;
+
 
     public UserEntity(String email, String password, Role role, String firstName, String lastName, String fiscalCode) {
         super(email, password, role);
@@ -43,4 +46,6 @@ public class UserEntity extends AccountEntity {
     public void setFiscalCode(String fiscalCode) {
         this.fiscalCode = fiscalCode;
     }
+
+
 }

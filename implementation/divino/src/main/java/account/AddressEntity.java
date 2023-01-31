@@ -6,6 +6,7 @@ public class AddressEntity {
     private String number;
     private String city;
     private String country;
+    private Integer favourite;
 
     public AddressEntity() {
 
@@ -57,5 +58,13 @@ public class AddressEntity {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Integer getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(Integer favourite) {
+        this.favourite = favourite;
     }
 }

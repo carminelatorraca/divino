@@ -38,6 +38,7 @@ public class LoginController extends HttpServlet {
             if (account.getAccountID() != -1) {
                 if (user.getRole() == AccountEntity.Role.CUSTOMERUSER) {
                     CustomerUserEntity customer = new CustomerUserEntity(user);
+                    customer.setShippingAddresses(dbAccount.retrieveAddresses(customer));
                     request.getSession().setAttribute("user", customer);
                 } else
                     request.getSession().setAttribute("user", user);

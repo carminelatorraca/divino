@@ -2,12 +2,14 @@ package account;
 
 import payment.PaymentEntity;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class CustomerUserEntity extends UserEntity {
 
-    private List<AddressEntity> shippingAddresses;
+    //private List<AddressEntity> shippingAddresses;
     private List<PaymentEntity> customerPayments;
+    private HashSet<AddressEntity> shippingAddresses;
 
     public CustomerUserEntity (){
         super("", "", Role.CUSTOMERUSER , "", "", "");
@@ -15,13 +17,13 @@ public class CustomerUserEntity extends UserEntity {
         this.customerPayments = null;
     }
 
-    public CustomerUserEntity(String email, String password, Role role, String firstName, String lastName, String fiscalCode, List<AddressEntity> shippingAddresses, List<PaymentEntity> customerPayments) {
+    public CustomerUserEntity(String email, String password, Role role, String firstName, String lastName, String fiscalCode, HashSet<AddressEntity> shippingAddresses, List<PaymentEntity> customerPayments) {
         super(email, password, role, firstName, lastName, fiscalCode);
         this.shippingAddresses = shippingAddresses;
         this.customerPayments = customerPayments;
     }
 
-    public CustomerUserEntity(AccountEntity account, List<AddressEntity> shippingAddresses, List<PaymentEntity> customerPayments) {
+    public CustomerUserEntity(AccountEntity account, HashSet<AddressEntity> shippingAddresses, List<PaymentEntity> customerPayments) {
         super(account);
         this.shippingAddresses = shippingAddresses;
         this.customerPayments = customerPayments;
@@ -33,11 +35,11 @@ public class CustomerUserEntity extends UserEntity {
         this.customerPayments = null;
     }
 
-    public List<AddressEntity> getShippingAddresses() {
+    public HashSet<AddressEntity> getShippingAddresses() {
         return shippingAddresses;
     }
 
-    public void setShippingAddresses(List<AddressEntity> shippingAddresses) {
+    public void setShippingAddresses(HashSet<AddressEntity> shippingAddresses) {
         this.shippingAddresses = shippingAddresses;
     }
 
