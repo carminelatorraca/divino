@@ -1,24 +1,24 @@
 package cart;
 
+import catalog.CatalogEntity;
 import catalog.ProductEntity;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
 
 @WebServlet(name = "CartController", value = "/cart")
 public class CartController extends HttpServlet {
     CartEntity cart = new CartEntity();
-    Collection<ProductEntity> catalog;
+    CatalogEntity catalog;
 
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.catalog = (Collection<ProductEntity>) super.getServletContext().getAttribute("catalog");
+        this.catalog = (CatalogEntity) super.getServletContext().getAttribute("catalog");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CartController extends HttpServlet {
             Integer productID = Integer.valueOf(request.getParameter("productid"));
             System.out.println(productID);
 
-            for (ProductEntity product : catalog) {
+            for (ProductEntity product : catalog.getCatalogProducts()) {
                 if (product.getProductId().equals(productID)) {
                     if (!cart.checkItem(productID)) {
                         cart.addItem(new CartItemEntity(product, 1));
@@ -56,7 +56,7 @@ public class CartController extends HttpServlet {
             Integer productID = Integer.valueOf(request.getParameter("productid"));
             System.out.println(productID);
 
-            for (ProductEntity product : catalog) {
+            for (ProductEntity product : catalog.getCatalogProducts()) {
                 if (product.getProductId().equals(productID)) {
                     if (!cart.checkItem(productID)) {
                         cart.addItem(new CartItemEntity(product, 1));
@@ -73,13 +73,13 @@ public class CartController extends HttpServlet {
 
         //rimozione prodotto
         if (request.getParameter("mode").equalsIgnoreCase("remove")) {
-            String productid = request.getParameter("productid");
+            int productid = Integer.parseInt(request.getParameter("productid"));
             cart.removeItem(productid);
         }
 
         //decremento quantità
         else if (request.getParameter("mode").equalsIgnoreCase("min")) {
-            String productID = request.getParameter("productid");
+            int productID = Integer.parseInt(request.getParameter("productid"));
             int quantity = cart.getShoppingCart().get(productID).getProductQuantity();
             if ((quantity - 1) == 0) {
                 System.out.println("Ci sono");

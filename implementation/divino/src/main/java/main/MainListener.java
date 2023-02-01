@@ -2,6 +2,7 @@ package main;
 
 import account.AccountDAO;
 import catalog.CatalogDAO;
+import catalog.CatalogEntity;
 import catalog.ProductEntity;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -48,7 +49,8 @@ public class MainListener implements ServletContextListener, HttpSessionListener
             servletContext.setAttribute("orderDAO", orderDAO);
 
             //set catalog
-            Collection<ProductEntity> catalog = catalogDAO.createCatalog();
+            CatalogEntity catalog = new CatalogEntity();
+            catalog.setCatalogProducts(catalogDAO.createCatalog());
             servletContext.setAttribute("catalog", catalog);
 
             //set errors

@@ -4,9 +4,11 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import order.OrderDAO;
+import order.OrderEntity;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
 
 @WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
@@ -41,7 +43,8 @@ public class LoginController extends HttpServlet {
                 if (user.getRole() == AccountEntity.Role.CUSTOMERUSER) {
                     CustomerUserEntity customer = new CustomerUserEntity(user);
                     request.getSession().setAttribute("user", customer);
-                    request.getSession().setAttribute("myOrder", orderDAO.customerOrders(account));
+                    HashSet<OrderEntity> orders = orderDAO.customerOrders(account);
+                    request.getSession().setAttribute("myOrder", orders);
                     response.sendRedirect("./account/account.jsp");
 
                 } else if (user.getRole().equals(AccountEntity.Role.MANAGERUSER) || user.getRole().equals(AccountEntity.Role.WAREHOUSEUSER)) {

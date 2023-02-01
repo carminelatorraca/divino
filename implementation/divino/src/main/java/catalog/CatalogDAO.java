@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 public class CatalogDAO {
 
@@ -16,14 +17,14 @@ public class CatalogDAO {
         this.connection = connection;
     }
 
-    public Collection<ProductEntity> createCatalog() throws SQLException {
-        Collection<ProductEntity> catalog = new ArrayList<>();
-        ProductEntity product = new ProductEntity();
+    public HashSet<ProductEntity> createCatalog() throws SQLException {
+        HashSet<ProductEntity> catalog = new HashSet<>();
 
         PreparedStatement pst = connection.prepareStatement("SELECT * FROM " + TABLE_NAME + ";");
         ResultSet rs = pst.executeQuery();
 
         while (rs.next()) {
+            ProductEntity product = new ProductEntity();
             product.setProductId(rs.getInt(1));
             product.setProductBrand(rs.getString(2));
             product.setProductAvailability(rs.getInt(6));

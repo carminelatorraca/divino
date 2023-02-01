@@ -45,6 +45,7 @@ public class OrderController extends HttpServlet {
             order.setOrderTotalAmount(shoppingCart.getTotalAmount());
             orderDAO.updateOrder(order);
             orderPlacement.joinProducts(shoppingCart, order);
+            request.getSession().removeAttribute("shoppingCart");
 
             request.setAttribute("order", order);
             RequestDispatcher paymentRequest = request.getRequestDispatcher("/payment");

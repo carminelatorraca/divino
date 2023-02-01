@@ -1,6 +1,6 @@
-<%@ page import="java.util.Collection" %>
 <%@ page import="catalog.ProductEntity" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="catalog.CatalogEntity" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <% ServletContext context = request.getServletContext(); %>
@@ -35,13 +35,13 @@
     %>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <%
-            Collection<ProductEntity> catalog = (Collection<ProductEntity>) context.getAttribute("catalog");
-            if (catalog.isEmpty()) {
+            CatalogEntity catalog = (CatalogEntity) context.getAttribute("catalog");
+            if (catalog.getCatalogProducts().isEmpty()) {
         %>
         <h4>Nessun prodotto disponibile</h4>
         <%
         } else {
-            for (ProductEntity product : catalog) {
+            for (ProductEntity product : catalog.getCatalogProducts()) {
         %>
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 w-100 wine-card bg-white">
