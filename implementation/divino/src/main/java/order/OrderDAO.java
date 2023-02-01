@@ -39,7 +39,7 @@ public class OrderDAO {
         pst.setDouble(2, order.getOrderTotalAmount());
         pst.setString(3, order.getOrderShippingAddress());
         pst.setInt(4, order.getOrderNumber());
-        pst.setInt(5, order.getOrderCustomer().getAccountID());
+        pst.setInt(5, order.getOrderCustomer());
         pst.executeUpdate();
 
     }
@@ -67,7 +67,7 @@ public class OrderDAO {
         ResultSet rs = pst.executeQuery();
         if (rs.next())
             id = rs.getInt(1);
-        System.out.println("id"+id);
+        System.out.println("id" + id);
         return id;
     }
 
@@ -86,7 +86,7 @@ public class OrderDAO {
         pst.executeUpdate();
     }
 
-    public HashSet<OrderEntity> retrieveAllOrders () throws SQLException {
+    public HashSet<OrderEntity> retrieveAllOrders() throws SQLException {
         HashSet<OrderEntity> orders = new HashSet<>();
         OrderEntity order = new OrderEntity();
         String createQuery = "SELECT * FROM " + ORDER_TABLE + " ORDER BY order_id DESC";
@@ -105,7 +105,7 @@ public class OrderDAO {
         return orders;
     }
 
-    public HashSet<OrderEntity> retrieveAllOrdersToShip () throws SQLException {
+    public HashSet<OrderEntity> retrieveAllOrdersToShip() throws SQLException {
         HashSet<OrderEntity> orders = new HashSet<>();
         OrderEntity order = new OrderEntity();
         String createQuery = "SELECT * FROM " + ORDER_TABLE + " WHERE order_status = ? ORDER BY order_id DESC";
@@ -125,7 +125,7 @@ public class OrderDAO {
         return orders;
     }
 
-    public HashSet<OrderEntity> retrieveAllOrdersToPack () throws SQLException {
+    public HashSet<OrderEntity> retrieveAllOrdersToPack() throws SQLException {
         HashSet<OrderEntity> orders = new HashSet<>();
         OrderEntity order = new OrderEntity();
         String createQuery = "SELECT * FROM " + ORDER_TABLE + " WHERE order_status = ? ORDER BY order_id DESC";

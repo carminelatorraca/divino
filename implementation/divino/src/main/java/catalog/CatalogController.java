@@ -12,11 +12,13 @@ import java.io.IOException;
 @WebServlet(name = "CatalogController", value = "/catalog")
 public class CatalogController extends HttpServlet {
 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String productBrand = request.getParameter("p_brand");
         String productDescription = request.getParameter("p_description");
         String productFormat = request.getParameter("p_format");
@@ -25,6 +27,8 @@ public class CatalogController extends HttpServlet {
         int isSales = Integer.parseInt(request.getParameter("p_issales"));
         double salesPrice = Double.parseDouble(request.getParameter("p_price_sales"));
         int productVat = Integer.parseInt(request.getParameter("p_vat"));
+        String imagePath = request.getParameter("p_images");
+
 
     }
 }
