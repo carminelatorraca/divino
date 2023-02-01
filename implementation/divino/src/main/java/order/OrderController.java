@@ -1,6 +1,8 @@
 package order;
 
+import account.AccountEntity;
 import account.CustomerUserEntity;
+import account.UserEntity;
 import cart.CartEntity;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -27,7 +29,12 @@ public class OrderController extends HttpServlet {
             try {
                 ArrayList<OrderEntity> orders = orderDAO.retrieveAllOrders();
                 request.getSession().setAttribute("orders", orders);
-                response.sendRedirect("./admin/order-view.jsp");
+                UserEntity user = (UserEntity) request.getSession().getAttribute("user");
+                if(user.getRole()== AccountEntity.Role.MANAGERUSER)
+                    response.sendRedirect("./admin/order-view.jsp");
+                else if (user.getRole()== AccountEntity.Role.WAREHOUSEUSER) {
+                    response.sendRedirect("./warehouse/order-view.jsp");
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
