@@ -30,9 +30,9 @@
     <h3>I miei ordini</h3>
     <%
         HashSet<OrderEntity> orders = (HashSet<OrderEntity>) session.getAttribute("myOrder");
+        System.out.println(orders.size());
         if (!orders.isEmpty()) {
             for (OrderEntity order : orders) {
-                for (OrderItemEntity orderItem : order.getOrderProducts()) {
     %>
     <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
         <div class="col-md-4">
@@ -55,6 +55,9 @@
                 </div>
             </div>
         </div>
+        <%
+            for (OrderItemEntity orderItem : order.getOrderProducts()) {
+        %>
         <div class="col-md-6 col-lg-2">
             <div class="card h-100 w-100 bg-white mb-3" style="border-radius: 0;">
                 <img src="${pageContext.request.contextPath}/images/<%//=%>"
@@ -68,9 +71,9 @@
                 </div>
             </div>
         </div>
+        <% }%>
     </div>
     <%
-                }
             }
         }
     %>

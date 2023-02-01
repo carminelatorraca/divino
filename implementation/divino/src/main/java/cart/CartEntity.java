@@ -8,22 +8,22 @@ public class CartEntity {
     private double totalAmount;
 
     public CartEntity() {
+        shoppingCart = new HashMap<>();
         totalAmount = 0;
     }
 
     public void addItem(CartItemEntity cartItem) {
-        if(shoppingCart!=null) {
+        if (shoppingCart != null) {
             if (!shoppingCart.containsKey(cartItem.getProduct().getProductId())) {
                 cartItem.setProductQuantity(1);
                 shoppingCart.put(cartItem.getProduct().getProductId(), cartItem);
             } else {
                 cartItem.setProductQuantity(cartItem.getProductQuantity() + 1);
-                System.out.println("Fatto +1 :" + cartItem.getProductQuantity());
             }
         }
     }
 
-    public boolean checkItem(Integer productID){
+    public boolean checkItem(int productID) {
         if (shoppingCart.containsKey(productID))
             return true;
         return false;
@@ -33,7 +33,7 @@ public class CartEntity {
         return shoppingCart;
     }
 
-    public CartItemEntity getCartItem(Integer productID){
+    public CartItemEntity getCartItem(Integer productID) {
         return shoppingCart.get(productID);
     }
 
