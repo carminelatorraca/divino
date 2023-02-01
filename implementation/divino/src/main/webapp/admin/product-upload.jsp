@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <label for="inputTitle" class="form-label">Promo</label>
+                        <label for="inputTitle" class="form-label">Promo 1/0</label>
                         <input class="form-control" type="text" id="inputTitle" required
                                placeholder="titolo annuncio" name="p_issales" maxlength="255">
 

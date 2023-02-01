@@ -27,22 +27,23 @@ public class CatalogController extends HttpServlet {
         String productBrand = request.getParameter("p_brand");
         String productDescription = request.getParameter("p_description");
         String productFormat = request.getParameter("p_format");
-        double productPrice = Double.parseDouble(request.getParameter("p_price"));
-        int productAvailability = Integer.parseInt(request.getParameter("p_availability"));
-        boolean isSales = Boolean.parseBoolean(request.getParameter("p_issales"));
-        double salesPrice = Double.parseDouble(request.getParameter("p_price_sales"));
-        int productVat = Integer.parseInt(request.getParameter("p_vat"));
+        String productPrice = request.getParameter("p_price");
+        String productAvailability = request.getParameter("p_availability");
+        String isSales = request.getParameter("p_issales");
+        String salesPrice = request.getParameter("p_price_sales");
+        String productVat = request.getParameter("p_vat");
         String imagePath = request.getParameter("p_images");
 
         ProductEntity catalogProduct = new ProductEntity();
+
         catalogProduct.setProductBrand(productBrand);
         catalogProduct.setProductDescription(productDescription);
         catalogProduct.setProductFormat(productFormat);
-        catalogProduct.setProductPrice(productPrice);
-        catalogProduct.setProductAvailability(productAvailability);
-        catalogProduct.setSales(isSales);
-        catalogProduct.setSalesPrice(productPrice);
-        catalogProduct.setProductVat(productVat);
+        catalogProduct.setProductPrice(Double.parseDouble(productPrice));
+        catalogProduct.setProductAvailability(Integer.parseInt(productAvailability));
+        catalogProduct.setSales(Boolean.parseBoolean(isSales));
+        catalogProduct.setSalesPrice(Double.parseDouble(salesPrice));
+        catalogProduct.setProductVat(Integer.parseInt(productVat));
         catalogProduct.setImagePath(imagePath);
 
         try {
