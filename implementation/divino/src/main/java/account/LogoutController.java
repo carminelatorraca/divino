@@ -12,7 +12,7 @@ public class LogoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().removeAttribute("user");
         request.getSession().removeAttribute("logged");
-        request.getSession().removeAttribute("cart");
+        request.getSession().removeAttribute("shoppingCart");
         response.sendRedirect("./shop.jsp");
     }
 

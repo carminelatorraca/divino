@@ -79,12 +79,13 @@ public class AccountDAO {
     }
 
     public void updateCustomerAccount(UserEntity user) throws SQLException {
-        PreparedStatement pst = connection.prepareStatement("UPDATE firstName, lastName, email, password, fiscalCode" + TABLE_NAME + " SET WHERE accountID = ?;");
+        PreparedStatement pst = connection.prepareStatement("UPDATE users SET firstName=?, lastName=?, email=?, password=?, fiscalCode=? WHERE account_id = ?;");
         pst.setString(1, user.getFirstName());
         pst.setString(2, user.getLastName());
         pst.setString(3, user.getEmail());
         pst.setString(4, user.getPassword());
         pst.setString(5, user.getFiscalCode());
+        pst.setInt(6, user.getAccountID());
         pst.executeUpdate();
     }
 

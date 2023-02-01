@@ -34,6 +34,8 @@ public class CatalogDAO {
             product.setSales(rs.getBoolean(7));
             product.setSalesPrice(rs.getDouble(8));
             product.setVisible(rs.getBoolean(10));
+            System.out.println(product.getProductId());
+            System.out.println(product.getProductPrice());
             catalog.add(product);
         }
         return catalog;
@@ -48,26 +50,25 @@ public class CatalogDAO {
 
      public void addProduct(ProductEntity product) throws SQLException {
      PreparedStatement pst = connection.prepareStatement("INSERT INTO " + TABLE_NAME +
-     "(productID, productPrice, productBrand, productAvailability, ProductDescription, productVAT, productFormat, isSales, salesPrice, isVisible) VALUES (?,?,?,?,?,?,?,?,?,?);");
+     "(product_price, product_brand, product_availability, product_description, product_vat, product_format, is_sales, sales_price, is_visible) VALUES (?,?,?,?,?,?,?,?,?);");
 
-     pst.setInt(1, product.getProductId());
-     pst.setDouble(2, product.getProductPrice());
-     pst.setString(3, product.getProductBrand());
-     pst.setInt(4, product.getProductAvailability());
-     pst.setString(5, product.getProductDescription());
-     pst.setInt(6, product.getProductVat());
-     pst.setString(7, product.getProductFormat());
-     pst.setBoolean(8, product.isSales());
-     pst.setDouble(9, product.getSalesPrice());
-     pst.setBoolean(10, product.isVisible());
+     pst.setDouble(1, product.getProductPrice());
+     pst.setString(2, product.getProductBrand());
+     pst.setInt(3, product.getProductAvailability());
+     pst.setString(4, product.getProductDescription());
+     pst.setInt(5, product.getProductVat());
+     pst.setString(6, product.getProductFormat());
+     pst.setBoolean(7, product.isSales());
+     pst.setDouble(8, product.getSalesPrice());
+     pst.setBoolean(9, product.isVisible());
      pst.executeUpdate();
      }
 
      public void updateProduct(ProductEntity product) throws SQLException {
      PreparedStatement pst = connection.prepareStatement(
      "UPDATE " + TABLE_NAME +
-     "SET productID=?, productPrice = ?, productBrand = ?, productAvailability = ?, ProductDescription = ?, productVAT = ?, productFormat = ?, isSales = ?, salesPrice = ?, isVisible = ? " +
-     "WHERE productID = ?;");
+     "SET product_id=?, product_price = ?, product_brand = ?, product_availability = ?, product_description = ?, product_vat = ?, product_format = ?, is_sales = ?, sales_price = ?, is_visible = ? " +
+     "WHERE product_id = ?;");
      pst.setInt(1, product.getProductId());
      pst.setDouble(2, product.getProductPrice());
      pst.setString(3, product.getProductBrand());
@@ -88,8 +89,8 @@ public class CatalogDAO {
      int updatedQuantity = getAvailableQuantity(productID) - purchasedQuantity;
      PreparedStatement pst = connection.prepareStatement(
      "UPDATE " + TABLE_NAME +
-     "SET productAvailability = ?" +
-     "WHERE productID = ?;");
+     "SET product_availability = ?" +
+     "WHERE product_id = ?;");
      pst.setDouble(1, updatedQuantity);
      pst.setString(2, productID);
      pst.executeUpdate();
@@ -97,7 +98,7 @@ public class CatalogDAO {
 
      private Integer getAvailableQuantity(String productID) throws SQLException {
      PreparedStatement pst = connection.prepareStatement(
-     "SELECT productAvailability FROM" + TABLE_NAME + "WHERE productID = ?;");
+     "SELECT product_availability FROM" + TABLE_NAME + "WHERE product_id = ?;");
      pst.setString(1, productID);
      ResultSet rs = pst.executeQuery();
      return rs.getInt("productAvailability");

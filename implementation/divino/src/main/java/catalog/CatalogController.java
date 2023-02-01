@@ -24,6 +24,7 @@ public class CatalogController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String productBrand = request.getParameter("p_brand");
+        System.out.println(productBrand);
         String productDescription = request.getParameter("p_description");
         String productFormat = request.getParameter("p_format");
         String productPrice = request.getParameter("p_price");

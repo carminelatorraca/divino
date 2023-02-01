@@ -25,8 +25,7 @@
     <div class="row justify-content-center">
         <h3>Upload prodotti</h3>
         <div class="col-lg-6">
-            <form id="upload-form" action="${pageContext.request.contextPath}/catalog" method="post"
-                  enctype="multipart/form-data">
+            <form id="upload-form" action="${pageContext.request.contextPath}/catalog" method="post">
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label for="inputBrand" class="form-label">Marca</label>
@@ -59,10 +58,10 @@
                         <select class="form-select" aria-label="Seleziona categoria" name="p_vat" id="inputVat"
                                 required>
                             <option selected>Seleziona l'Iva</option>
-                            <option value="1.04">Aliquota 4%</option>
-                            <option value="1.05">Aliquota 5%</option>
-                            <option value="1.10">Aliquota 10%</option>
-                            <option value="1.22">Aliquota 22%</option>
+                            <option value="4">Aliquota 4%</option>
+                            <option value="5">Aliquota 5%</option>
+                            <option value="0">Aliquota 10%</option>
+                            <option value="2">Aliquota 22%</option>
                         </select>
                     </div>
                 </div>

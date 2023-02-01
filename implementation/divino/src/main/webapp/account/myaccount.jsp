@@ -4,9 +4,10 @@
 
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="account.AccountEntity" %>
+<%@ page import="account.CustomerUserEntity" %>
 
 <%
-    AccountEntity account = (AccountEntity) session.getAttribute("user");
+    CustomerUserEntity account = (CustomerUserEntity) session.getAttribute("user");
     if (account == null || !account.getRole().equals(AccountEntity.Role.CUSTOMERUSER)) {
         String errors = "non sei autorizzato";
         session.setAttribute("ow-errors", errors);
@@ -44,19 +45,19 @@
     <h3>I miei dati</h3>
     <div class="row align-items-center">
         <%
-            if (user != null) {
+            if (account != null) {
         %>
         <div class="col-md-6">
             <div class="card" style="width: 18rem; border-radius: 0">
                 <div class="card-body">
-                    <h5 class="card-title"><%=user.getFirstName() + " " + user.getLastName()%>
+                    <h5 class="card-title"><%=account.getFirstName() + " " + account.getLastName()%>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">Dati personali</h6>
-                    <p class="card-text" style="margin-bottom: 0">Username: <%=user.getEmail()%>
+                    <p class="card-text" style="margin-bottom: 0">Email: <%=account.getEmail()%>
                     </p>
-                    <p class="card-text" style="margin-bottom: 0">Nome: <%=user.getFirstName()%>
+                    <p class="card-text" style="margin-bottom: 0">Nome: <%=account.getFirstName()%>
                     </p>
-                    <p class="card-text" style="margin-bottom: 0">Cognome: <%=user.getLastName()%>
+                    <p class="card-text" style="margin-bottom: 0">Cognome: <%=account.getLastName()%>
                     </p>
                     <br>
                 </div>
@@ -66,37 +67,37 @@
             <form action="${pageContext.request.contextPath}/account" method="post">
                 <div class="form-group row">
                     <div class="col-lg-12">
-                        <label for="inputAddress0" class="form-label wine-label">Username</label>
-                        <input class="form-control form-control-lg wine-input" type="text" id="inputAddress0"
-                               placeholder="username" name="a-username">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-12">
                         <label for="inputAddress" class="form-label wine-label">Nome</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="inputAddress"
-                               placeholder="nome" name="a-firstname">
+                               placeholder="" name="a-firstname" value="<% out.println(account.getFirstName());%>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="inputAddress2" class="form-label wine-label">Cognome</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="inputAddress2"
-                               placeholder="cognome" name="a-lastname">
+                               placeholder="" name="a-lastname" value="<% out.println(account.getLastName());%>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="inputCap" class="form-label wine-label">Email</label>
                         <input class="form-control form-control-lg wine-input" type="email" id="inputCap"
-                               placeholder="email" name="a-email">
+                               placeholder="" name="a-email" value="<% out.print(account.getEmail());%>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
-                        <label for="inputCity" class="form-label wine-label">Cellulare</label>
-                        <input class="form-control form-control-lg wine-input" type="number" id="inputCity"
-                               placeholder="" name="a-telephone">
+                        <label for="oldPass" class="form-label wine-label">Vecchia Password</label>
+                        <input class="form-control form-control-lg wine-input" type="password" id="oldPass"
+                               placeholder="Vecchia Password" name="a-oldPass" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label for="newPass" class="form-label wine-label">Nuova Password</label>
+                        <input class="form-control form-control-lg wine-input" type="password" id="newPass"
+                               placeholder="Nuova Password" name="a-newPass">
                     </div>
                 </div>
                 <br>

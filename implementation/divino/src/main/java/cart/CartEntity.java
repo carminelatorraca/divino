@@ -41,7 +41,7 @@ public class CartEntity {
         this.shoppingCart = shoppingCart;
     }
 
-    public void removeItem(String productId) {
+    public void removeItem(int productId) {
         shoppingCart.remove(productId);
     }
 

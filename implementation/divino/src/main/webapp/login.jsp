@@ -38,7 +38,7 @@
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="loginUsername" class="form-label wine-label">Email</label>
-                        <input class="form-control form-control-lg wine-input" type="text" id="loginUsername" required
+                        <input class="form-control form-control-lg wine-input" type="email" id="loginUsername" required
                                placeholder="inserisci l'email" name="l-email">
                     </div>
                 </div>

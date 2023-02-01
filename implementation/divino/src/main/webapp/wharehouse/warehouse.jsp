@@ -3,7 +3,7 @@
 
 <%
     AccountEntity user = (AccountEntity) request.getSession().getAttribute("user");
-    if (user == null || !user.getRole().equals(AccountEntity.Role.MANAGERUSER)) {
+    if (user == null || !user.getRole().equals(AccountEntity.Role.WAREHOUSEUSER)) {
         String errors = "non sei autorizzato";
         session.setAttribute("ow-errors", errors);
         request.getRequestDispatcher("/login.jsp").forward(request, response);
@@ -36,16 +36,7 @@
                         <ul class="navbar-nav justify-content-center">
                             <li class="nav-item">
                                 <a class="nav-link active text-white"
-                                   href="${pageContext.request.contextPath}/admin/product-upload.jsp">Upload
-                                    prodotti</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active text-white"
                                    href="${pageContext.request.contextPath}/buy?mode=showOrders">Gestione ordini</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active text-white"
-                                   href="${pageContext.request.contextPath}/buy?mode=showOrders">Gestione prodotti</a>
                             </li>
                         </ul>
                     </div>

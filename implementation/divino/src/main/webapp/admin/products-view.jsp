@@ -12,7 +12,7 @@
         session.setAttribute("ow-errors", errors);
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
-    ArrayList<OrderEntity> orders = (ArrayList<OrderEntity>) session.getAttribute("orders");
+    ArrayList<OrderEntity> catalog = (ArrayList<OrderEntity>) session.getAttribute("catalog");
 %>
 
 <!DOCTYPE html>
@@ -54,11 +54,11 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">ORDINE</th>
-                        <th scope="col">CLIENTE</th>
-                        <th scope="col">STATO</th>
-                        <th scope="col">TOTALE ORDINE</th>
-                        <th scope="col">INDRIZZO</th>
+                        <th scope="col">PRODOTTO</th>
+                        <th scope="col">NOME</th>
+                        <th scope="col">PREZZO</th>
+                        <th scope="col">QUANTITA DISPONIBILE</th>
+                        <th scope="col">VISIBILE</th>
                         <th scope="col">MODIFICA STATO</th>
                         <th scope="col"></th>
                     </tr>

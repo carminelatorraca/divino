@@ -4,6 +4,8 @@ import account.AccountEntity;
 import account.CustomerUserEntity;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 
 public class OrderDAO {
@@ -35,10 +37,12 @@ public class OrderDAO {
 
     public void updateOrder(OrderEntity order) throws SQLException {
         String createQuery = "UPDATE " + ORDER_TABLE + " SET order_status=?, order_total_amount=?, order_shipping_address=? WHERE order_id = ? AND order_account = ?;";
-        PreparedStatement pst = connection.prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement pst = connection.prepareStatement(createQuery);
         pst.setString(1, order.getOrderStatus());
         pst.setDouble(2, order.getOrderTotalAmount());
         pst.setString(3, order.getOrderShippingAddress());
+        System.out.println("Acc ID: " + order.getOrderCustomer());
+        System.out.println("Order ID: " + order.getOrderNumber());
         pst.setInt(4, order.getOrderNumber());
         pst.setInt(5, order.getOrderCustomer());
         pst.executeUpdate();
@@ -87,23 +91,40 @@ public class OrderDAO {
         pst.executeUpdate();
     }
 
-    public HashSet<OrderEntity> retrieveAllOrders() throws SQLException {
-        HashSet<OrderEntity> orders = new HashSet<>();
-        OrderEntity order = new OrderEntity();
+    public ArrayList<OrderEntity> retrieveAllOrders() throws SQLException {
+        ArrayList<OrderEntity> orders = new ArrayList<>();
         String createQuery = "SELECT * FROM " + ORDER_TABLE + " ORDER BY order_id DESC";
         PreparedStatement pst = connection.prepareStatement(createQuery);
         ResultSet rs = pst.executeQuery();
-
         while (rs.next()) {
+            OrderEntity order = new OrderEntity();
             order.setOrderNumber(rs.getInt(1));
             order.setOrderStatus(rs.getString(2));
             order.setOrderTotalAmount(rs.getDouble(3));
             order.setOrderShippingAddress(rs.getString(4));
-            order.setOrderCustomer(rs.getInt(5));
-            order.setOrderPayment(rs.getInt(6));
+            order.setOrderCustomer(rs.getInt(7));
+            order.setOrderPayment(rs.getInt(8));
             orders.add(order);
         }
         return orders;
+    }
+
+    public OrderEntity retrieveOrder(Integer orderid) throws SQLException {
+        String createQuery = "SELECT * FROM " + ORDER_TABLE + " WHERE order_id = ?";
+        PreparedStatement pst = connection.prepareStatement(createQuery);
+        pst.setInt(1, orderid);
+        ResultSet rs = pst.executeQuery();
+        OrderEntity order = new OrderEntity();
+        while (rs.next()) {
+
+            order.setOrderNumber(rs.getInt(1));
+            order.setOrderStatus(rs.getString(2));
+            order.setOrderTotalAmount(rs.getDouble(3));
+            order.setOrderShippingAddress(rs.getString(4));
+            order.setOrderCustomer(rs.getInt(7));
+            order.setOrderPayment(rs.getInt(8));
+        }
+        return order;
     }
 
     public HashSet<OrderEntity> retrieveAllOrdersToShip() throws SQLException {
