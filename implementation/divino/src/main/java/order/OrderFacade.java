@@ -35,7 +35,8 @@ public class OrderFacade {
 
         for (CartItemEntity cartItem : cart.getShoppingCart().values()) {
             OrderItemEntity orderItem = new OrderItemEntity();
-
+System.out.println(cartItem.getProduct().getProductBrand());
+            orderItem.setProductID(cartItem.getProduct().getProductId());
             orderItem.setOrder(order.getOrderNumber());
             orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
             orderItem.setProductDescription(cartItem.getProduct().getProductBrand());

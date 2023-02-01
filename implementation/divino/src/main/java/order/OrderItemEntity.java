@@ -7,8 +7,10 @@ public class OrderItemEntity {
     private double productPrice;
     private int productQuantity;
     private String productDescription;
+    private Integer productID;
 
     public OrderItemEntity() {
+        this.productID = -1;
         this.order = -1;
         this.productVat = -1;
         this.productPrice = -1;
@@ -54,5 +56,13 @@ public class OrderItemEntity {
 
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
+    }
+
+    public Integer getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 }

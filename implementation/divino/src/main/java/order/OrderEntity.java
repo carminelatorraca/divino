@@ -15,7 +15,7 @@ public class OrderEntity {
     private LocalDateTime createdAt;
     private LocalDateTime isDeleted;
 
-    private CustomerUserEntity orderCustomer;
+    private CustomerUserEntity orderCustomer = new CustomerUserEntity();
     private PaymentEntity orderPayment;
     private ArrayList<OrderItemEntity> orderProducts;
 
@@ -56,8 +56,11 @@ public class OrderEntity {
     }
 
     public double getOrderTotalAmount() {
+        /*
         for (OrderItemEntity item : orderProducts)
             orderTotalAmount += item.getProductPrice() * item.getProductQuantity();
+
+         */
         return orderTotalAmount;
     }
 
@@ -89,7 +92,7 @@ public class OrderEntity {
         return orderCustomer;
     }
 
-    public void setOrderCustomer(CustomerUserEntity orderCustomer) {
+    public void setOrderCustomer(int orderCustomer) {
         this.orderCustomer = orderCustomer;
     }
 
@@ -97,7 +100,7 @@ public class OrderEntity {
         return orderPayment;
     }
 
-    public void setOrderPayment(PaymentEntity orderPayment) {
+    public void setOrderPayment(int orderPayment) {
         this.orderPayment = orderPayment;
     }
 

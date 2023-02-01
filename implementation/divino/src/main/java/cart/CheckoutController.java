@@ -20,6 +20,7 @@ public class CheckoutController extends HttpServlet {
         //ricevo i dati di checkout quali indirizzo, carrello e pagamento
 
         CartEntity checkoutCart = (CartEntity) request.getSession().getAttribute("shoppingCart");
+        System.out.println("CheckoutCART " + checkoutCart.getShoppingCart().values());
         CustomerUserEntity customer = (CustomerUserEntity) request.getSession().getAttribute("user");
 
         if (checkoutCart != null && customer != null) {
@@ -31,12 +32,10 @@ public class CheckoutController extends HttpServlet {
             String city = request.getParameter("c-address-city");
             String phone = request.getParameter("c-phone");
 
-            AddressEntity addressEntity = new AddressEntity();
-            addressEntity.setCity(city);
-            addressEntity.setCountry(country);
-            addressEntity.setPostalCode(postalCode);
-            addressEntity.setNumber(phone);
-            addressEntity.setFavourite(1);
+            String shippingAddress = address + ", " + city + ", " + postalCode + ", " + country;
+            request.getSession().setAttribute("shippingAddress", shippingAddress);
+            System.out.println(shippingAddress);
+
         }
 
         RequestDispatcher orderRequest = request.getRequestDispatcher("/buy");

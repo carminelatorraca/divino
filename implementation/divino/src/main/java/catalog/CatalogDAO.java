@@ -25,7 +25,7 @@ public class CatalogDAO {
         ResultSet rs = pst.executeQuery();
 
         while (rs.next()) {
-            product.setProductId(rs.getString(1));
+            product.setProductId(rs.getInt(1));
             product.setProductBrand(rs.getString(2));
             product.setProductAvailability(rs.getInt(6));
             product.setProductDescription(rs.getString(3));

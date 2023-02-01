@@ -8,7 +8,6 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 
 @WebServlet(name = "CartController", value = "/cart")
 public class CartController extends HttpServlet {
@@ -34,7 +33,7 @@ public class CartController extends HttpServlet {
 
         //aggiunta al carrello
         if (request.getParameter("mode").equalsIgnoreCase("add")) {
-            String productID = request.getParameter("productid");
+            Integer productID = Integer.valueOf(request.getParameter("productid"));
             System.out.println(productID);
 
             for (ProductEntity product : catalog) {
@@ -54,7 +53,7 @@ public class CartController extends HttpServlet {
 
         //plus al carrello
         if (request.getParameter("mode").equalsIgnoreCase("plus")) {
-            String productID = request.getParameter("productid");
+            Integer productID = Integer.valueOf(request.getParameter("productid"));
             System.out.println(productID);
 
             for (ProductEntity product : catalog) {

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class CartEntity {
 
-    private HashMap<String, CartItemEntity> shoppingCart = new HashMap<>();
+    private HashMap<Integer, CartItemEntity> shoppingCart = new HashMap<Integer, CartItemEntity>();
     private double totalAmount;
 
     public CartEntity() {
@@ -23,21 +23,21 @@ public class CartEntity {
         }
     }
 
-    public boolean checkItem(String productID){
+    public boolean checkItem(Integer productID){
         if (shoppingCart.containsKey(productID))
             return true;
         return false;
     }
 
-    public HashMap<String, CartItemEntity> getShoppingCart() {
+    public HashMap<Integer, CartItemEntity> getShoppingCart() {
         return shoppingCart;
     }
 
-    public CartItemEntity getCartItem(String productID){
+    public CartItemEntity getCartItem(Integer productID){
         return shoppingCart.get(productID);
     }
 
-    public void setShoppingCart(HashMap<String, CartItemEntity> shoppingCart) {
+    public void setShoppingCart(HashMap<Integer, CartItemEntity> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
 

@@ -52,6 +52,7 @@
         }
     %>
 
+
     <!-- FORM INDIRIZZO -->
     <form action="${pageContext.request.contextPath}/checkout" method="post" onsubmit="return validatePayment()">
         <div class="row">
@@ -59,33 +60,6 @@
             <!-- DETTAGLIO INDIRIZZI -->
             <div class="col-md-6">
                 <h3>Dati Fatturazione</h3>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="c-choose" id="choose-old-address" checked
-                           value="oldaddress">
-                    <label class="form-check-label" for="choose-old-address">L'indirizzo di fatturazione coincide con
-                        quello di spedizione</label>
-                    <br>
-                    <div class="card" style="width: 18rem; border-radius: 0">
-                        <div class="card-body">
-                            <h5 class="card-title"><%=user.getFirstName().concat("" + user.getLastName())%>
-                            </h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Indirizzo</h6>
-                            <p class="card-text" style="margin-bottom: 0">Indirizzo
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <br>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="c-choose" id="choose-new-address"
-                           value="newaddress">
-                    <label class="form-check-label" for="choose-new-address">
-                        Aggiungi nuovo indirizzo
-                    </label>
-                </div>
-
-                <br>
 
                 <!-- NUOVO INDIRIZZO -->
 

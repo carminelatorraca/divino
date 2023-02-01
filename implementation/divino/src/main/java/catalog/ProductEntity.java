@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class ProductEntity {
 
-    private String productId;
+    private Integer productId;
     private String productBrand;
     private String productDescription;
     private String productFormat;
@@ -23,11 +23,11 @@ public class ProductEntity {
 
     }
 
-    public String getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 

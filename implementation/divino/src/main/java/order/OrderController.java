@@ -41,6 +41,9 @@ public class OrderController extends HttpServlet {
         //logica ordine
         try {
             OrderEntity order = orderPlacement.placeOrder(customer);
+            order.setOrderShippingAddress((String) request.getSession().getAttribute("shippingAddress"));
+            order.setOrderTotalAmount(shoppingCart.getTotalAmount());
+            orderDAO.updateOrder(order);
             orderPlacement.joinProducts(shoppingCart, order);
 
             request.setAttribute("order", order);
