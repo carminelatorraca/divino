@@ -3,6 +3,7 @@ package account;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import order.OrderDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,12 +11,12 @@ import java.sql.SQLException;
 @WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
 
-    private AccountDAO accountDao;
+    private AccountDAO accountDAO;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.accountDao = (AccountDAO) super.getServletContext().getAttribute("accountDAO");
+        this.accountDAO = (AccountDAO) super.getServletContext().getAttribute("accountDAO");
     }
 
     @Override
@@ -32,17 +33,20 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("l-password");
 
         try {
-            account = accountDao.retrieveAccount(email, password);
-            UserEntity user = accountDao.retrieveUser(account);
+            account = accountDAO.retrieveAccount(email, password);
+            UserEntity user = accountDAO.retrieveUser(account);
             if (account.getAccountID() != -1) {
+
                 if (user.getRole() == AccountEntity.Role.CUSTOMERUSER) {
                     CustomerUserEntity customer = new CustomerUserEntity(user);
-
                     request.getSession().setAttribute("user", customer);
-                } else
+                } else if (user.getRole().equals(AccountEntity.Role.MANAGERUSER) || user.getRole().equals(AccountEntity.Role.WAREHOUSEUSER)) {
                     request.getSession().setAttribute("user", user);
+                    response.sendRedirect("./admin/admin.jsp");
+                }
+
                 request.getSession().setAttribute("logged", true);
-                response.sendRedirect("./shop.jsp");
+                //  response.sendRedirect("./shop.jsp");
             } else {
                 request.getSession().setAttribute("logged", false);
                 request.getSession().setAttribute("error", "Username e/o password invalidi.");

@@ -15,7 +15,7 @@
 <head>
     <%@include file="/fragments/meta.jsp" %>
 
-    <title>Admin</title>
+    <title>Dashboard</title>
 </head>
 <body>
 <%@include file="/fragments/header.jsp" %>
@@ -23,7 +23,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="row">
-            <h1>Benvenuto, <%=account.getFirstName()%>
+            <h1>Benvenuto, <%=user.getEmail()%>
                 <a class="nav-link" style="display: inline" href="${pageContext.request.contextPath}/logout">
                     <span class="material-symbols-outlined">logout</span></a>
             </h1>
@@ -43,19 +43,6 @@
                                 <a class="nav-link active text-white"
                                    href="${pageContext.request.contextPath}/admin/order-view.jsp">Gestione ordini</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active text-white"
-                                   href="${pageContext.request.contextPath}/admin/product-view.jsp">Lista prodotti</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active text-white"
-                                   href="${pageContext.request.contextPath}/admin/categories-settings.jsp">Gestione
-                                    categorie</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active text-white"
-                                   href="${pageContext.request.contextPath}/admin/customer-view.jsp">Gestione utenti</a>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -65,6 +52,7 @@
 </div>
 
 <%@include file="/fragments/footer.jsp" %>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
         integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
         crossorigin="anonymous"></script>

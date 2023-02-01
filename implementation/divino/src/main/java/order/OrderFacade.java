@@ -24,6 +24,10 @@ public class OrderFacade {
         return orderDAO.createOrder(customer);
     }
 
+    public void placePayment(PaymentEntity payment) {
+        //gestire pagamento
+    }
+
     /**
      * @param cart  contains a list of cart item
      * @param order order just create
@@ -35,7 +39,6 @@ public class OrderFacade {
 
         for (CartItemEntity cartItem : cart.getShoppingCart().values()) {
             OrderItemEntity orderItem = new OrderItemEntity();
-System.out.println(cartItem.getProduct().getProductBrand());
             orderItem.setProductID(cartItem.getProduct().getProductId());
             orderItem.setOrder(order.getOrderNumber());
             orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
@@ -44,14 +47,10 @@ System.out.println(cartItem.getProduct().getProductBrand());
             orderItem.setProductPrice(cartItem.getProduct().getProductPrice());
             orderItem.setProductVat(cartItem.getProduct().getProductVat());
 
+            //aggiungo order item ad array degli item
             orderItems.add(orderItem);
         }
         order.setOrderProducts(orderItems);
-    }
-
-
-    public void placePayment(PaymentEntity payment) {
-
     }
 
     /**

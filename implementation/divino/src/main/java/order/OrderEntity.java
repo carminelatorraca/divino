@@ -15,11 +15,11 @@ public class OrderEntity {
     private LocalDateTime createdAt;
     private LocalDateTime isDeleted;
 
-    private CustomerUserEntity orderCustomer = new CustomerUserEntity();
-    private PaymentEntity orderPayment;
+    private int orderCustomer;
+    private int orderPayment;
     private ArrayList<OrderItemEntity> orderProducts;
 
-    public OrderEntity(int orderNumber, String orderStatus, double orderTotalAmount, String orderShippingAddress, LocalDateTime createdAt, LocalDateTime isDeleted, CustomerUserEntity orderCustomer, PaymentEntity orderPayment, ArrayList<OrderItemEntity> orderProducts) {
+    public OrderEntity(int orderNumber, String orderStatus, double orderTotalAmount, String orderShippingAddress, LocalDateTime createdAt, LocalDateTime isDeleted, int orderCustomer, int orderPayment, ArrayList<OrderItemEntity> orderProducts) {
         this.orderNumber = orderNumber;
         this.orderStatus = orderStatus;
         this.orderTotalAmount = orderTotalAmount;
@@ -88,7 +88,7 @@ public class OrderEntity {
         this.isDeleted = isDeleted;
     }
 
-    public CustomerUserEntity getOrderCustomer() {
+    public int getOrderCustomer() {
         return orderCustomer;
     }
 
@@ -96,7 +96,7 @@ public class OrderEntity {
         this.orderCustomer = orderCustomer;
     }
 
-    public PaymentEntity getOrderPayment() {
+    public int getOrderPayment() {
         return orderPayment;
     }
 

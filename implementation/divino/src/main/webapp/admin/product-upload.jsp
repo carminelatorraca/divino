@@ -25,7 +25,7 @@
     <div class="row justify-content-center">
         <h3>Upload prodotti</h3>
         <div class="col-lg-6">
-            <form id="upload-form" action="${pageContext.request.contextPath}/productUpload" method="post"
+            <form id="upload-form" action="${pageContext.request.contextPath}/catalog" method="post"
                   enctype="multipart/form-data">
                 <div class="form-group row">
                     <div class="col-lg-6">
@@ -34,16 +34,20 @@
                                placeholder="marca" name="p_brand" maxlength="255">
                     </div>
                     <div class="col-lg-6">
-                        <label for="inputModel" class="form-label">Modello</label>
+                        <label for="inputModel" class="form-label">Formato</label>
                         <input class="form-control" type="text" id="inputModel" required
-                               placeholder="modello" name="p_model" maxlength="255">
+                               placeholder="modello" name="p_format" maxlength="255">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <label for="inputTitle" class="form-label">Titolo</label>
+                        <label for="inputTitle" class="form-label">Promo</label>
                         <input class="form-control" type="text" id="inputTitle" required
-                               placeholder="titolo annuncio" name="p_title" maxlength="255">
+                               placeholder="titolo annuncio" name="p_issales" maxlength="255">
+
+                        <label for="inputPriceSales" class="form-label">Prezzo Promo</label>
+                        <input class="form-control" type="text" id="inputPriceSales" required
+                               placeholder="prezzo" name="p_price_sales">
                     </div>
                     <div class="col-md-3">
                         <label for="inputPrice" class="form-label">Prezzo</label>
@@ -73,7 +77,7 @@
                     <div class="col-lg-9">
                         <label for="inputStock" class="form-label">Disponibilità</label>
                         <input class="form-control" type="number" id="inputStock" required
-                               placeholder="quantità stock" name="p_stock" min="0">
+                               placeholder="quantità stock" name="p_availability" min="0">
                     </div>
                     <div class="col-lg-3">
                         <div class="form-check">
