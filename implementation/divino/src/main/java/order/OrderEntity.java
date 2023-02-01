@@ -5,6 +5,7 @@ import payment.PaymentEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class OrderEntity {
 
@@ -17,9 +18,9 @@ public class OrderEntity {
 
     private int orderCustomer;
     private int orderPayment;
-    private ArrayList<OrderItemEntity> orderProducts;
+    private HashSet<OrderItemEntity> orderProducts;
 
-    public OrderEntity(int orderNumber, String orderStatus, double orderTotalAmount, String orderShippingAddress, LocalDateTime createdAt, LocalDateTime isDeleted, int orderCustomer, int orderPayment, ArrayList<OrderItemEntity> orderProducts) {
+    public OrderEntity(int orderNumber, String orderStatus, double orderTotalAmount, String orderShippingAddress, LocalDateTime createdAt, LocalDateTime isDeleted, int orderCustomer, int orderPayment, HashSet<OrderItemEntity> orderProducts) {
         this.orderNumber = orderNumber;
         this.orderStatus = orderStatus;
         this.orderTotalAmount = orderTotalAmount;
@@ -104,11 +105,11 @@ public class OrderEntity {
         this.orderPayment = orderPayment;
     }
 
-    public ArrayList<OrderItemEntity> getOrderProducts() {
+    public HashSet<OrderItemEntity> getOrderProducts() {
         return orderProducts;
     }
 
-    public void setOrderProducts(ArrayList<OrderItemEntity> orderProducts) {
+    public void setOrderProducts(HashSet<OrderItemEntity> orderProducts) {
         this.orderProducts = orderProducts;
     }
 }

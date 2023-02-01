@@ -7,6 +7,7 @@ import payment.PaymentEntity;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class OrderFacade {
 
@@ -35,7 +36,7 @@ public class OrderFacade {
     public void joinProducts(CartEntity cart, OrderEntity order) {
         //if (cart == null || order == null) return;
 
-        ArrayList<OrderItemEntity> orderItems = new ArrayList<>();
+        HashSet<OrderItemEntity> orderItems = new HashSet<>();
 
         for (CartItemEntity cartItem : cart.getShoppingCart().values()) {
             OrderItemEntity orderItem = new OrderItemEntity();

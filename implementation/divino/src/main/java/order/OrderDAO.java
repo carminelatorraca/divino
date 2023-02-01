@@ -1,5 +1,6 @@
 package order;
 
+import account.AccountEntity;
 import account.CustomerUserEntity;
 
 import java.sql.*;
@@ -145,4 +146,45 @@ public class OrderDAO {
         return orders;
     }
 
+    public HashSet<OrderEntity> customerOrders(AccountEntity account) throws SQLException {
+        HashSet<OrderEntity> customerOrders = new HashSet<>();
+        OrderEntity order = new OrderEntity();
+
+        String createQuery = "SELECT * FROM " + ORDER_TABLE + " WHERE order_account = ?";
+        PreparedStatement pst = connection.prepareStatement(createQuery);
+        pst.setInt(1, account.getAccountID());
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            order.setOrderNumber(rs.getInt(1));
+            order.setOrderStatus(rs.getString(2));
+            order.setOrderTotalAmount(rs.getDouble(3));
+            order.setOrderShippingAddress(rs.getString(4));
+            order.setOrderCustomer(rs.getInt(5));
+            order.setOrderPayment(rs.getInt(6));
+            order.setOrderProducts(orderItem(rs.getInt(1)));
+            customerOrders.add(order);
+        }
+        return customerOrders;
+    }
+
+    public HashSet<OrderItemEntity> orderItem(int order) throws SQLException {
+        HashSet<OrderItemEntity> orderItems = new HashSet<>();
+        OrderItemEntity orderItem = new OrderItemEntity();
+
+        String createQuery = "SELECT * FROM " + PIVOT_ORDER_TABLE + " WHERE order_id = ?";
+        PreparedStatement pst = connection.prepareStatement(createQuery);
+        pst.setInt(1, order);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            orderItem.setOrder(rs.getInt("order_id"));
+            orderItem.setProductPrice(rs.getInt("item_price"));
+            orderItem.setProductDescription(rs.getString("item_description"));
+            orderItem.setProductVat(rs.getInt("item_vat"));
+            orderItem.setProductQuantity(rs.getInt("item_quantity"));
+            orderItems.add(orderItem);
+        }
+        return orderItems;
+    }
 }

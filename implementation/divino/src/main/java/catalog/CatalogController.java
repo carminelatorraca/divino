@@ -1,6 +1,5 @@
 package catalog;
 
-import account.AccountDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
+import java.lang.*;
 
 @WebServlet(name = "CatalogController", value = "/catalog")
 public class CatalogController extends HttpServlet {
@@ -35,7 +34,6 @@ public class CatalogController extends HttpServlet {
         String imagePath = request.getParameter("p_images");
 
         ProductEntity catalogProduct = new ProductEntity();
-
         catalogProduct.setProductBrand(productBrand);
         catalogProduct.setProductDescription(productDescription);
         catalogProduct.setProductFormat(productFormat);

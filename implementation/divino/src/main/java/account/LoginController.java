@@ -10,13 +10,14 @@ import java.sql.SQLException;
 
 @WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
-
     private AccountDAO accountDAO;
+    private OrderDAO orderDAO;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.accountDAO = (AccountDAO) super.getServletContext().getAttribute("accountDAO");
+        this.orderDAO = (OrderDAO) super.getServletContext().getAttribute("orderDAO");
     }
 
     @Override
@@ -40,6 +41,7 @@ public class LoginController extends HttpServlet {
                 if (user.getRole() == AccountEntity.Role.CUSTOMERUSER) {
                     CustomerUserEntity customer = new CustomerUserEntity(user);
                     request.getSession().setAttribute("user", customer);
+                    request.getSession().setAttribute("myOrder", orderDAO.customerOrders(account));
                     response.sendRedirect("./account/account.jsp");
 
                 } else if (user.getRole().equals(AccountEntity.Role.MANAGERUSER) || user.getRole().equals(AccountEntity.Role.WAREHOUSEUSER)) {

@@ -55,7 +55,7 @@ public class OrderController extends HttpServlet {
             if (payment != null && payment.getPaymentStatus().equals("paid")) {
                 orderPlacement.placePayment(payment);
                 orderPlacement.placeOrderItems(order);
-                response.sendRedirect("/order-confirm.jsp");
+                response.sendRedirect("./order-confirm.jsp");
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
