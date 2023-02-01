@@ -57,7 +57,7 @@ public class OrderController extends HttpServlet {
                 System.out.println(order.getOrderStatus());
                 orderDAO.updateOrder(order);
                 request.getSession().setAttribute("orders", orderDAO.retrieveAllOrders());
-                response.sendRedirect("./admin/order-view.jsp");
+                response.sendRedirect("./warehouse/order-view.jsp");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

@@ -23,18 +23,6 @@ public class FilterAuth implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         String redirectURL = resp.encodeRedirectURL(((HttpServletRequest) request).getContextPath() + "/login.jsp");
 
-        if (user == null) {
-            resp.sendRedirect(redirectURL);
-            return;
-        } else {
-            HttpServletRequest req = (HttpServletRequest) request;
-            if ((user.getRole().equals(AccountEntity.Role.MANAGERUSER) && !req.getRequestURI().contains("/admin/admin.jsp"))
-                    || (user.getRole().equals(AccountEntity.Role.CUSTOMERUSER) && !req.getRequestURI().contains("/account/account.jsp"))
-            ) {
-                resp.sendRedirect(redirectURL);
-                return;
-            }
-        }
 
         chain.doFilter(request, response);
     }

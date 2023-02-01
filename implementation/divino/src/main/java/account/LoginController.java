@@ -47,9 +47,12 @@ public class LoginController extends HttpServlet {
                     request.getSession().setAttribute("myOrder", orders);
                     response.sendRedirect("./account/account.jsp");
 
-                } else if (user.getRole().equals(AccountEntity.Role.MANAGERUSER) || user.getRole().equals(AccountEntity.Role.WAREHOUSEUSER)) {
+                } else if (user.getRole().equals(AccountEntity.Role.MANAGERUSER)) {
                     request.getSession().setAttribute("user", user);
                     response.sendRedirect("./admin/admin.jsp");
+                } else if (user.getRole().equals(AccountEntity.Role.WAREHOUSEUSER)) {
+                    request.getSession().setAttribute("user", user);
+                    response.sendRedirect("./warehouse/warehouse.jsp");
                 }
 
                 request.getSession().setAttribute("logged", true);

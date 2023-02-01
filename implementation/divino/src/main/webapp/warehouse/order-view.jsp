@@ -6,7 +6,7 @@
 
 <%
     AccountEntity user = (AccountEntity) request.getSession().getAttribute("user");
-    if (user == null || !user.getRole().equals(AccountEntity.Role.MANAGERUSER)) {
+    if (user == null || !user.getRole().equals(AccountEntity.Role.WAREHOUSEUSER)) {
         String errors = "non sei autorizzato";
         session.setAttribute("ow-errors", errors);
         request.getRequestDispatcher("/login.jsp").forward(request, response);
