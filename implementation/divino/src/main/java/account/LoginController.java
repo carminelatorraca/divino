@@ -40,6 +40,8 @@ public class LoginController extends HttpServlet {
                 if (user.getRole() == AccountEntity.Role.CUSTOMERUSER) {
                     CustomerUserEntity customer = new CustomerUserEntity(user);
                     request.getSession().setAttribute("user", customer);
+                    response.sendRedirect("./account/account.jsp");
+
                 } else if (user.getRole().equals(AccountEntity.Role.MANAGERUSER) || user.getRole().equals(AccountEntity.Role.WAREHOUSEUSER)) {
                     request.getSession().setAttribute("user", user);
                     response.sendRedirect("./admin/admin.jsp");

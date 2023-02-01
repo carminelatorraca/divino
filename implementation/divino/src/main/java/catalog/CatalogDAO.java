@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 public class CatalogDAO {
 
@@ -40,10 +39,9 @@ public class CatalogDAO {
         return catalog;
     }
 
-    /**
      public void removeProduct(ProductEntity product) throws SQLException {
      PreparedStatement pst = connection.prepareStatement("DELETE * FROM " + TABLE_NAME + "WHERE productID = ?;");
-     pst.setString(1, product.getProductId());
+     pst.setInt(1, product.getProductId());
      pst.executeUpdate();
      }
 
@@ -51,7 +49,8 @@ public class CatalogDAO {
      public void addProduct(ProductEntity product) throws SQLException {
      PreparedStatement pst = connection.prepareStatement("INSERT INTO " + TABLE_NAME +
      "(productID, productPrice, productBrand, productAvailability, ProductDescription, productVAT, productFormat, isSales, salesPrice, isVisible) VALUES (?,?,?,?,?,?,?,?,?,?);");
-     pst.setString(1, product.getProductId());
+
+     pst.setInt(1, product.getProductId());
      pst.setDouble(2, product.getProductPrice());
      pst.setString(3, product.getProductBrand());
      pst.setInt(4, product.getProductAvailability());
@@ -69,7 +68,7 @@ public class CatalogDAO {
      "UPDATE " + TABLE_NAME +
      "SET productID=?, productPrice = ?, productBrand = ?, productAvailability = ?, ProductDescription = ?, productVAT = ?, productFormat = ?, isSales = ?, salesPrice = ?, isVisible = ? " +
      "WHERE productID = ?;");
-     pst.setString(1, product.getProductId());
+     pst.setInt(1, product.getProductId());
      pst.setDouble(2, product.getProductPrice());
      pst.setString(3, product.getProductBrand());
      pst.setInt(4, product.getProductAvailability());
@@ -79,7 +78,7 @@ public class CatalogDAO {
      pst.setBoolean(8, product.isSales());
      pst.setDouble(9, product.getSalesPrice());
      pst.setBoolean(10, product.isVisible());
-     pst.setString(11, product.getProductId());
+     pst.setInt(11, product.getProductId());
      pst.executeUpdate();
      }
 
@@ -103,5 +102,4 @@ public class CatalogDAO {
      ResultSet rs = pst.executeQuery();
      return rs.getInt("productAvailability");
      }
-     **/
 }
