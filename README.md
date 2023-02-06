@@ -5,7 +5,7 @@
 diVino è una web-application per la gestione e vendita di prodotti di un'enoteca.
 
 ## Deliverables
-#### La documentazione prodotta è fruibile presso i seguenti link:
+La documentazione prodotta è fruibile presso i seguenti link:
 
 [Problem Statement](https://github.com/carminelatorraca/divino/blob/main/deliverable/RAD_divino.pdf)
 
@@ -16,11 +16,3 @@ diVino è una web-application per la gestione e vendita di prodotti di un'enotec
 [Object Design Documents]()
 
 [Test Plan Documents]()
-
-
-
-
-
->Cataldo Gaetano - 0512111910
-
->La Torraca Carmine - 0512112936
