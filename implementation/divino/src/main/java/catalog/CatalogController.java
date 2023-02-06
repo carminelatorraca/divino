@@ -22,36 +22,65 @@ public class CatalogController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("mode").equalsIgnoreCase("updateProduct")) {
+            String productID = request.getParameter("p_productID");
+            String productBrand = request.getParameter("p_brand");
+            System.out.println(productBrand);
+            String productDescription = request.getParameter("p_description");
+            String productFormat = request.getParameter("p_format");
+            String productPrice = request.getParameter("p_price");
+            String productAvailability = request.getParameter("p_availability");
+            String isSales = request.getParameter("p_issales");
+            String salesPrice = request.getParameter("p_price_sales");
+            String productVat = request.getParameter("p_vat");
+            String imagePath = request.getParameter("p_images");
 
-        String productBrand = request.getParameter("p_brand");
-        System.out.println(productBrand);
-        String productDescription = request.getParameter("p_description");
-        String productFormat = request.getParameter("p_format");
-        String productPrice = request.getParameter("p_price");
-        String productAvailability = request.getParameter("p_availability");
-        String isSales = request.getParameter("p_issales");
-        String salesPrice = request.getParameter("p_price_sales");
-        String productVat = request.getParameter("p_vat");
-        String imagePath = request.getParameter("p_images");
+            ProductEntity catalogProduct = new ProductEntity();
+            catalogProduct.setProductBrand(productBrand);
+            catalogProduct.setProductDescription(productDescription);
+            catalogProduct.setProductFormat(productFormat);
+            catalogProduct.setProductPrice(Double.parseDouble(productPrice));
+            catalogProduct.setProductAvailability(Integer.parseInt(productAvailability));
+            catalogProduct.setSales(Boolean.parseBoolean(isSales));
+            catalogProduct.setSalesPrice(Double.parseDouble(salesPrice));
+            catalogProduct.setProductVat(Integer.parseInt(productVat));
+            catalogProduct.setImagePath(imagePath);
 
-        ProductEntity catalogProduct = new ProductEntity();
-        catalogProduct.setProductBrand(productBrand);
-        catalogProduct.setProductDescription(productDescription);
-        catalogProduct.setProductFormat(productFormat);
-        catalogProduct.setProductPrice(Double.parseDouble(productPrice));
-        catalogProduct.setProductAvailability(Integer.parseInt(productAvailability));
-        catalogProduct.setSales(Boolean.parseBoolean(isSales));
-        catalogProduct.setSalesPrice(Double.parseDouble(salesPrice));
-        catalogProduct.setProductVat(Integer.parseInt(productVat));
-        catalogProduct.setImagePath(imagePath);
+            try {
+                catalogDAO.updateProduct(catalogProduct);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            String productBrand = request.getParameter("p_brand");
+            System.out.println(productBrand);
+            String productDescription = request.getParameter("p_description");
+            String productFormat = request.getParameter("p_format");
+            String productPrice = request.getParameter("p_price");
+            String productAvailability = request.getParameter("p_availability");
+            String isSales = request.getParameter("p_issales");
+            String salesPrice = request.getParameter("p_price_sales");
+            String productVat = request.getParameter("p_vat");
+            String imagePath = request.getParameter("p_images");
 
-        try {
-            catalogDAO.addProduct(catalogProduct);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            ProductEntity catalogProduct = new ProductEntity();
+            catalogProduct.setProductBrand(productBrand);
+            catalogProduct.setProductDescription(productDescription);
+            catalogProduct.setProductFormat(productFormat);
+            catalogProduct.setProductPrice(Double.parseDouble(productPrice));
+            catalogProduct.setProductAvailability(Integer.parseInt(productAvailability));
+            catalogProduct.setSales(Boolean.parseBoolean(isSales));
+            catalogProduct.setSalesPrice(Double.parseDouble(salesPrice));
+            catalogProduct.setProductVat(Integer.parseInt(productVat));
+            catalogProduct.setImagePath(imagePath);
+
+            try {
+                catalogDAO.addProduct(catalogProduct);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

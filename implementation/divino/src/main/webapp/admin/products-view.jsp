@@ -4,7 +4,11 @@
 <%@ page import="java.util.Collection" %>
 <%@ page import="order.OrderEntity" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="catalog.ProductEntity" %>
+<%@ page import="catalog.CatalogEntity" %>
+<%@ page import="java.util.HashSet" %>
 
+<% ServletContext context = request.getServletContext(); %>
 <%
     AccountEntity user = (AccountEntity) request.getSession().getAttribute("user");
     if (user == null || !user.getRole().equals(AccountEntity.Role.MANAGERUSER)) {
@@ -12,7 +16,8 @@
         session.setAttribute("ow-errors", errors);
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
-    ArrayList<OrderEntity> catalog = (ArrayList<OrderEntity>) session.getAttribute("catalog");
+    CatalogEntity c = (CatalogEntity) context.getAttribute("catalog");
+    HashSet<ProductEntity> catalog = (HashSet<ProductEntity>) c.getCatalogProducts();
 %>
 
 <!DOCTYPE html>
@@ -59,39 +64,31 @@
                         <th scope="col">PREZZO</th>
                         <th scope="col">QUANTITA DISPONIBILE</th>
                         <th scope="col">VISIBILE</th>
-                        <th scope="col">MODIFICA STATO</th>
+                        <th scope="col">MODIFICA INFO</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <%
-                        if (orders != null) {
-                            for (OrderEntity order : orders) {
+                        if (catalog != null) {
+                            for ( ProductEntity product : catalog) {
                     %>
                     <tr>
-                        <td><%=order.getOrderNumber()%>
+                        <td><%=product.getProductId()%>
                         </td>
-                        <td><%=order.getOrderCustomer()%>
+                        <td><%=product.getProductDescription()%>
                         </td>
-                        <td><%=order.getOrderStatus()%>
+                        <td><%=product.getProductPrice()%>
                         </td>
-                        <td>&euro; <%=order.getOrderTotalAmount()%>
+                        <td><%=product.getProductAvailability()%>
                         </td>
-                        <td><%=order.getOrderShippingAddress()%>
+                        <td><%=product.isVisible()%>
                         </td>
                         <td>
-                        <form id="upload-form" action="${pageContext.request.contextPath}/buy" method="post">
-                            <input name="mode" value="updateStatus" type="hidden">
-                            <input name="orderID" value="<%=order.getOrderNumber()%>" type="hidden">
-                            <select class="form-select" aria-label="Seleziona categoria" name="p_status" id="inputStatus"
-                                    required>
-                                <option selected>Seleziona Stato</option>
-                                <option value="Packed">Imballato</option>
-                                <option value="Shipped">Spedito</option>
-                            </select>
-                            <button type="submit" class="btn btn-primary">Aggiorna</button>
+                        <form id="upload-form" action="${pageContext.request.contextPath}/admin/product-update.jsp" method="post">
+                            <input name="up_product" hidden="hidden" value="<%=product.getProductId()%>">
+                            <button type="submit" class="btn btn-primary">Modifica</button>
                         </form>
-
                         </td>
                     </tr>
                     <%
@@ -99,7 +96,7 @@
                     } else {
                     %>
                     <tr>
-                        <td>nessun ordine</td>
+                        <td>nessun prodotto</td>
                     </tr>
                     <%
                         }

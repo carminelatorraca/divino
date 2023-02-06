@@ -126,4 +126,6 @@ public class ProductEntity {
     public void setIsDeleted(LocalDateTime isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+
 }

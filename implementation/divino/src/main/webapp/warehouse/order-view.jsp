@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ page import="account.AccountEntity" %>
+<%@ page import="java.util.Collection" %>
 <%@ page import="order.OrderEntity" %>
 <%@ page import="java.util.ArrayList" %>
 

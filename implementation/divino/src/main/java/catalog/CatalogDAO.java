@@ -48,7 +48,6 @@ public class CatalogDAO {
      pst.executeUpdate();
      }
 
-
      public void addProduct(ProductEntity product) throws SQLException {
      PreparedStatement pst = connection.prepareStatement("INSERT INTO " + TABLE_NAME +
      "(product_price, product_brand, product_availability, product_description, product_vat, product_format, is_sales, sales_price, is_visible) VALUES (?,?,?,?,?,?,?,?,?);");
