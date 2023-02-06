@@ -5,7 +5,7 @@
 diVino è una web-application per la gestione e vendita di prodotti di un'enoteca.
 
 ## Deliverables
-La documentazione prodotta è fruibile presso i seguenti link:
+La documentazione prodotta nella realizzazione di questo progetto è fruibile presso i seguenti link:
 
 [Problem Statement](https://github.com/carminelatorraca/divino/blob/main/deliverable/RAD_divino.pdf)
 
