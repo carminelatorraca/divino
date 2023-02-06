@@ -65,22 +65,20 @@ public class CatalogDAO {
      }
 
      public void updateProduct(ProductEntity product) throws SQLException {
-     PreparedStatement pst = connection.prepareStatement(
-     "UPDATE " + TABLE_NAME +
-     "SET product_id=?, product_price = ?, product_brand = ?, product_availability = ?, product_description = ?, product_vat = ?, product_format = ?, is_sales = ?, sales_price = ?, is_visible = ? " +
-     "WHERE product_id = ?;");
-     pst.setInt(1, product.getProductId());
-     pst.setDouble(2, product.getProductPrice());
-     pst.setString(3, product.getProductBrand());
-     pst.setInt(4, product.getProductAvailability());
-     pst.setString(5, product.getProductDescription());
-     pst.setInt(6, product.getProductVat());
-     pst.setString(7, product.getProductFormat());
-     pst.setBoolean(8, product.isSales());
-     pst.setDouble(9, product.getSalesPrice());
-     pst.setBoolean(10, product.isVisible());
-     pst.setInt(11, product.getProductId());
-     pst.executeUpdate();
+     PreparedStatement pst = connection.prepareStatement("UPDATE " + TABLE_NAME +  " SET product_id = ?, product_price = ?, product_brand = ?, product_availability = ?, product_description = ?, product_vat = ?, product_format = ?, is_sales = ?, sales_price = ?, is_visible = ? " +
+         "WHERE product_id = ?;");
+         pst.setInt(1, product.getProductId());
+         pst.setDouble(2, product.getProductPrice());
+         pst.setString(3, product.getProductBrand());
+         pst.setInt(4, product.getProductAvailability());
+         pst.setString(5, product.getProductDescription());
+         pst.setInt(6, product.getProductVat());
+         pst.setString(7, product.getProductFormat());
+         pst.setBoolean(8, product.isSales());
+         pst.setDouble(9, product.getSalesPrice());
+         pst.setBoolean(10, product.isVisible());
+         pst.setInt(11, product.getProductId());
+         pst.executeUpdate();
      }
 
      //Aggiorna la quantità disponibile di un prodotto in seguito ad un ordine andato a buon fine

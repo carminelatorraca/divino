@@ -23,7 +23,8 @@ public class CatalogController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("mode").equalsIgnoreCase("updateProduct")) {
-            String productID = request.getParameter("p_productID");
+            Integer productID = Integer.valueOf(request.getParameter("p_productID"));
+            System.out.println(productID);
             String productBrand = request.getParameter("p_brand");
             System.out.println(productBrand);
             String productDescription = request.getParameter("p_description");
@@ -36,6 +37,7 @@ public class CatalogController extends HttpServlet {
             String imagePath = request.getParameter("p_images");
 
             ProductEntity catalogProduct = new ProductEntity();
+            catalogProduct.setProductId(productID);
             catalogProduct.setProductBrand(productBrand);
             catalogProduct.setProductDescription(productDescription);
             catalogProduct.setProductFormat(productFormat);
@@ -48,6 +50,7 @@ public class CatalogController extends HttpServlet {
 
             try {
                 catalogDAO.updateProduct(catalogProduct);
+                response.sendRedirect("./admin/product-view.jsp");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

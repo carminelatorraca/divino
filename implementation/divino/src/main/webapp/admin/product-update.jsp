@@ -40,7 +40,7 @@
         <div class="col-lg-6">
             <form id="update-form" action="${pageContext.request.contextPath}/catalog" method="post">
                 <input hidden="hidden" name="mode" value="updateProduct">
-                <input hidden="hidden" name="p_productID" value="<%product.getProductId();%>>">
+                <input hidden="hidden" name="p_productID" value="<%out.println(product_id);%>">
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label for="inputBrand" class="form-label">Marca</label>
