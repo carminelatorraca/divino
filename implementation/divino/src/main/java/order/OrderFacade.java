@@ -6,7 +6,6 @@ import cart.CartItemEntity;
 import payment.PaymentEntity;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class OrderFacade {
@@ -25,8 +24,13 @@ public class OrderFacade {
         return orderDAO.createOrder(customer);
     }
 
-    public void placePayment(PaymentEntity payment) {
-        //gestire pagamento
+    /**
+     * save payment
+     *
+     * @param payment object contains payment data
+     */
+    public void placePayment(PaymentEntity payment) throws SQLException {
+        orderDAO.savePayment(payment);
     }
 
     /**

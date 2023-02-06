@@ -2,6 +2,7 @@ package order;
 
 import account.AccountEntity;
 import account.CustomerUserEntity;
+import payment.PaymentEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -205,5 +206,18 @@ public class OrderDAO {
             orderItems.add(orderItem);
         }
         return orderItems;
+    }
+
+    public void savePayment(PaymentEntity payment) throws SQLException {
+        String sql = "INSERT INTO " + PAYMENT_TABLE + " (paid_amount, payment_description, payment_status, payment_method, order_id) VALUES(?,?,?,?,?);";
+        PreparedStatement pst = connection.prepareStatement(sql);
+
+        pst.setDouble(1, payment.getPaidAmount());
+        pst.setString(2, payment.getPaymentDescription());
+        pst.setString(3, payment.getPaymentStatus());
+        pst.setString(4, payment.getPaymentMethod());
+        pst.setInt(5, payment.getOrderNumber());
+
+        pst.executeUpdate();
     }
 }

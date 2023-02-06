@@ -1,8 +1,6 @@
 package order;
 
-import account.AccountEntity;
 import account.CustomerUserEntity;
-import account.UserEntity;
 import cart.CartEntity;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -11,7 +9,6 @@ import payment.PaymentEntity;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 @WebServlet(name = "OrderController", value = "/buy")
 public class OrderController extends HttpServlet {

@@ -7,6 +7,7 @@ public class PaymentEntity {
     private String paymentMethod;
     private String paymentDescription;
     private String paymentStatus;
+    private int orderNumber;
 
     public PaymentEntity() {
     }
@@ -49,5 +50,13 @@ public class PaymentEntity {
 
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
     }
 }

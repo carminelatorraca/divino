@@ -25,7 +25,9 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("shoppingCart") == null) {
             request.getSession().setAttribute("shoppingCart", cart);
+            return;
         }
+
         cart = (CartEntity) request.getSession().getAttribute("shoppingCart");
         HashMap<String, CartItemEntity> list = new HashMap<>();
 
