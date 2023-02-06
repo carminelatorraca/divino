@@ -25,7 +25,6 @@ public class CatalogController extends HttpServlet {
         if (request.getParameter("mode").equalsIgnoreCase("updateProduct")) {
             String productID = request.getParameter("p_productID");
             String productBrand = request.getParameter("p_brand");
-            System.out.println(productBrand);
             String productDescription = request.getParameter("p_description");
             String productFormat = request.getParameter("p_format");
             String productPrice = request.getParameter("p_price");
@@ -53,7 +52,6 @@ public class CatalogController extends HttpServlet {
             }
         } else {
             String productBrand = request.getParameter("p_brand");
-            System.out.println(productBrand);
             String productDescription = request.getParameter("p_description");
             String productFormat = request.getParameter("p_format");
             String productPrice = request.getParameter("p_price");

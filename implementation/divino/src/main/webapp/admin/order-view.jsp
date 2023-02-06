@@ -79,7 +79,7 @@
                         <td><%=order.getOrderShippingAddress()%>
                         </td>
                         <td>
-                        <form id="upload-form" action="${pageContext.request.contextPath}/buy" method="post">
+                        <form id="upload-form" action="${pageContext.request.contextPath}/order-manager" method="post">
                             <input name="mode" value="updateStatus" type="hidden">
                             <input name="orderID" value="<%=order.getOrderNumber()%>" type="hidden">
                             <select class="form-select" aria-label="Seleziona categoria" name="p_status" id="inputStatus"

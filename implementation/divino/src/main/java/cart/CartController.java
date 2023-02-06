@@ -25,16 +25,13 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("shoppingCart") == null) {
             request.getSession().setAttribute("shoppingCart", cart);
-            System.out.println("FATTO");
         }
         cart = (CartEntity) request.getSession().getAttribute("shoppingCart");
         HashMap<String, CartItemEntity> list = new HashMap<>();
 
-
         //aggiunta al carrello
         if (request.getParameter("mode").equalsIgnoreCase("add")) {
             Integer productID = Integer.valueOf(request.getParameter("productid"));
-            System.out.println(productID);
 
             for (ProductEntity product : catalog.getCatalogProducts()) {
                 if (product.getProductId().equals(productID)) {
@@ -45,16 +42,13 @@ public class CartController extends HttpServlet {
                         CartItemEntity item = cart.getCartItem(productID);
                         item.setProductQuantity(item.getProductQuantity()+1);
                     }
-                    System.out.println("ok");
                 }
             }
-
         }
 
         //plus al carrello
         if (request.getParameter("mode").equalsIgnoreCase("plus")) {
             Integer productID = Integer.valueOf(request.getParameter("productid"));
-            System.out.println(productID);
 
             for (ProductEntity product : catalog.getCatalogProducts()) {
                 if (product.getProductId().equals(productID)) {
@@ -65,7 +59,6 @@ public class CartController extends HttpServlet {
                         CartItemEntity item = cart.getCartItem(productID);
                         item.setProductQuantity(item.getProductQuantity()+1);
                     }
-                    System.out.println("ok");
                     request.getSession().setAttribute("shippingCart", cart);
                 }
             }
@@ -82,11 +75,9 @@ public class CartController extends HttpServlet {
             int productID = Integer.parseInt(request.getParameter("productid"));
             int quantity = cart.getShoppingCart().get(productID).getProductQuantity();
             if ((quantity - 1) == 0) {
-                System.out.println("Ci sono");
                 cart.removeItem(productID);
                 if (cart.getShoppingCart().isEmpty()) {
                     cart = null;
-                    System.out.println("Messo a null");
                 }
             }
             else

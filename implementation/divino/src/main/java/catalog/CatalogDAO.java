@@ -35,8 +35,6 @@ public class CatalogDAO {
             product.setSales(rs.getBoolean(7));
             product.setSalesPrice(rs.getDouble(8));
             product.setVisible(rs.getBoolean(10));
-            System.out.println(product.getProductId());
-            System.out.println(product.getProductPrice());
             catalog.add(product);
         }
         return catalog;

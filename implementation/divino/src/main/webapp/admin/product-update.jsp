@@ -4,7 +4,7 @@
 <%@ page import="catalog.CatalogEntity" %>
 <%@ page import="catalog.ProductEntity" %>
 <%@ page import="java.util.HashSet" %>
-<%@ page import="java.nio.file.FileSystemNotFoundException" %>
+
 <% ServletContext context = request.getServletContext();
     AccountEntity user = (AccountEntity) request.getSession().getAttribute("user");
     if (user == null || !user.getRole().equals(AccountEntity.Role.MANAGERUSER)) {

@@ -14,6 +14,11 @@ public class PaymentController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         OrderEntity orderToPay = (OrderEntity) request.getAttribute("order");
 
+        if (orderToPay == null) {
+            response.sendError(900, "ordine nullo");
+            return;
+        }
+
         PaymentEntity payment = new PaymentEntity();
         payment.setPaidAmount(orderToPay.getOrderTotalAmount());
         payment.setPaymentDescription(orderToPay.getOrderStatus());

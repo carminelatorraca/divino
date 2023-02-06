@@ -41,8 +41,6 @@ public class OrderDAO {
         pst.setString(1, order.getOrderStatus());
         pst.setDouble(2, order.getOrderTotalAmount());
         pst.setString(3, order.getOrderShippingAddress());
-        System.out.println("Acc ID: " + order.getOrderCustomer());
-        System.out.println("Order ID: " + order.getOrderNumber());
         pst.setInt(4, order.getOrderNumber());
         pst.setInt(5, order.getOrderCustomer());
         pst.executeUpdate();
