@@ -27,7 +27,7 @@
 <head>
     <%@include file="/fragments/meta.jsp" %>
 
-    <title>Update Prodotto</title>
+    <title>Update Prodotti</title>
 </head>
 <body>
 <%@include file="/fragments/header.jsp" %>

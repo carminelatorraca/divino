@@ -25,7 +25,7 @@
 <head>
     <%@include file="/fragments/meta.jsp" %>
 
-    <title>Ordini clienti</title>
+    <title>Gestione Prodotti</title>
 </head>
 <body>
 <%@include file="/fragments/header.jsp" %>

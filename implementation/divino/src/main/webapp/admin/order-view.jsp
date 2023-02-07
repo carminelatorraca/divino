@@ -19,7 +19,7 @@
 <head>
     <%@include file="/fragments/meta.jsp" %>
 
-    <title>Ordini clienti</title>
+    <title>Ordini</title>
 </head>
 <body>
 <%@include file="/fragments/header.jsp" %>
@@ -28,27 +28,6 @@
     <div class="row">
         <div class="col-md-12" style="overflow: scroll">
             <h3>Ordini</h3>
-            <div class="form-group row align-items-end">
-                <div class="col-md-4">
-                    <label for="input-date-1" class="form-label">da</label>
-                    <input class="form-control" type="date" id="input-date-1" required
-                           placeholder="data" name="first_date">
-                </div>
-                <div class="col-md-4">
-                    <label for="input-date-2" class="form-label">a</label>
-                    <input class="form-control" type="date" id="input-date-2" required
-                           placeholder="data" name="second_date">
-                </div>
-                <br>
-                <div class="col-md-4 justify-content-end">
-                    <button class="btn btn-light" id="filter-btn">Filtra Ordini</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-12" style="overflow: scroll">
             <div id="orders-table">
                 <table class="table">
                     <thead>
