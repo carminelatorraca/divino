@@ -1,5 +1,6 @@
 package cart;
 
+import account.UserEntity;
 import catalog.CatalogEntity;
 import catalog.ProductEntity;
 import jakarta.servlet.*;
@@ -26,6 +27,7 @@ public class CartController extends HttpServlet {
         if (request.getSession().getAttribute("shoppingCart") == null) {
             request.getSession().setAttribute("shoppingCart", cart);
         }
+
         cart = (CartEntity) request.getSession().getAttribute("shoppingCart");
         HashMap<String, CartItemEntity> list = new HashMap<>();
 
@@ -84,12 +86,15 @@ public class CartController extends HttpServlet {
                 cart.getShoppingCart().get(productID).setProductQuantity(quantity - 1);
         }
 
+        UserEntity user = (UserEntity) request.getSession().getAttribute("user");
 
         if (request.getParameter("mode").equalsIgnoreCase("add")) {
             request.getSession().setAttribute("shoppingCart", cart);
             response.sendRedirect(getServletContext().getContextPath() + "/shop.jsp");
         } else if (request.getParameter("mode").equalsIgnoreCase("checkout") && cart!=null) {
             response.sendRedirect(getServletContext().getContextPath() + "/checkout.jsp");
+        } else if (request.getParameter("mode").equalsIgnoreCase("checkout") && user==null) {
+            response.sendRedirect(getServletContext().getContextPath() + "/cart.jsp");
         } else{
             request.getSession().setAttribute("shoppingCart", cart);
             response.sendRedirect(getServletContext().getContextPath() + "/cart.jsp");
