@@ -48,6 +48,8 @@ public class GetOrders extends HttpServlet {
 
         //aggiornamento stato ordine da parte di gestore e magazzino
         if (request.getParameter("mode").equalsIgnoreCase("updateStatus")) {
+            UserEntity user = (UserEntity) request.getSession().getAttribute("user");
+
             Integer orderID = Integer.valueOf(request.getParameter("orderID"));
             String orderStatus = request.getParameter("p_status");
 
@@ -57,7 +59,11 @@ public class GetOrders extends HttpServlet {
                 orderDAO.updateOrder(orderToUpdate);
 
                 request.getSession().setAttribute("orders", orderDAO.retrieveAllOrders());
-                response.sendRedirect("./warehouse/order-view.jsp");
+                if (user.getRole() == AccountEntity.Role.MANAGERUSER)
+                    response.sendRedirect("./admin/order-view.jsp");
+                else if (user.getRole() == AccountEntity.Role.WAREHOUSEUSER) {
+                    response.sendRedirect("./warehouse/order-view.jsp");
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
