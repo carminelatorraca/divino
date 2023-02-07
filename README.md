@@ -1,30 +1,18 @@
 # diVino
 
-Il committente intende realizzare un e-commerce per la vendita di vino.
-Le funzionalità che il sistema dovrà offrire, richieste dal committente,
-sono le seguenti:
+![alt text](https://github.com/carminelatorraca/divino/blob/main/implementation/divino/src/main/webapp/images/logo.jpg "divino")
 
-- Gestione dell’inventario dei prodotti
-- Gestione account del cliente
-- Gestione anagrafica dei clienti
-- Visualizzazione degli ordini
-- Visualizzazione dei prodotti
-- Acquisto dei prodotti
+**diVino** è una web-application per la gestione e la vendita di prodotti, in particolar modo, di bottiglie di vino.
 
-Quindi, si vuole realizzare un’applicazione web che permetta
-l’interazione di tre tipologie di utente, ognuno con ruolo e
-funzionalità proprie:
-- Gestore, il qui ruolo permetterà l'accesso all'area back-office, 
-da cui poter gestire inventario, ordini e anagrafica dei clienti.
-- Ospite, il quale, può visualizzare i prodotti, visualizzare il carrello
-e creare un account.
-- Cliente registrato, il quale, potrà effettuare ordini e visualizzarne
-i dettagli, avere accesso alla propria area personale;
+## Deliverables
+La documentazione prodotta nella realizzazione di questo progetto è fruibile presso i seguenti link:
 
-L’applicazione presenterà un'interfaccia di login e di registrazione,
-una pagina dedicata alle funzionalità per il ruolo di gestore e
-di cliente registrato alla piattaforma.
+[Problem Statement](https://github.com/carminelatorraca/divino/blob/main/deliverable/RAD_divino.pdf)
 
->Cataldo Gaetano - 0512111910
+[Requirements Analysis Documents](https://github.com/carminelatorraca/divino/blob/main/deliverable/RAD_divino.pdf)
 
->La Torraca Carmine - 0512112936
+[System Design Documents](https://github.com/carminelatorraca/divino/blob/main/deliverable/RAD_divino.pdf)
+
+[Object Design Documents]()
+
+[Test Plan Documents]()
