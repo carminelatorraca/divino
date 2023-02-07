@@ -19,11 +19,6 @@ public class AccountController extends HttpServlet {
         this.accountDAO = (AccountDAO) super.getServletContext().getAttribute("accountDAO");
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     //Check delle credenziali inserite per il login e aggiunta oggetto utente alla sessione in caso di credeziali corrette
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +31,7 @@ public class AccountController extends HttpServlet {
         user.setEmail(email);
         user.setLastName(lastName);
         user.setFirstName(firstName);
-        if(password!=null)
+        if (password != null)
             user.setPassword(password);
 
         try {
@@ -44,5 +39,10 @@ public class AccountController extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

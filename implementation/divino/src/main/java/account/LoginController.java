@@ -22,12 +22,7 @@ public class LoginController extends HttpServlet {
         this.orderDAO = (OrderDAO) super.getServletContext().getAttribute("orderDAO");
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    //Check delle credenziali inserite per il login e aggiunta oggetto utente alla sessione in caso di credeziali corrette
+    //check delle credenziali inserite per il login e aggiunta oggetto utente alla sessione in caso di credeziali corrette
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AccountEntity account;
@@ -44,6 +39,7 @@ public class LoginController extends HttpServlet {
                     CustomerUserEntity customer = new CustomerUserEntity(user);
                     request.getSession().setAttribute("user", customer);
                     HashSet<OrderEntity> orders = orderDAO.customerOrders(account);
+                    System.out.println("size"+orders.size());
                     request.getSession().setAttribute("myOrder", orders);
                     response.sendRedirect("./account/account.jsp");
 
@@ -65,6 +61,11 @@ public class LoginController extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }
 

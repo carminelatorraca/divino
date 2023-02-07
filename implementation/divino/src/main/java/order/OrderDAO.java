@@ -71,7 +71,6 @@ public class OrderDAO {
         ResultSet rs = pst.executeQuery();
         if (rs.next())
             id = rs.getInt(1);
-        System.out.println("id" + id);
         return id;
     }
 
@@ -168,14 +167,14 @@ public class OrderDAO {
 
     public HashSet<OrderEntity> customerOrders(AccountEntity account) throws SQLException {
         HashSet<OrderEntity> customerOrders = new HashSet<>();
-        OrderEntity order = new OrderEntity();
-
         String createQuery = "SELECT * FROM " + ORDER_TABLE + " WHERE order_account = ?";
         PreparedStatement pst = connection.prepareStatement(createQuery);
         pst.setInt(1, account.getAccountID());
         ResultSet rs = pst.executeQuery();
 
         while (rs.next()) {
+            OrderEntity order = new OrderEntity();
+
             order.setOrderNumber(rs.getInt(1));
             order.setOrderStatus(rs.getString(2));
             order.setOrderTotalAmount(rs.getDouble(3));

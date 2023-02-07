@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ page import="account.AccountEntity" %>
-<%@ page import="java.util.Collection" %>
 <%@ page import="order.OrderEntity" %>
 <%@ page import="order.OrderItemEntity" %>
 <%@ page import="java.util.HashSet" %>
@@ -13,7 +12,6 @@
         session.setAttribute("ow-errors", errors);
         request.getRequestDispatcher("./login.jsp").forward(request, response);
     }
-    //gestire ordini
 %>
 
 <!DOCTYPE html>
@@ -30,7 +28,6 @@
     <h3>I miei ordini</h3>
     <%
         HashSet<OrderEntity> orders = (HashSet<OrderEntity>) session.getAttribute("myOrder");
-        System.out.println(orders.size());
         if (!orders.isEmpty()) {
             for (OrderEntity order : orders) {
     %>
