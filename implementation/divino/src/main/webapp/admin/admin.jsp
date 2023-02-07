@@ -41,7 +41,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active text-white"
-                                   href="${pageContext.request.contextPath}/buy?mode=showOrders">Gestione ordini</a>
+                                   href="${pageContext.request.contextPath}/order-manager?mode=showOrders">Gestione ordini</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active text-white"

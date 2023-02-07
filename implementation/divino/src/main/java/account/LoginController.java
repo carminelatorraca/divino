@@ -38,8 +38,7 @@ public class LoginController extends HttpServlet {
                 if (user.getRole() == AccountEntity.Role.CUSTOMERUSER) {
                     CustomerUserEntity customer = new CustomerUserEntity(user);
                     request.getSession().setAttribute("user", customer);
-                    HashSet<OrderEntity> orders = orderDAO.customerOrders(account);
-                    System.out.println("size"+orders.size());
+                    HashSet<OrderEntity> orders = orderDAO.getCustomerOrders(account);
                     request.getSession().setAttribute("myOrder", orders);
                     response.sendRedirect("./account/account.jsp");
 
