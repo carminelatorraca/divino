@@ -15,7 +15,7 @@
 <head>
     <%@include file="/fragments/meta.jsp" %>
 
-    <title>Dashboard</title>
+    <title>Dashboard - Warehouse</title>
 </head>
 <body>
 <%@include file="/fragments/header.jsp" %>

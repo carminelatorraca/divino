@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-auto">
                             <span id="passwordHelp" class="form-text">
-                                Deve essere lunga almeno 8-16 caratteri.
+                                Deve essere lunga dai 8-16 caratteri.
                             </span>
                         </div>
                     </div>

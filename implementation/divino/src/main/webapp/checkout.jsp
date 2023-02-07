@@ -52,7 +52,6 @@
         }
     %>
 
-
     <!-- FORM INDIRIZZO -->
     <form action="${pageContext.request.contextPath}/checkout" method="post" onsubmit="return validatePayment()">
         <div class="row">
@@ -177,7 +176,7 @@
                                placeholder="MM/AA" name="c-card-expire">
                     </div>
                     <div class="col-lg-6">
-                        <label for="input-card-cvc" class="form-label wine-label">Codice cvc</label>
+                        <label for="input-card-cvc" class="form-label wine-label">Codice CVC</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="input-card-cvc" required
                                placeholder="CVC" name="c-card-cvc">
                     </div>
@@ -193,6 +192,7 @@
         </div>
     </form>
 </div>
+
 <%@include file="/fragments/footer.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
