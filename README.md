@@ -2,7 +2,7 @@
 
 ![alt text](https://github.com/carminelatorraca/divino/blob/main/implementation/divino/src/main/webapp/images/logo.jpg "divino")
 
-diVino è una web-application per la gestione e la vendita di prodotti di un'enoteca.
+**diVino** è una web-application per la gestione e la vendita di prodotti, in particolar modo, di bottiglie di vino.
 
 ## Deliverables
 La documentazione prodotta nella realizzazione di questo progetto è fruibile presso i seguenti link:
