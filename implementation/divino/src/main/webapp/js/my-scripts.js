@@ -38,4 +38,39 @@ function validatePayment() {
     return flag
 }
 
+function validateSignup() {
+    let email = document.getElementById("inputEmail").value.trim();
+    let password = document.getElementById("inputPassword").value.trim();
+
+    let patternEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let patternPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+
+    let flag = true;
+
+    if (!patternEmail.test(email)) {
+        $("#inputEmail").css("border-color", "red");
+        flag = false
+    }
+    if (!patternPassword.test(password)) {
+        $("#inputPassword").css("border-color", "red");
+        flag = false
+    }
+    return flag
+}
+
+function validateSignIn() {
+    let email = document.getElementById("loginEmail").value.trim();
+
+    let patternEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    let flag = true;
+
+    if (!patternEmail.test(email)) {
+        $("#loginEmail").css("border-color", "red");
+        flag = false
+    }
+
+    return flag
+}
+
 

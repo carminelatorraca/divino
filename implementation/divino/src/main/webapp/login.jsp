@@ -15,9 +15,10 @@
 <%@include file="fragments/header.jsp" %>
 <div class="container">
     <%
-        ArrayList<String> exceptions = (ArrayList<String>) context.getAttribute("exceptions");
+        ArrayList<String> exceptions = (ArrayList<String>) session.getAttribute("exceptions");
 
         if (exceptions != null) {
+            System.out.println(exceptions);
             for (String exception : exceptions) {
     %>
     <div class="row justify-content-center">
@@ -34,11 +35,11 @@
     <div class="row justify-content-evenly g-0">
         <div class="col-lg-4 my-auto">
             <h3>Login</h3>
-            <form action="${pageContext.request.contextPath}/login" method="post">
+            <form action="${pageContext.request.contextPath}/login" method="post" onsubmit="return validateSignIn()" novalidate>
                 <div class="form-group row">
                     <div class="col-lg-12">
-                        <label for="loginUsername" class="form-label wine-label">Email</label>
-                        <input class="form-control form-control-lg wine-input" type="email" id="loginUsername" required
+                        <label for="loginEmail" class="form-label wine-label">Email</label>
+                        <input class="form-control form-control-lg wine-input" type="email" id="loginEmail" required
                                placeholder="inserisci l'email" name="l-email">
                     </div>
                 </div>
@@ -57,12 +58,12 @@
         <br>
         <div class="col-lg-4 my-auto">
             <h3>Registrati qui!</h3>
-            <form action="${pageContext.request.contextPath}/signup" method="post" novalidate>
+            <form action="${pageContext.request.contextPath}/signup" method="post" onsubmit="return validateSignup()" novalidate>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="inputFirstname" class="form-label wine-label">Nome</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="inputFirstname" required
-                               placeholder="inserisci il nome" name="r-firstname" onchange="validateFName()">
+                               placeholder="inserisci il nome" name="r-firstname">
                     </div>
                 </div>
                 <div class="form-group row">

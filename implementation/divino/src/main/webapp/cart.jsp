@@ -69,9 +69,9 @@
 
                     <!-- IMG -->
                     <div class="col-md-2">
-                        <img src="${pageContext.request.contextPath}/images/<%=product.getProduct().getImagePath()%>"
+                        <img src="${pageContext.request.contextPath}/images/<%=product.getProduct().getProductBrand()%>/<%=product.getProduct().getImagePath()%>"
                              class="card-img-top img-fluid"
-                             alt="no_image" width="200px" height="200px">
+                             alt="image" width="200px" height="200px">
                     </div>
 
                     <!-- CARD PRODOTTO -->

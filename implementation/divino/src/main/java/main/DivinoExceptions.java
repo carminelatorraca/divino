@@ -3,6 +3,10 @@ package main;
 public class DivinoExceptions {
     private String handleException;
 
+    public DivinoExceptions(String handleException) {
+        this.handleException = handleException;
+    }
+
     public String getHandleException() {
         return handleException;
     }

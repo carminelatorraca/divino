@@ -46,7 +46,7 @@
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 w-100 wine-card bg-white">
                 <div class="overflow-hidden">
-                    <img src="${pageContext.request.contextPath}/images/<%=product.getImagePath()%>/"
+                    <img src="${pageContext.request.contextPath}/images/<%=product.getProductBrand()%>/<%=product.getImagePath()%>"
                          class="card-img-top img-fluid zoom" alt="<%=product.getProductBrand()%>" width="200px"
                          height="200px">
                 </div>

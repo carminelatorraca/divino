@@ -54,7 +54,8 @@ public class MainListener implements ServletContextListener, HttpSessionListener
             servletContext.setAttribute("catalog", catalog);
 
             //set errors
-            Collection<DivinoExceptions> exceptions = new ArrayList<>();
+            //Collection<DivinoExceptions> exceptions = new ArrayList<>();
+            ArrayList<String> exceptions = new ArrayList<>();
             servletContext.setAttribute("exceptions", exceptions);
 
         } catch (NamingException | SQLException e) {

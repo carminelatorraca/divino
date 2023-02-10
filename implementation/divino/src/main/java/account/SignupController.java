@@ -1,11 +1,16 @@
 package account;
-import catalog.CatalogDAO;
+
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 @WebServlet(name = "SignupController", value = "/signup")
 public class SignupController extends HttpServlet {
@@ -24,16 +29,23 @@ public class SignupController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String email = request.getParameter("r-email");
-        String password = request.getParameter("r-password");
         String firstName = request.getParameter("r-firstname");
         String lastName = request.getParameter("r-lastname");
 
-        AccountEntity account = new AccountEntity(email, password, AccountEntity.Role.CUSTOMERUSER);
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
+        byte[] securePassword = digest.digest(request.getParameter("r-password").getBytes(StandardCharsets.UTF_8)); //gestione password
+
+        AccountEntity account = new AccountEntity(email, byteToEx(securePassword), AccountEntity.Role.CUSTOMERUSER);
         try {
             dbAccount.createAccount(account);
-            account = dbAccount.retrieveAccount(email,password);
+            account = dbAccount.retrieveAccount(email, byteToEx(securePassword));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -51,5 +63,17 @@ public class SignupController extends HttpServlet {
         RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
         view.forward(request, response);
 
+    }
+
+    private static String byteToEx(byte[] hash) {
+        StringBuilder StringBuilder = new StringBuilder(2 * hash.length);
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                StringBuilder.append('0');
+            }
+            StringBuilder.append(hex);
+        }
+        return StringBuilder.toString();
     }
 }

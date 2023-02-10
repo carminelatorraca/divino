@@ -25,28 +25,28 @@
     <div class="row justify-content-center">
         <h3>Upload prodotti</h3>
         <div class="col-lg-6">
-            <form id="upload-form" action="${pageContext.request.contextPath}/catalog" method="post">
+            <form id="upload-form" action="${pageContext.request.contextPath}/catalog" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label for="inputBrand" class="form-label">Marca</label>
                         <input class="form-control" type="text" id="inputBrand" required
-                               placeholder="marca" name="p_brand" maxlength="255">
+                               placeholder="brand" name="p_brand" maxlength="255">
                     </div>
                     <div class="col-lg-6">
                         <label for="inputModel" class="form-label">Formato</label>
                         <input class="form-control" type="text" id="inputModel" required
-                               placeholder="modello" name="p_format" maxlength="255">
+                               placeholder="formato" name="p_format" maxlength="255">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
                         <label for="inputTitle" class="form-label">Promo 1/0</label>
                         <input class="form-control" type="text" id="inputTitle" required
-                               placeholder="titolo annuncio" name="p_issales" maxlength="255">
+                               placeholder="prodotto promo?" name="p_issales" maxlength="255">
 
                         <label for="inputPriceSales" class="form-label">Prezzo Promo</label>
                         <input class="form-control" type="text" id="inputPriceSales" required
-                               placeholder="prezzo" name="p_price_sales">
+                               placeholder="prezzo promozionale" name="p_price_sales">
                     </div>
                     <div class="col-md-3">
                         <label for="inputPrice" class="form-label">Prezzo</label>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-md-3">
                         <label for="inputVat" class="form-label">Aliquota</label>
-                        <select class="form-select" aria-label="Seleziona categoria" name="p_vat" id="inputVat"
+                        <select class="form-select" aria-label="Seleziona aliquota" name="p_vat" id="inputVat"
                                 required>
                             <option selected>Seleziona l'Iva</option>
                             <option value="4">Aliquota 4%</option>
@@ -76,7 +76,7 @@
                     <div class="col-lg-9">
                         <label for="inputStock" class="form-label">Disponibilità</label>
                         <input class="form-control" type="number" id="inputStock" required
-                               placeholder="quantità stock" name="p_availability" min="0">
+                               placeholder="quantità disponibili" name="p_availability" min="0">
                     </div>
                     <div class="col-lg-3">
                         <div class="form-check">
@@ -92,9 +92,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="inputImages" class="form-label">Immagine prodotto</label>
-                    <input class="form-control" type="file" accept="image/jpeg" id="inputImages" name="p_images">
+                    <input class="form-control" type="file" accept="image/jpeg" id="inputImages" name="p_images" multiple>
                 </div>
                 <br>
+                <input hidden="hidden" name="mode" value="uploadProduct">
                 <button type="submit" class="btn btn-primary">Inserisci Prodotto</button>
                 <button type="reset" class="btn btn-secondary">Annulla</button>
             </form>
