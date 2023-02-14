@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <accounts account_id='1' email='divino@test.it' password='testing' role='CUSTOMERUSER'></accounts>
+    <accounts account_id='2' email='divino@test' password='testing' role='CUSTOMERUSER'></accounts>
+    <accounts account_id='3' email='divino@test' password='testing' role='CUSTOMERUSER'></accounts>
+    <accounts account_id='4' email='divino@test' password='testing' role='CUSTOMERUSER'></accounts>
+    <accounts account_id='5' email='divino@test' password='testing' role='CUSTOMERUSER'></accounts>
+
+    <accounts account_id='6' email='mario.giovanni@gmail.com' password='marioGiovanni1' role='CUSTOMERUSER'></accounts>
+</dataset>

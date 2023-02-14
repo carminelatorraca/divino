@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <accounts account_id='1' email='divino@test.it' password='testing' role='CUSTOMERUSER'/>
+    <accounts account_id='2' email='divino@test' password='testing' role='CUSTOMERUSER'/>
+    <accounts account_id='3' email='divino@test' password='testing' role='CUSTOMERUSER'/>
+    <accounts account_id='4' email='divino@test' password='testing' role='CUSTOMERUSER'/>
+    <accounts account_id='5' email='divino@test' password='testing' role='CUSTOMERUSER'/>
+
+    <users user_id='1' account_id='1' firstName='Marco' lastName='Kappa' fiscalCode='LTRCMN323CC'/>
+    <users user_id='2' account_id='2' firstName='Carmine' lastName='Zeta' fiscalCode='LTRCMN323CC'/>
+    <users user_id='3' account_id='3' firstName='Luca' lastName='Imola' fiscalCode='EASJDDADJOJ'/>
+    <users user_id='4' account_id='4' firstName='Mario' lastName='LaFranca' fiscalCode='AHSADSDSOJ'/>
+    <users user_id='5' account_id='5' firstName='Gaetano' lastName='Larano' fiscalCode='LEAHAJHHASA'/>
+
+    <products product_id='1' product_brand='LE ROSEMATTE IGB' product_description='buon vino bianco'
+              product_format='9' product_price='120.99' product_availability='10' is_sales='1' sales_price='0.00'
+              product_vat='22' is_visible='1' image_path='3.jpg'/>
+    <products product_id='2' product_brand='NANUCCI IGB' product_description='buon vino bianco siciliano'
+              product_format='9' product_price='110.00' product_availability='13' is_sales='1' sales_price='0.00'
+              product_vat='22' is_visible='1' image_path='3.jpg'/>
+    <products product_id='3' product_brand='PELORO ROSSO IGB' product_description='buon vino rosso'
+              product_format='9' product_price='150.00' product_availability='10' is_sales='1' sales_price='0.00'
+              product_vat='22' is_visible='1' image_path='3.jpg'/>
+
+    <orders order_id='1' order_status='shiped' order_total_amount='120.99'
+            order_shipping_address='via amendola, 61 eboli 84025' order_account='1'/>
+    <orders order_id='2' order_status='packed' order_total_amount='110.99'
+            order_shipping_address='via amendola, 61 eboli 84025' order_account='2'/>
+    <orders order_id='3' order_status='shiped' order_total_amount='150.00'
+            order_shipping_address='via amendola, 61 eboli 84025' order_account='3'/>
+
+    <order_items order_item_id='1' item_price='11.00' item_description='LE CASEMATTE IGB' order_id='1' item_quantity='2'
+                 item_vat='22' product_id='1'/>
+    <order_items order_item_id='2' item_price='11.00' item_description='NANUCCI IGB' order_id='2' item_quantity='2'
+                 item_vat='22' product_id='2'/>
+    <order_items order_item_id='3' item_price='11.00' item_description='PELORO ROSSO IGB' order_id='3' item_quantity='2'
+                 item_vat='22' product_id='3'/>
+    <order_items order_item_id='4' item_price='11.00' item_description='NANUCCI IGB' order_id='3' item_quantity='2'
+                 item_vat='22' product_id='2'/>
+
+    <payments payment_id='1' paid_amount='120.99' payment_description='ORDER 1' payment_status='paid'
+              payment_method='generic' order_id='1'/>
+    <payments payment_id='1' paid_amount='110.00' payment_description='ORDER 1' payment_status='paid'
+              payment_method='generic' order_id='2'/>
+    <payments payment_id='1' paid_amount='150.00' payment_description='ORDER 1' payment_status='paid'
+              payment_method='generic' order_id='3'/>
+
+</dataset>

@@ -23,6 +23,10 @@ public class UserEntity extends AccountEntity {
         this.fiscalCode = null;
     }
 
+    public UserEntity(){
+
+    }
+
     public String getFirstName() {
         return firstName;
     }
