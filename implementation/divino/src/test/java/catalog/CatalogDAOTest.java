@@ -62,6 +62,7 @@ public class CatalogDAOTest extends DataSourceBasedDBTestCase {
         ITable expectedTable = new FlatXmlDataSetBuilder().build(CatalogDAOTest.class.getClassLoader().getResourceAsStream("db/expected/CatalogDAOTest/deleteProduct.xml")).getTable("products");
 
         ProductEntity product = new ProductEntity();
+        product.setProductId(1);
 
         catalogDAO.removeProduct(product);
 
@@ -72,8 +73,17 @@ public class CatalogDAOTest extends DataSourceBasedDBTestCase {
     }
 
     @Test
-    void addProduct() {
+    void addProduct() throws Exception {
+        ITable expectedTable = new FlatXmlDataSetBuilder()
+                .build(CatalogDAOTest.class.getClassLoader().getResourceAsStream("db/expected/ProductsDAOTest/testDoSaveProducts.xml"))
+                .getTable("products");
 
+        catalogDAO.addProduct(new ProductEntity(1, "Rosematte", "Bel vino", "1", 120.99, 21, true, 0.0, 22, true, "3.jpg"));
+
+        IDataSet databaseDataSet = getConnection().createDataSet();
+        ITable actualTable = databaseDataSet.getTable("products");
+
+        Assertion.assertEquals(new SortedTable(expectedTable), new SortedTable(actualTable));
     }
 
     @Test

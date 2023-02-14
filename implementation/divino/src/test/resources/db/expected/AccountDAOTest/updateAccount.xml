@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <users user_id = '1' account_id = '1' firstName = 'Carmine' lastName = 'La Torraca' fiscalCode = 'LTRCMSDSDSDCSD12'></users>
+    <users user_id='1' account_id='1' firstName='Carmine' lastName='La Torraca' fiscalCode='LTRCMSDSDSDCSD12'/>
+
+    <users user_id='2' account_id='2' firstName='Carmine' lastName='Zeta' fiscalCode='LTRCMN323CC'/>
+    <users user_id='3' account_id='3' firstName='Luca' lastName='Imola' fiscalCode='EASJDDADJOJ'/>
+    <users user_id='4' account_id='4' firstName='Mario' lastName='LaFranca' fiscalCode='AHSADSDSOJ'/>
+    <users user_id='5' account_id='5' firstName='Gaetano' lastName='Larano' fiscalCode='LEAHAJHHASA'/>
 </dataset>

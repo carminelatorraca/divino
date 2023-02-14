@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-
+    <products product_id='2' product_brand='NANUCCI IGB' product_description='buon vino bianco siciliano'
+              product_format='9' product_price='110.00' product_availability='13' is_sales='1' sales_price='0.00'
+              product_vat='22' is_visible='1' image_path='3.jpg'/>
+    <products product_id='3' product_brand='PELORO ROSSO IGB' product_description='buon vino rosso'
+              product_format='9' product_price='150.00' product_availability='10' is_sales='1' sales_price='0.00'
+              product_vat='22' is_visible='1' image_path='3.jpg'/>
 </dataset>

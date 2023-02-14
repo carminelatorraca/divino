@@ -23,7 +23,7 @@ public class PaymentController extends HttpServlet {
         payment.setPaidAmount(orderToPay.getOrderTotalAmount());
         payment.setPaymentDescription(orderToPay.getOrderProducts().toString());
         payment.setPaymentMethod("Card Payment");
-        payment.setPaymentStatus("Paid");
+        payment.setPaymentStatus("paid");
         payment.setOrderNumber(orderToPay.getOrderNumber());
 
         request.setAttribute("payment", payment);

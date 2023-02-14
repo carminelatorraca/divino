@@ -23,6 +23,20 @@ public class ProductEntity {
 
     }
 
+    public ProductEntity(Integer productId, String productBrand, String productDescription, String productFormat, double productPrice, int productAvailability, boolean isSales, double salesPrice, int productVat, boolean isVisible, String imagePath) {
+        this.productId = productId;
+        this.productBrand = productBrand;
+        this.productDescription = productDescription;
+        this.productFormat = productFormat;
+        this.productPrice = productPrice;
+        this.productAvailability = productAvailability;
+        this.isSales = isSales;
+        this.salesPrice = salesPrice;
+        this.productVat = productVat;
+        this.isVisible = isVisible;
+        this.imagePath = imagePath;
+    }
+
     public Integer getProductId() {
         return productId;
     }

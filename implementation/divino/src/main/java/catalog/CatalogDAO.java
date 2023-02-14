@@ -40,7 +40,7 @@ public class CatalogDAO {
     }
 
     public void removeProduct(ProductEntity product) throws SQLException {
-        PreparedStatement pst = connection.prepareStatement("DELETE * FROM " + TABLE_NAME + "WHERE productID = ?;");
+        PreparedStatement pst = connection.prepareStatement("DELETE FROM " + TABLE_NAME + " WHERE product_id = ?;");
         pst.setInt(1, product.getProductId());
         pst.executeUpdate();
     }

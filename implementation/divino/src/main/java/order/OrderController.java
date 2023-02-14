@@ -47,6 +47,7 @@ public class OrderController extends HttpServlet {
             request.getSession().removeAttribute("shoppingCart");
 
             request.setAttribute("order", order);
+            System.out.println("ciao");
             RequestDispatcher paymentRequest = request.getRequestDispatcher("/payment");
             paymentRequest.include(request, response);
 
