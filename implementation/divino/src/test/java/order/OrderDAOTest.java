@@ -103,27 +103,22 @@ public class OrderDAOTest extends DataSourceBasedDBTestCase {
     }
 
     @Test
-    void retrieveAllOrders() {
+    void retrieveAllOrders() throws Exception {
+
     }
 
     @Test
-    void retrieveOrder() {
-    }
+    void retrieveOrder() throws Exception {
+        OrderEntity order = new OrderEntity();
+        order.setOrderNumber(1);
+        order.setOrderStatus("shipped");
+        order.setOrderCustomer(1);
+        order.setOrderShippingAddress("via amendola, 61 eboli 84025");
+        order.setOrderTotalAmount(120.99);
+        order.setOrderPayment(1);
 
-    @Test
-    void retrieveAllOrdersToShip() {
-    }
-
-    @Test
-    void retrieveAllOrdersToPack() {
-    }
-
-    @Test
-    void getCustomerOrders() {
-    }
-
-    @Test
-    void getOrderItems() {
+        OrderEntity orderRetrieved = orderDAO.retrieveOrder(1);
+        assertEquals(orderRetrieved.getOrderNumber(), order.getOrderNumber());
     }
 
     @Test

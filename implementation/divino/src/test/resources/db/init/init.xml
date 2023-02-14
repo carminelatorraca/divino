@@ -22,11 +22,11 @@
               product_format='9' product_price='150.00' product_availability='10' is_sales='1' sales_price='0.00'
               product_vat='22' is_visible='1' image_path='3.jpg'/>
 
-    <orders order_id='1' order_status='shiped' order_total_amount='120.99'
+    <orders order_id='1' order_status='shipped' order_total_amount='120.99'
             order_shipping_address='via amendola, 61 eboli 84025' order_account='1' order_payment = '1'/>
     <orders order_id='2' order_status='packed' order_total_amount='110.99'
             order_shipping_address='via amendola, 61 eboli 84025' order_account='2' order_payment = '2'/>
-    <orders order_id='3' order_status='shiped' order_total_amount='150.00'
+    <orders order_id='3' order_status='shipped' order_total_amount='150.00'
             order_shipping_address='via amendola, 61 eboli 84025' order_account='3' order_payment = '3'/>
 
     <order_items order_item_id='1' item_price='11.00' item_description='LE CASEMATTE IGB' order_id='1' item_quantity='2'
