@@ -18,6 +18,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import payment.PaymentEntity;
 
 import javax.sql.DataSource;
 
@@ -126,6 +127,23 @@ public class OrderDAOTest extends DataSourceBasedDBTestCase {
     }
 
     @Test
-    void savePayment() {
+    void savePayment() throws Exception {
+        ITable expectedTable = new FlatXmlDataSetBuilder()
+                .build(AccountDAOTest.class.getClassLoader().getResourceAsStream("db/expected/OrderDAOTest/savePayment.xml")).getTable("payments");
+
+        PaymentEntity payment = new PaymentEntity();
+        payment.setOrderNumber(2);
+        payment.setPaymentStatus("paid");
+        payment.setPaymentDescription("pagamento ordine n. 2");
+        payment.setPaidAmount(150.00);
+        payment.setPaymentMethod("generic payment");
+        payment.setPaymentNumber(4);
+
+        orderDAO.savePayment(payment);
+
+        IDataSet databaseDataSet = getConnection().createDataSet();
+        ITable actualTable = databaseDataSet.getTable("payments");
+
+        Assertion.assertEquals(new SortedTable(expectedTable), new SortedTable(actualTable));
     }
 }

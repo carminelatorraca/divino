@@ -2,7 +2,7 @@ package payment;
 
 public class PaymentEntity {
 
-    private String paymentNumber;
+    private int paymentNumber;
     private double paidAmount;
     private String paymentMethod;
     private String paymentDescription;
@@ -12,11 +12,11 @@ public class PaymentEntity {
     public PaymentEntity() {
     }
 
-    public String getPaymentNumber() {
+    public int getPaymentNumber() {
         return paymentNumber;
     }
 
-    public void setPaymentNumber(String paymentNumber) {
+    public void setPaymentNumber(int paymentNumber) {
         this.paymentNumber = paymentNumber;
     }
 

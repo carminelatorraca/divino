@@ -38,11 +38,11 @@
     <order_items order_item_id='4' item_price='11.00' item_description='NANUCCI IGB' order_id='3' item_quantity='2'
                  item_vat='22' product_id='2'/>
 
-    <payments payment_id='1' paid_amount='120.99' payment_description='ORDER 1' payment_status='paid'
-              payment_method='generic' order_id='1'/>
-    <payments payment_id='2' paid_amount='110.00' payment_description='ORDER 1' payment_status='paid'
-              payment_method='generic' order_id='2'/>
-    <payments payment_id='3' paid_amount='150.00' payment_description='ORDER 1' payment_status='paid'
-              payment_method='generic' order_id='3'/>
+    <payments payment_id='1' paid_amount='120.99' payment_description='pagamento ordine n. 1' payment_status='paid'
+              payment_method='generic payment' order_id='1'/>
+    <payments payment_id='2' paid_amount='110.00' payment_description='pagamento ordine n. 2' payment_status='paid'
+              payment_method='generic payment' order_id='2'/>
+    <payments payment_id='3' paid_amount='150.00' payment_description='pagamento ordine n. 3' payment_status='paid'
+              payment_method='generic payment' order_id='3'/>
 
 </dataset>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <payments payment_id='1' paid_amount='120.99' payment_description='pagamento ordine n. 1' payment_status='paid'
+              payment_method='generic payment' order_id='1'/>
+    <payments payment_id='2' paid_amount='110.00' payment_description='pagamento ordine n. 2' payment_status='paid'
+              payment_method='generic payment' order_id='2'/>
+    <payments payment_id='3' paid_amount='150.00' payment_description='pagamento ordine n. 3' payment_status='paid'
+              payment_method='generic payment' order_id='3'/>
+
+    <payments payment_id='4' paid_amount='150.00' payment_description='pagamento ordine n. 2' payment_status='paid'
+              payment_method='generic payment' order_id='2'/>
+</dataset>
