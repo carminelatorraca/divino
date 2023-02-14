@@ -1,8 +1,11 @@
 package catalog;
 
+import org.dbunit.Assertion;
 import org.dbunit.DataSourceBasedDBTestCase;
+import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
+import org.dbunit.dataset.SortedTable;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.h2.jdbcx.JdbcDataSource;
@@ -55,16 +58,15 @@ public class CatalogDAOTest extends DataSourceBasedDBTestCase {
 
 
     @Test
-    void removeProduct() {
-        ITable expectedTable = new FlatXmlDataSetBuilder()
-                .build(CatalogDAOTest.class.getClassLoader().getResourceAsStream("db/expected/CatalogDAOTest/deleteProduct.xml"))
-                .getTable(ClientiDAO.TABLE_NAME);
+    void removeProduct() throws Exception {
+        ITable expectedTable = new FlatXmlDataSetBuilder().build(CatalogDAOTest.class.getClassLoader().getResourceAsStream("db/expected/CatalogDAOTest/deleteProduct.xml")).getTable("products");
 
+        ProductEntity product = new ProductEntity();
 
-        clientiDAO.doDelete("peppeRoma");
+        catalogDAO.removeProduct(product);
 
         IDataSet databaseDataSet = getConnection().createDataSet();
-        ITable actualTable = databaseDataSet.getTable(ClientiDAO.TABLE_NAME);
+        ITable actualTable = databaseDataSet.getTable("products");
 
         Assertion.assertEquals(new SortedTable(expectedTable), new SortedTable(actualTable));
     }
