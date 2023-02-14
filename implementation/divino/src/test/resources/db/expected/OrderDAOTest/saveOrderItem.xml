@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <order_items order_item_id='1' item_price='11.00' item_description='LE CASEMATTE IGB' order_id='1' item_quantity='2'
+                 item_vat='22' product_id='1'/>
+    <order_items order_item_id='2' item_price='11.00' item_description='NANUCCI IGB' order_id='2' item_quantity='2'
+                 item_vat='22' product_id='2'/>
+    <order_items order_item_id='3' item_price='11.00' item_description='PELORO ROSSO IGB' order_id='3' item_quantity='2'
+                 item_vat='22' product_id='3'/>
+
+</dataset>

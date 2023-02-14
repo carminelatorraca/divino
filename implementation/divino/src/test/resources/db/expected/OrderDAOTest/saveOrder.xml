@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <orders order_id='1' order_status='shiped' order_total_amount='120.99'
+            order_shipping_address='via amendola, 61 eboli 84025' order_account='1' order_payment = '1'/>
+    <orders order_id='2' order_status='packed' order_total_amount='110.99'
+            order_shipping_address='via amendola, 61 eboli 84025' order_account='2' order_payment = '2'/>
+    <orders order_id='3' order_status='shiped' order_total_amount='150.00'
+            order_shipping_address='via amendola, 61 eboli 84025' order_account='3' order_payment = '3'/>
+
+    <orders order_id='4' order_account='3'/>
+</dataset>

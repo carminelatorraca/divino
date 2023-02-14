@@ -80,23 +80,20 @@ public class CatalogDAO {
     }
 
     //Aggiorna la quantità disponibile di un prodotto in seguito ad un ordine andato a buon fine
-    public void updateStock(Integer purchasedQuantity, String productID) throws SQLException {
+    public void updateStock(Integer purchasedQuantity, int productID) throws SQLException {
 
         int updatedQuantity = getAvailableQuantity(productID) - purchasedQuantity;
-        PreparedStatement pst = connection.prepareStatement(
-                "UPDATE " + TABLE_NAME +
-                        "SET product_availability = ?" +
-                        "WHERE product_id = ?;");
-        pst.setDouble(1, updatedQuantity);
-        pst.setString(2, productID);
+        PreparedStatement pst = connection.prepareStatement("UPDATE " + TABLE_NAME + " SET product_availability = ? WHERE product_id = ?;");
+        pst.setInt(1, updatedQuantity);
+        pst.setInt(2, productID);
         pst.executeUpdate();
     }
 
-    private Integer getAvailableQuantity(String productID) throws SQLException {
+    private Integer getAvailableQuantity(int productID) throws SQLException {
         PreparedStatement pst = connection.prepareStatement(
-                "SELECT product_availability FROM" + TABLE_NAME + "WHERE product_id = ?;");
-        pst.setString(1, productID);
+                "SELECT product_availability FROM " + TABLE_NAME + " WHERE product_id = ?;");
+        pst.setInt(1, productID);
         ResultSet rs = pst.executeQuery();
-        return rs.getInt("productAvailability");
+        return rs.getInt("product_availability");
     }
 }
