@@ -2,7 +2,7 @@ package catalog;
 
 import org.dbunit.Assertion;
 import org.dbunit.DataSourceBasedDBTestCase;
-import org.dbunit.dataset.DataSetException;
+
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.SortedTable;
@@ -14,8 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.sql.DataSource;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CatalogDAOTest extends DataSourceBasedDBTestCase {
     CatalogDAO catalogDAO;
@@ -74,11 +72,9 @@ public class CatalogDAOTest extends DataSourceBasedDBTestCase {
 
     @Test
     void addProduct() throws Exception {
-        ITable expectedTable = new FlatXmlDataSetBuilder()
-                .build(CatalogDAOTest.class.getClassLoader().getResourceAsStream("db/expected/ProductsDAOTest/testDoSaveProducts.xml"))
-                .getTable("products");
+        ITable expectedTable = new FlatXmlDataSetBuilder().build(CatalogDAOTest.class.getClassLoader().getResourceAsStream("db/expected/CatalogDAOTest/saveProduct.xml")).getTable("products");
 
-        catalogDAO.addProduct(new ProductEntity(1, "Rosematte", "Bel vino", "1", 120.99, 21, true, 0.0, 22, true, "3.jpg"));
+        catalogDAO.addProduct(new ProductEntity(4, "LE ROSEMATTE IGB", "buon vino bianco", "9", 120.99, 21, true, 0.0, 22, true, "3.jpg"));
 
         IDataSet databaseDataSet = getConnection().createDataSet();
         ITable actualTable = databaseDataSet.getTable("products");
@@ -87,12 +83,16 @@ public class CatalogDAOTest extends DataSourceBasedDBTestCase {
     }
 
     @Test
-    void updateProduct() {
+    void updateProduct() throws Exception {
+        ITable expectedTable = new FlatXmlDataSetBuilder()
+                .build(CatalogDAOTest.class.getClassLoader().getResourceAsStream("db/expected/CatalogDAOTest/updateProduct.xml"))
+                .getTable("products");
 
-    }
+        catalogDAO.updateProduct(new ProductEntity(3, "LE ROSEMATTE IGB", "buon vino bianco", "9", 120.99, 21, true, 0.0, 22, true, "3.jpg"));
 
-    @Test
-    void updateStock() {
+        IDataSet databaseDataSet = getConnection().createDataSet();
+        ITable actualTable = databaseDataSet.getTable("products");
 
+        Assertion.assertEquals(new SortedTable(expectedTable), new SortedTable(actualTable));
     }
 }

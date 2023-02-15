@@ -14,8 +14,6 @@ create table if not exists orders
     order_status           varchar(255) null,
     order_total_amount     double       null,
     order_shipping_address varchar(255) null,
-    created_at             varchar(255) null,
-    is_deleted             varchar(255) null,
     order_account          int          not null,
     order_payment          int          null,
 

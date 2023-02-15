@@ -105,8 +105,8 @@ public class OrderDAO {
             order.setOrderStatus(rs.getString(2));
             order.setOrderTotalAmount(rs.getDouble(3));
             order.setOrderShippingAddress(rs.getString(4));
-            order.setOrderCustomer(rs.getInt(7));
-            order.setOrderPayment(rs.getInt(8));
+            order.setOrderCustomer(rs.getInt(5));
+            order.setOrderPayment(rs.getInt(6));
         }
         return order;
     }

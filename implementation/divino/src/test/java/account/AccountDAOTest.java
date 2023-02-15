@@ -71,14 +71,10 @@ public class AccountDAOTest extends DataSourceBasedDBTestCase {
     }
 
     @Test
-    void createUser() {
-
-    }
-
-    @Test
     void retrieveAccount() throws Exception {
         AccountEntity retrieveAccount = accountDAO.retrieveAccount("divino@test.it", "testing");
-        assertNotNull(retrieveAccount);
+        Integer actual = 1;
+        assertEquals(retrieveAccount.getAccountID(), actual);
     }
 
     @Test
