@@ -26,11 +26,11 @@
 <html lang="it">
 <head>
     <%@include file="/fragments/meta.jsp" %>
-
+    <script src="../js/my-scripts.js" type="text/javascript"></script>
     <title>Update Prodotti</title>
 </head>
 <body>
-<%@include file="/fragments/header.jsp" %>
+<%@include file="/fragments/header2.jsp" %>
 <%
     for (ProductEntity product : catalog){
         if(product.getProductId().equals(product_id)){%>
@@ -38,7 +38,7 @@
     <div class="row justify-content-center">
         <h3>Upload prodotti</h3>
         <div class="col-lg-6">
-            <form id="update-form" action="${pageContext.request.contextPath}/catalog" method="post">
+            <form id="update-form" action="${pageContext.request.contextPath}/catalog" method="post" onsubmit="return validateProduct()" novalidate>
                 <input hidden="hidden" name="mode" value="updateProduct">
                 <input hidden="hidden" name="p_productID" value="<%out.println(product_id);%>">
                 <div class="form-group row">

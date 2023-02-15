@@ -39,10 +39,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active text-white"
-                               href="${pageContext.request.contextPath}/account/myaddress.jsp">Indirizzi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active text-white"
                                href="${pageContext.request.contextPath}/account/myaccount.jsp">I miei dati</a>
                         </li>
                     </ul>

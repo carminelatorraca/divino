@@ -36,6 +36,7 @@ public class AccountController extends HttpServlet {
 
         try {
             accountDAO.updateCustomerAccount(user);
+            response.sendRedirect("./account/myaccount.jsp");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

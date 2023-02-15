@@ -16,15 +16,17 @@ public class AccountDAO {
         //this.connection = connection;
     }
 
-    public void createAccount(AccountEntity account) throws SQLException {
+    public boolean createAccount(AccountEntity account) throws SQLException {
         String query = "INSERT INTO " + TABLE_NAME + " (email, password, role) VALUES (?,?,?);";
         PreparedStatement statement = connection.prepareStatement(query);
-        //if (check(account.getEmail())) {
+        if (!check(account.getEmail())) {
             statement.setString(1, account.getEmail());
             statement.setString(2, account.getPassword());
             statement.setString(3, account.getRole().toString());
             statement.executeUpdate();
-        //}
+            return true;
+        }
+        return false;
     }
 
 
@@ -39,10 +41,10 @@ public class AccountDAO {
     }
 
     private boolean check(String email) throws SQLException {
-        PreparedStatement pst = connection.prepareStatement("SELECT email FROM " + TABLE_NAME + "WHERE email = ?;");
+        PreparedStatement pst = connection.prepareStatement("SELECT email FROM " + TABLE_NAME + " WHERE email = ?;");
         pst.setString(1, email);
         ResultSet rs = pst.executeQuery();
-        return rs.wasNull();
+        return rs.next();
     }
 
     public AccountEntity retrieveAccount(String email, String password) throws SQLException {

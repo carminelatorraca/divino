@@ -1,3 +1,5 @@
+<%@ page import="cart.CartItemEntity" %>
+<%@ page import="cart.CartEntity" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -15,6 +17,7 @@
         <h4>Ordine confermato!</h4>
     </div>
 </div>
+
 
 <%@include file="/fragments/footer.jsp" %>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"

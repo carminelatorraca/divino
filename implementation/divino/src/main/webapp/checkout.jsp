@@ -66,49 +66,49 @@
                     <div class="col-lg-12">
                         <label for="input-firstname" class="form-label wine-label">Nome</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="input-firstname"
-                               placeholder="" name="c-firstname">
+                               placeholder="" name="c-firstname" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="input-lastname" class="form-label wine-label">Cognome</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="input-lastname"
-                               placeholder="" name="c-lastname">
+                               placeholder="" name="c-lastname" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="input-state" class="form-label wine-label">Stato/regione</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="input-state"
-                               placeholder="" name="c-state">
+                               placeholder="" name="c-state" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="input-address" class="form-label wine-label">Via e Numero</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="input-address"
-                               placeholder="Via/Piazza e Numero Civico" name="c-address">
+                               placeholder="Via/Piazza e Numero Civico" name="c-address" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="input-address-cap" class="form-label wine-label">CAP</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="input-address-cap"
-                               placeholder="" name="c-address-cap">
+                               placeholder="" name="c-address-cap" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="input-address-city" class="form-label wine-label">Città</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="input-address-city"
-                               placeholder="" name="c-address-city">
+                               placeholder="" name="c-address-city" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="input-address-prov" class="form-label wine-label">Provincia</label>
                         <input class="form-control form-control-lg wine-input" type="text" id="input-address-prov"
-                               placeholder="" name="c-address-prov">
+                               placeholder="" name="c-address-prov" required>
                     </div>
                 </div>
                 <div class="form-group row">

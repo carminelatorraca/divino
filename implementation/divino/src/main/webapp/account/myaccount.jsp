@@ -18,7 +18,7 @@
 <html lang="it">
 <head>
     <%@include file="/fragments/meta.jsp" %>
-
+    <script src="../js/my-scripts.js" type="text/javascript"></script>
     <title>I miei dati</title>
 </head>
 <body>
@@ -64,39 +64,32 @@
             </div>
         </div>
         <div class="col-md-6" id="update-form">
-            <form action="${pageContext.request.contextPath}/account" method="post">
+            <form action="${pageContext.request.contextPath}/account" method="post" onsubmit="return validateUpdateAcc()" novalidate>
                 <div class="form-group row">
                     <div class="col-lg-12">
-                        <label for="inputAddress" class="form-label wine-label">Nome</label>
-                        <input class="form-control form-control-lg wine-input" type="text" id="inputAddress"
+                        <label for="inputFirstname" class="form-label wine-label">Nome</label>
+                        <input class="form-control form-control-lg wine-input" type="text" id="inputFirstname"
                                placeholder="" name="a-firstname" value="<% out.println(account.getFirstName());%>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
-                        <label for="inputAddress2" class="form-label wine-label">Cognome</label>
-                        <input class="form-control form-control-lg wine-input" type="text" id="inputAddress2"
+                        <label for="inputLastname" class="form-label wine-label">Cognome</label>
+                        <input class="form-control form-control-lg wine-input" type="text" id="inputLastname"
                                placeholder="" name="a-lastname" value="<% out.println(account.getLastName());%>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
-                        <label for="inputCap" class="form-label wine-label">Email</label>
-                        <input class="form-control form-control-lg wine-input" type="email" id="inputCap"
+                        <label for="inputEmail" class="form-label wine-label">Email</label>
+                        <input class="form-control form-control-lg wine-input" type="email" id="inputEmail"
                                placeholder="" name="a-email" value="<% out.print(account.getEmail());%>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-12">
-                        <label for="oldPass" class="form-label wine-label">Vecchia Password</label>
-                        <input class="form-control form-control-lg wine-input" type="password" id="oldPass"
-                               placeholder="Vecchia Password" name="a-oldPass" >
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-12">
-                        <label for="newPass" class="form-label wine-label">Nuova Password</label>
-                        <input class="form-control form-control-lg wine-input" type="password" id="newPass"
+                        <label for="inputPassword" class="form-label wine-label">Nuova Password</label>
+                        <input class="form-control form-control-lg wine-input" type="password" id="inputPassword"
                                placeholder="Nuova Password" name="a-newPass">
                     </div>
                 </div>

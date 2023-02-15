@@ -32,7 +32,7 @@ public class SignupController extends HttpServlet {
         String email = request.getParameter("r-email");
         String firstName = request.getParameter("r-firstname");
         String lastName = request.getParameter("r-lastname");
-
+        Boolean created;
         MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("SHA-256");
@@ -44,22 +44,28 @@ public class SignupController extends HttpServlet {
 
         AccountEntity account = new AccountEntity(email, byteToEx(securePassword), AccountEntity.Role.CUSTOMERUSER);
         try {
-            dbAccount.createAccount(account);
-            account = dbAccount.retrieveAccount(email, byteToEx(securePassword));
+            created = dbAccount.createAccount(account);
+            if(created)
+                account = dbAccount.retrieveAccount(email, byteToEx(securePassword));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        UserEntity user = new UserEntity(account);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setFiscalCode("null");
-        try {
-            dbAccount.createUser(user);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if(created) {
+            UserEntity user = new UserEntity(account);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setFiscalCode("null");
+            try {
+                dbAccount.createUser(user);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
-
+        if(!created)
+            request.getSession().setAttribute("error2", "Email già utilizzata.");
+        else
+            request.getSession().setAttribute("error2", null);
         RequestDispatcher view = request.getRequestDispatcher("./login.jsp");
         view.forward(request, response);
 

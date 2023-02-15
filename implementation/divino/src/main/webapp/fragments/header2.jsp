@@ -37,11 +37,6 @@
                     <%
                         }
                     %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/cart.jsp">
-                            <span class="material-symbols-outlined">shopping_bag</span>
-                        </a>
-                    </li>
                     <%
                         if (session.getAttribute("user") != null) {
                     %>
