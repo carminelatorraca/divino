@@ -9,10 +9,12 @@ La documentazione prodotta nella realizzazione di questo progetto è fruibile pr
 
 [Problem Statement](https://github.com/carminelatorraca/divino/blob/main/deliverable/RAD_divino.pdf)
 
-[Requirements Analysis Documents](https://github.com/carminelatorraca/divino/blob/main/deliverable/RAD_divino.pdf)
+[Requirements Analysis Documents](https://github.com/carminelatorraca/divino/blob/main/deliverables/RAD_divino.pdf)
 
-[System Design Documents](https://github.com/carminelatorraca/divino/blob/main/deliverable/RAD_divino.pdf)
+[System Design Documents](https://github.com/carminelatorraca/divino/blob/main/deliverables/RAD_divino.pdf)
 
-[Object Design Documents]()
+[Object Design Documents](https://github.com/carminelatorraca/divino/blob/main/deliverables/ODD_divino.pdf)
 
-[Test Plan Documents]()
+[Test Plan Documents](https://github.com/carminelatorraca/divino/blob/main/deliverables/TP_divino.pdf)
+
+[Test Report Documents](https://github.com/carminelatorraca/divino/blob/main/deliverables/TR_divino.pdf)
