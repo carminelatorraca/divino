@@ -25,7 +25,6 @@ public class PaymentController extends HttpServlet {
         payment.setPaymentMethod("generic");
         payment.setPaymentStatus("paid");
         payment.setOrderNumber(orderToPay.getOrderNumber());
-
         request.setAttribute("payment", payment);
     }
 

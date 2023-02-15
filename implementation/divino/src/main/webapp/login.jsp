@@ -40,7 +40,7 @@
                     <div class="col-lg-12">
                         <label for="loginEmail" class="form-label wine-label">Email</label>
                         <input class="form-control form-control-lg wine-input" type="email" id="loginEmail" required
-                               placeholder="inserisci l'email" name="l-email">
+                               placeholder="inserisci l'email" name="l-email" value="">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -52,7 +52,9 @@
                     </div>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-primary wine-button">Accedi</button>
+                <button type="submit" class="btn btn-primary wine-button">Accedi</button><br>
+                <%if(session.getAttribute("error")!=null)
+                    out.println(session.getAttribute("error")); %>
             </form>
         </div>
         <br>
@@ -98,6 +100,9 @@
                 <br>
                 <button type="submit" class="btn btn-primary wine-button">Registrati</button>
                 <button type="reset" class="btn btn-secondary wine-button">Cancella</button>
+                <br><br>
+                <%if(session.getAttribute("error2")!=null)
+                    out.println(session.getAttribute("error2")); %>
             </form>
         </div>
     </div>

@@ -15,17 +15,17 @@
 <html lang="it">
 <head>
     <%@include file="/fragments/meta.jsp" %>
-
+    <script src="../js/my-scripts.js" type="text/javascript"></script>
     <title>Upload Prodotti</title>
 </head>
 <body>
-<%@include file="/fragments/header.jsp" %>
+<%@include file="/fragments/header2.jsp" %>
 
 <div class="container">
     <div class="row justify-content-center">
         <h3>Upload prodotti</h3>
         <div class="col-lg-6">
-            <form id="upload-form" action="${pageContext.request.contextPath}/catalog" method="post" enctype="multipart/form-data">
+            <form id="upload-form" action="${pageContext.request.contextPath}/catalog" method="post" enctype="multipart/form-data" onsubmit="return validateProduct()" novalidate>
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label for="inputBrand" class="form-label">Marca</label>
