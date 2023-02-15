@@ -58,7 +58,7 @@ function validateAddress() {
     let cap = document.getElementById("input-address-cap").value.trim();
     let cell = document.getElementById("input-phone").value.trim();
 
-    let patternName = /^[a-zA-Z]{2,20}$/;
+    let patternName = /^[a-zA-Z\s]{2,20}$/;
     let patternAddress = /^[a-zA-Z0-9\s]{2,20}$/
     let patternCAP = new RegExp("^[0-9]{5}$");
     let patternPhone = new RegExp("^[0-9]{10}$");
@@ -136,7 +136,7 @@ function validateUpdateAcc() {
 
     let patternEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let patternPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    let patternName = /^[a-zA-Z]{2,20}$/;
+    let patternName = /^[a-zA-Z\s]{2,20}$/;
     let flag = true;
 
     if (!patternEmail.test(email)) {
@@ -235,7 +235,7 @@ function validateSignup() {
 
     let patternEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let patternPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    let patternName = /^[a-zA-Z]{2,20}$/;
+    let patternName = /^[a-zA-Z\s]{2,20}$/;
     let flag = true;
 
     if (!patternEmail.test(email)) {
