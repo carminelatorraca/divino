@@ -36,6 +36,8 @@ public class MainListener implements ServletContextListener, HttpSessionListener
             javax.naming.Context context = (javax.naming.Context) contextInit.lookup("java:comp/env");
             DataSource dataSource = (DataSource) context.lookup("jdbc/divino_db");
             connection = dataSource.getConnection();
+
+            servletContext.setAttribute("datasource", dataSource);
             servletContext.setAttribute("connection", connection);
 
             //init dao

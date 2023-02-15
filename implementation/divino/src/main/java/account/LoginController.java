@@ -12,8 +12,9 @@ import java.util.HashSet;
 
 @WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
-    private AccountDAO accountDAO;
-    private OrderDAO orderDAO;
+    public AccountDAO accountDAO;
+    public OrderDAO orderDAO;
+
 
     @Override
     public void init() throws ServletException {

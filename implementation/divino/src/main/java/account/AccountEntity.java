@@ -11,9 +11,13 @@ public class AccountEntity {
 
     public AccountEntity(String email, String password, Role role) {
         accountID = -1;
-        this.email = email;
-        this.password = password;
-        this.role = role;
+        this.email = "";
+        this.password = "";
+        this.role = null;
+    }
+
+    public AccountEntity() {
+
     }
 
     public AccountEntity(Integer accountID, String email, String password, Role role) {
@@ -21,13 +25,6 @@ public class AccountEntity {
         this.email = email;
         this.password = password;
         this.role = role;
-    }
-
-    public AccountEntity() {
-        accountID = -1;
-        email = null;
-        password = null;
-        role = null;
     }
 
     public Integer getAccountID() {
