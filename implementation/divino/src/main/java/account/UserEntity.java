@@ -1,7 +1,5 @@
 package account;
 
-import java.util.HashSet;
-
 public class UserEntity extends AccountEntity {
 
     private String firstName;
