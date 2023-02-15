@@ -1,5 +1,7 @@
 package account;
 
+import java.util.HashSet;
+
 public class UserEntity extends AccountEntity {
 
     private String firstName;
@@ -8,7 +10,7 @@ public class UserEntity extends AccountEntity {
 
 
     public UserEntity(int accountID, String email, String password, Role role, String firstName, String lastName, String fiscalCode) {
-        super(accountID, email, password, role);
+        super(accountID,email, password, role);
         this.firstName = firstName;
         this.lastName = lastName;
         this.fiscalCode = fiscalCode;
@@ -21,8 +23,8 @@ public class UserEntity extends AccountEntity {
         this.fiscalCode = null;
     }
 
-    public UserEntity() {
-        super();
+    public UserEntity(){
+
     }
 
     public String getFirstName() {

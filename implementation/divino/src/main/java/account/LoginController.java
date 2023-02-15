@@ -1,10 +1,8 @@
 package account;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
 import order.OrderDAO;
 import order.OrderEntity;
 
@@ -14,9 +12,8 @@ import java.util.HashSet;
 
 @WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
-    public AccountDAO accountDAO;
-    public OrderDAO orderDAO;
-
+    private AccountDAO accountDAO;
+    private OrderDAO orderDAO;
 
     @Override
     public void init() throws ServletException {

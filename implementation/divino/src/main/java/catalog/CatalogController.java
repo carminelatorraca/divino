@@ -12,6 +12,7 @@ import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.lang.*;
 
 @WebServlet(name = "CatalogController", value = "/catalog",
         initParams = {@WebInitParam(name = "upload-dir", value = "images", description = "")})

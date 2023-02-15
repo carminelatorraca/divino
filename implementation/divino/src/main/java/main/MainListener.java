@@ -3,14 +3,10 @@ package main;
 import account.AccountDAO;
 import catalog.CatalogDAO;
 import catalog.CatalogEntity;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletContextEvent;
-import jakarta.servlet.ServletContextListener;
-import jakarta.servlet.annotation.WebListener;
-import jakarta.servlet.http.HttpSessionAttributeListener;
-import jakarta.servlet.http.HttpSessionBindingEvent;
-import jakarta.servlet.http.HttpSessionEvent;
-import jakarta.servlet.http.HttpSessionListener;
+import catalog.ProductEntity;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
 import order.OrderDAO;
 
 import javax.naming.InitialContext;
@@ -19,6 +15,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 @WebListener
 public class MainListener implements ServletContextListener, HttpSessionListener, HttpSessionAttributeListener {
@@ -39,8 +36,6 @@ public class MainListener implements ServletContextListener, HttpSessionListener
             javax.naming.Context context = (javax.naming.Context) contextInit.lookup("java:comp/env");
             DataSource dataSource = (DataSource) context.lookup("jdbc/divino_db");
             connection = dataSource.getConnection();
-
-            servletContext.setAttribute("datasource", dataSource);
             servletContext.setAttribute("connection", connection);
 
             //init dao

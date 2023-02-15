@@ -2,61 +2,81 @@ package account;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import order.OrderDAO;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 public class LoginControllerTest {
+    LoginController loginController;
 
-    private Connection open() throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3308/divino_db", "root", "Divino!");
+    @Mock
+    ServletContext context;
+
+    @BeforeEach
+    void setUp() {
     }
 
-    @Test
-    public void doPostTest() throws Exception {
-        Connection connection = open();
-        AccountDAO accountDAO = new AccountDAO(connection);
-        OrderDAO orderDAO = new OrderDAO(connection);
 
-        //REQUEST & RESPONSE
+    @Test
+    void doPostValid() throws ServletException, IOException, SQLException {
+
+        // Set up a mock request and response
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
-        when(request.getParameter("l-email")).thenReturn("carmine@carmine.com");
-        when(request.getParameter("l-password")).thenReturn("ciao");
+        final ServletContext servletContext = Mockito.mock(ServletContext.class);
 
-        //SESSION
+        //controller login
+        loginController = new LoginController() {
+            private static final long serialVersionUID = 1L;
+
+            public ServletContext getServletContext() {
+                return servletContext;
+            }
+        };
+
+        PreparedStatement preparedStmt1 = mock(PreparedStatement.class);
+        ResultSet resultSet = mock(ResultSet.class);
+
         HttpSession session = mock(HttpSession.class);
-        when(request.getSession(true)).thenReturn(session);
-
-        //DISPATCHER
         RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-        when(request.getRequestDispatcher("/shop.jsp")).thenReturn(dispatcher);
 
-        //WRITER
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
+        Connection connection = mock(Connection.class);
+        when(servletContext.getAttribute("connection")).thenReturn(connection);
+
+        AccountDAO accountDAO = mock(AccountDAO.class);
+        when(servletContext.getAttribute("accountDAO")).thenReturn(accountDAO);
 
 
-        //SERVLET
-        LoginController login = new LoginController();
-        login.orderDAO = orderDAO;
-        login.accountDAO = accountDAO;
+        when(request.getParameter("email")).thenReturn("carmine@carmine.com");
+        when(request.getParameter("password")).thenReturn("ciao");
 
-        login.doPost(request, response);
+        AccountEntity account = mock(AccountEntity.class);
+        when(accountDAO.retrieveAccount("carmine@carmine.com", "ciao")).thenReturn(account);
 
-        writer.flush();
-        System.out.println(stringWriter.toString());
+        // Call the servlet's doGet method with the mock request and response
+        loginController.doPost(request, response);
+
+        verify(request).getParameter("nome");
+        verify(request).getParameter("cognome");
+
+        Assertions.assertEquals("carmine@test.it", request.getParameter("email"));
+        Assertions.assertEquals("testing", request.getParameter("password"));
     }
 }
