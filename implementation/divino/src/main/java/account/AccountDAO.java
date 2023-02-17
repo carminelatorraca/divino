@@ -22,14 +22,13 @@ public class AccountDAO {
         if (!check(account.getEmail())) {
             statement.setString(1, account.getEmail());
             statement.setString(2, account.getPassword());
-            statement.setString(3, account.getRole().toString());
+            statement.setString(3, String.valueOf(account.getRole()));
             statement.executeUpdate();
             return true;
         }
         return false;
     }
-
-
+    
     public void createUser(UserEntity user) throws SQLException {
         String query = "INSERT INTO users (account_id, firstName, lastName, fiscalCode) VALUES (?,?,?,?);";
         PreparedStatement statement = connection.prepareStatement(query);

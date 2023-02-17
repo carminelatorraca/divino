@@ -15,27 +15,26 @@
 <%@include file="fragments/header.jsp" %>
 <div class="container">
     <%
-        ArrayList<String> exceptions = (ArrayList<String>) session.getAttribute("exceptions");
+        String exceptions = (String) session.getAttribute("error2");
 
         if (exceptions != null) {
-            System.out.println(exceptions);
-            for (String exception : exceptions) {
+
     %>
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="alert alert-warning wine-errors" role="alert">
-                <%=exception%>
+                <%=exceptions%>
             </div>
         </div>
     </div>
     <%
-            }
         }
     %>
     <div class="row justify-content-evenly g-0">
         <div class="col-lg-4 my-auto">
             <h3>Login</h3>
-            <form action="${pageContext.request.contextPath}/login" method="post" onsubmit="return validateSignIn()" novalidate>
+            <form action="${pageContext.request.contextPath}/login" method="post" onsubmit="return validateSignIn()"
+                  novalidate>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="loginEmail" class="form-label wine-label">Email</label>
@@ -52,15 +51,19 @@
                     </div>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-primary wine-button">Accedi</button><br>
-                <%if(session.getAttribute("error")!=null)
-                    out.println(session.getAttribute("error")); %>
+                <button type="submit" class="btn btn-primary wine-button">Accedi</button>
+                <br>
+                <%
+                    if (session.getAttribute("error") != null)
+                        out.println(session.getAttribute("error"));
+                %>
             </form>
         </div>
         <br>
         <div class="col-lg-4 my-auto">
             <h3>Registrati qui!</h3>
-            <form action="${pageContext.request.contextPath}/signup" method="post" onsubmit="return validateSignup()" novalidate>
+            <form action="${pageContext.request.contextPath}/signup" method="post" onsubmit="return validateSignup()"
+                  novalidate>
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="inputFirstname" class="form-label wine-label">Nome</label>
@@ -101,7 +104,7 @@
                 <button type="submit" class="btn btn-primary wine-button">Registrati</button>
                 <button type="reset" class="btn btn-secondary wine-button">Cancella</button>
                 <br><br>
-                <%if(session.getAttribute("error2")!=null)
+                <% if (session.getAttribute("error2") != null)
                     out.println(session.getAttribute("error2")); %>
             </form>
         </div>

@@ -7,6 +7,9 @@ import order.OrderDAO;
 import order.OrderEntity;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashSet;
 
@@ -28,10 +31,19 @@ public class LoginController extends HttpServlet {
         AccountEntity account;
 
         String email = request.getParameter("l-email");
-        String password = request.getParameter("l-password");
+        //String password = request.getParameter("l-password");
+
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
+        byte[] securePassword = digest.digest(request.getParameter("l-password").getBytes(StandardCharsets.UTF_8)); //gestione password
 
         try {
-            account = accountDAO.retrieveAccount(email, password);
+            account = accountDAO.retrieveAccount(email, byteToEx(securePassword));
             UserEntity user = accountDAO.retrieveUser(account);
             if (account.getAccountID() != -1) {
 
@@ -60,6 +72,18 @@ public class LoginController extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static String byteToEx(byte[] hash) {
+        StringBuilder StringBuilder = new StringBuilder(2 * hash.length);
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                StringBuilder.append('0');
+            }
+            StringBuilder.append(hex);
+        }
+        return StringBuilder.toString();
     }
 
     @Override

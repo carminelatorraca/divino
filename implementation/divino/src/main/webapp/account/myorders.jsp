@@ -4,8 +4,13 @@
 <%@ page import="order.OrderEntity" %>
 <%@ page import="order.OrderItemEntity" %>
 <%@ page import="java.util.HashSet" %>
+<%@ page import="catalog.ProductEntity" %>
+<%@ page import="catalog.CatalogDAO" %>
+<%@ page import="catalog.CatalogEntity" %>
 
 <%
+    CatalogEntity catalog = (CatalogEntity) request.getServletContext().getAttribute("catalog");
+
     AccountEntity account = (AccountEntity) session.getAttribute("user");
     if (account == null || !account.getRole().equals(AccountEntity.Role.CUSTOMERUSER)) {
         String errors = "non sei autorizzato";
@@ -40,35 +45,40 @@
                         </strong>
                     </h5>
                     <p class="card-text" style="font-size: 17px">
-                        ID Pagamento: <%=order.getOrderPayment()%>
-                    </p>
-                    <p class="card-text" style="font-size: 17px">
                         Totale Ordine: <%=order.getOrderTotalAmount()%>
                     </p>
-                    <br>
                     <p class="card-text">
-                        Stato Ordine: <%=order.getOrderStatus()%>
+                        Stato Ordine:
+                        <% if (order.getOrderStatus() == null) { %>
+                        Pagato
+                        <% } else { %>
+                        <%=order.getOrderStatus()%>
+                        <% } %>
                     </p>
                 </div>
             </div>
         </div>
         <%
             for (OrderItemEntity orderItem : order.getOrderProducts()) {
+                for (ProductEntity product : catalog.getCatalogProducts()) {
+                    if (product.getProductId().equals(orderItem.getProductID())) {
         %>
         <div class="col-md-6 col-lg-2">
             <div class="card h-100 w-100 bg-white mb-3" style="border-radius: 0;">
-                <img src="${pageContext.request.contextPath}/images/<%//=%>"
+                <img src="${pageContext.request.contextPath}/images/<%=product.getProductBrand()%>/<%=product.getImagePath()%>"
                      class="card-img-top img-fluid"
                      alt="no_image" width="200px" height="200px">
                 <div class="card-body">
-                    <p class="card-text"><%//%>
-                    </p>
                     <p class="card-text">Quantità: <%=orderItem.getProductQuantity()%>
                     </p>
                 </div>
             </div>
         </div>
-        <% }%>
+        <%
+                    }
+                }
+            }
+        %>
     </div>
     <%
             }

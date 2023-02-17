@@ -105,8 +105,8 @@ public class OrderDAO {
             order.setOrderStatus(rs.getString(2));
             order.setOrderTotalAmount(rs.getDouble(3));
             order.setOrderShippingAddress(rs.getString(4));
-            order.setOrderCustomer(rs.getInt(5));
-            order.setOrderPayment(rs.getInt(6));
+            order.setOrderCustomer(rs.getInt(7));
+            order.setOrderPayment(rs.getInt(8));
         }
         return order;
     }
@@ -195,6 +195,7 @@ public class OrderDAO {
             orderItem.setProductDescription(rs.getString("item_description"));
             orderItem.setProductVat(rs.getInt("item_vat"));
             orderItem.setProductQuantity(rs.getInt("item_quantity"));
+            orderItem.setProductID(rs.getInt("product_id"));
             orderItems.add(orderItem);
         }
         return orderItems;

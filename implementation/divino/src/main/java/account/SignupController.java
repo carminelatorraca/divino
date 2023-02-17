@@ -9,8 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
+
 
 @WebServlet(name = "SignupController", value = "/signup")
 public class SignupController extends HttpServlet {

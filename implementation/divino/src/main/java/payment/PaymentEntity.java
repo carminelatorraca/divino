@@ -10,6 +10,7 @@ public class PaymentEntity {
     private int orderNumber;
 
     public PaymentEntity() {
+
     }
 
     public int getPaymentNumber() {
